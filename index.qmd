@@ -1,0 +1,28 @@
+# Course Goals for STAT 414 {.unnumbered}
+
+STAT 414 is an introduction to sampling. By the end of the course, you will:
+
+- Learn the basic methodology of how classical survey samples are conducted based
+on simple random sampling.
+
+- Recognize sampling and non-sampling errors.
+
+- Be able to use extra information in sampling via ratio estimators and regression estimators.
+
+- Be able to define and use stratified samples and know why they are often better than SRS.
+
+- Be able to design one and two stage cluster samples and know their key properties.
+
+- Recognize strengths and weaknesses of different sampling approaches.
+
+- Use standard R packages to analyze survey data and estimate population means, proportions, totals, and more.
+
+  ```{r}
+  #| eval: true
+  #| include: false
+
+  quarto::quarto_render(input="syllabus fall 2026.qmd")
+  file.copy("syllabus fall 2026.html","docs/")
+  file.copy("syllabus-fall-2026.pdf","docs/")
+  file.copy("syllabus fall 2026_files","docs/",recursive=TRUE)
+  ```

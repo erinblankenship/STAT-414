@@ -1,0 +1,42 @@
+[
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Stat 414 Notes",
+    "section": "",
+    "text": "Course Goals for STAT 414\nSTAT 414 is an introduction to sampling. By the end of the course, you will:\n\nLearn the basic methodology of how classical survey samples are conducted based on simple random sampling.\nRecognize sampling and non-sampling errors.\nBe able to use extra information in sampling via ratio estimators and regression estimators.\nBe able to define and use stratified samples and know why they are often better than SRS.\nBe able to design one and two stage cluster samples and know their key properties.\nRecognize strengths and weaknesses of different sampling approaches.\nUse standard R packages to analyze survey data and estimate population means, proportions, totals, and more.",
+    "crumbs": [
+      "Course Goals for STAT 414"
+    ]
+  },
+  {
+    "objectID": "Section-1-Introduction.html",
+    "href": "Section-1-Introduction.html",
+    "title": "1  Introduction to Sampling",
+    "section": "",
+    "text": "1.1 Introduction\nIf you spend any time at all on social media (especially in an election year), you’re likely to come across a post like this:\nWhat do you think? Do you agree?\nn&lt;-c(10,20,30,40,50,60,100,200,400,1000,2000,3000,5000,6000,7000,8000,9000,10000)\nme&lt;-1.96*sqrt(0.25/n)\nplot(n,me,type=\"b\")\nSo why even sample?\nWhat’s key here?\nWhat we will spend this semester studying is how to ensure this, to make sure we can make accurate predictions. This will involve answering questions focused on:\nHow is sampling different from previous courses, like STAT 212?\nHow is sampling different from previous courses, like STAT 262 or STAT 380?\nHow is sampling different from previous courses, like STAT 102 or STAT 318?\nHowever, like previous courses, sample surveys do have an overarching process, some of which overlap with steps/processes we’ve seen before. We’ll go through the principal considerations in a sample survey, along with some definitions and (possibly) new notation.",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Introduction to Sampling</span>"
+    ]
+  },
+  {
+    "objectID": "Section-1-Introduction.html#introduction",
+    "href": "Section-1-Introduction.html#introduction",
+    "title": "1  Introduction to Sampling",
+    "section": "",
+    "text": "Cheaper\n\n\n\nFaster\n\n\n\nMore Accurate (?!?!?)\n\n\n\n\n\n\n\n\nSurvey design\n\n\n\nPreparation\n\n\n\nCollect and prepare data\nData analysis",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Introduction to Sampling</span>"
+    ]
+  },
+  {
+    "objectID": "Section-1-Introduction.html#considerations-in-planning-and-executing-a-survey",
+    "href": "Section-1-Introduction.html#considerations-in-planning-and-executing-a-survey",
+    "title": "1  Introduction to Sampling",
+    "section": "1.2 Considerations in planning and executing a survey",
+    "text": "1.2 Considerations in planning and executing a survey\n\nObjectives of the survey\nDefining the population In sampling, the word population needs some clarification. Generally, it means the larger set from which the sample is chosen, and it’s the larger group we wish to make inference/draw conclusions about. And a sample is a subset of the population. However, we must distinguish between\n\n\nTarget population\n\n\n\nSampled population\n\n\n\n\nIdeally, these two overlap completely, but this does not always occur. Plus, we also need to consider the sampling frame population\n\n\n\n\nI love the figure on page 5 of the book:\n\n\n\n\n\n\n\n\n\n\n\n\nWithin the sampling frame we have\n\nObservation unit\n\n\n\n\n\n\nSampling unit\n\n\n\n\n\nFor example,\n\n\n\n\n\n\nIdentifying potential sources of bias and ameliorating them: In previous classes, like STAT 262 or STAT 380, we use the word bias to mean an estimator that systematically over- or under-estimates the true population characteristic. In sample surveys, we still use the same definition, but now biased estimators typically arise for two reasons:\n\n\n\n\nPopulation characteristic of interest (Estimation bias):\n\n\n\n\n\nSelection and/or measurement bias: Selection bias occurs when there is a mismatch between the sampled population and the target population. Measurement bias occurs when the survey observation tends to differ from the truth in a particular direction.\n\n\n\n\nWe’ll talk about each of these in more detail.\n\nSelection bias\n\n\n\n\nConvenience samples\n\n\n\n\n\nJudgment samples\n\n\n\nSelf-selected samples\n\n\n\nUndercoverage\n\n\n\n\n\nOvercoverage\n\n\n\n\n\nNonresponse\n\n\n\n\n\nMeasurement bias\n\n\n\n\n\nWhy can it occur?\n\nUnavoidable Reasons\n\n\n\n\n\nPeople!\n\n\n\n\n\n\n\n\n\n\nSurvey mode: method used to distribute and gather responses\n\n\n\n\n\n\n\n\n\n\n\n\nSo we’re concerned about response bias–what now? Careful question design is key. We could spend weeks on just questionnaire design, but will only do a very brief overview. There are other resources on campus that can help with this aspect of surveys (Bureau of Sociological Research).\nWe’ll start with types of questions to avoid, and then move on to other considerations when writing questions.\nCommon types of biased questions:\n\nLeading questions\n\n\n\n\n\n\n\nHow to fix it:\n\n\n\n\n\n\nAssumptive questions\n\n\n\n\n\n\n\nHow to fix it:\n\n\n\n\n\n\nDouble-barreled questions\n\n\n\n\n\nHow to fix it:\n\n\n\nDouble negatives\n\n\n\n\n\n\n\n\n\nHow to fix it:\n\n\n\n\n\nOther considerations:\n\nPay careful attention to answer scale options\n\n\n\n\n\n\n\n\n\n\nCheck formatting\n\n\n\nAvoid jargon, and be specific\n\n\n\n\n\n\n\nOpen or closed questions?\n\n\n\n\n\n\n\n\nQuestion order matters\n\n\n\nProbably most important, test questions ahead of time with the target population.\n\nChoosing the sampling design/data collection approach\n\n\n\n\n\n\n\n\n\n\nChoosing the analysis approach\n\n\n\n\n\n\n\n\n\n\n\n\n\nData analysis\n\n\n\n\n\n\n\nWhat’s next? The more information we have about a population, the easier it is to devise a sampling plan that will give accurate estimates. Any past survey can serve as a guide for future samples, as it will provide information about variablity and cost.\n\n\n\nThe rest of the semester",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Introduction to Sampling</span>"
+    ]
+  }
+]

@@ -1,0 +1,432 @@
+# Introduction to Sampling
+
+## Introduction
+
+If you spend any time at all on social media (especially in an election year), you're likely to come across a post like this:
+
+![](twitter%20quote.jpg)
+
+What do you think? Do you agree?
+
+\
+\
+\
+\
+\
+\
+\
+
+```{r}
+n<-c(10,20,30,40,50,60,100,200,400,1000,2000,3000,5000,6000,7000,8000,9000,10000)
+me<-1.96*sqrt(0.25/n)
+plot(n,me,type="b")
+```
+
+So why even sample?
+
+1.  Cheaper
+
+\
+
+2.  Faster
+
+\
+
+3.  **More Accurate** (?!?!?)
+
+ 
+
+\newpage
+
+![](twitter%20quote%202.jpg)
+
+What's key here?
+
+\
+
+What we will spend this semester studying is how to ensure this, to make sure we can make accurate predictions. This will involve answering questions focused on:
+
+- Survey design
+
+\
+\
+
+- Preparation
+
+\
+\
+
+- Collect and prepare data
+
+- Data analysis
+
+\
+
+\newpage
+
+How is sampling different from previous courses, like STAT 212?
+
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+
+How is sampling different from previous courses, like STAT 262 or STAT 380?
+
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+
+How is sampling different from previous courses, like STAT 102 or STAT 318?
+
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+
+However, like previous courses, sample surveys do have an overarching process, some of which overlap with steps/processes we've seen before. We'll go through the principal considerations in a sample survey, along with some definitions and (possibly) new notation.
+
+\newpage
+
+## Considerations in planning and executing a survey
+
+1. **Objectives of the survey**
+
+2. **Defining the population** In sampling, the word **population** needs some clarification. Generally, it means the larger set from which the sample is chosen, and it's the larger group we wish to make inference/draw conclusions about. And a **sample** is a subset of the population. However, we must distinguish between
+
+- **Target population**
+
+  \
+  \
+
+- **Sampled population**
+
+  \
+  \
+
+Ideally, these two overlap completely, but this does not always occur. Plus, we also need to consider the **sampling frame population**
+
+\
+\
+\
+
+I love the figure on page 5 of the book:
+
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+
+\newpage
+
+Within the **sampling frame** we have
+
+- **Observation unit**
+    
+\
+\
+\
+    
+- **Sampling unit**
+    
+\
+\
+\
+
+For example,
+
+\
+\
+\
+\
+
+3. **Identifying potential sources of bias and ameliorating them**: In previous classes, like STAT 262 or STAT 380, we use the word **bias** to mean an estimator that systematically over- or under-estimates the true population characteristic. In sample surveys, we still use the same definition, but now biased estimators typically arise for two reasons:
+
+\
+
+- Population characteristic of interest (Estimation bias):
+    
+    \
+    \
+    \
+    \
+    
+- Selection and/or measurement bias: Selection bias occurs when there is a mismatch between the sampled population and the target population. Measurement bias occurs when the survey observation tends to differ from the truth in a particular direction.
+    
+ \
+ \
+
+We'll talk about each of these in more detail.
+
+\newpage
+
+**Selection bias**
+
+\
+\
+
+- Convenience samples
+    
+    \
+    \
+    \
+    \
+    
+    
+- Judgment samples
+    
+    \
+    \
+  
+    
+- Self-selected samples
+    
+    \
+    \
+    
+    
+- Undercoverage
+    
+    \
+    \
+    \
+    \
+    
+- Overcoverage
+    
+    \
+    \
+    \
+    \
+    
+- Nonresponse
+    
+    \
+    \
+    
+
+
+\newpage
+
+**Measurement bias**
+
+\
+\
+\
+\
+
+Why can it occur?
+
+- Unavoidable Reasons
+    
+    \
+    \
+    \
+    \
+    
+- People!
+    
+    \
+    \
+    \
+    \
+    \
+    \
+    \
+    \
+    \
+    
+- Survey mode: method used to distribute and gather responses
+        
+     \
+     \
+     \
+     \
+     \
+     \
+     \
+     \
+     \
+        
+        
+    
+\newpage
+
+
+So we're concerned about response bias--what now? Careful question design is key. We could spend weeks on just questionnaire design, but will only do a very brief overview. There are other resources on campus that can help with this aspect of surveys (Bureau of Sociological Research).
+
+We'll start with types of questions to avoid, and then move on to other considerations when writing questions.
+
+**Common types of biased questions**:
+
+- Leading questions
+    
+    \
+    \
+    \
+    \
+    \
+    \
+    
+    How to fix it:
+    
+    \
+    \
+    \
+    \
+    \
+    
+- Assumptive questions
+    
+    \
+    \
+    \
+    \
+    \
+    \
+    
+    How to fix it:
+    
+     \
+     \
+     \
+     \
+     \
+    
+- Double-barreled questions
+    
+    \
+    \
+    \
+    \
+    
+    How to fix it:
+    
+    \
+    \
+    
+- Double negatives
+    
+    \
+    \
+    \
+    \
+    \
+    \
+    \
+    \
+    
+    How to fix it:
+    
+    \
+    \
+    \
+    
+
+**Other considerations**:
+
+
+- Pay careful attention to answer scale options
+    
+    \
+    \
+    \
+    \
+    \
+    \
+    \
+    \
+    \
+    
+    
+- Check formatting
+    
+    \
+    \
+    
+- Avoid jargon, and be specific
+    
+    \
+    \
+    \
+    \
+    \
+    \
+    
+- Open or closed questions?
+    
+    \
+    \
+    \
+    \
+    \
+    \
+    \
+    
+- Question order matters
+    
+    \
+    
+Probably most important, test questions ahead of time with the target population.
+
+4.  **Choosing the sampling design/data collection approach**
+
+\
+\
+\
+\
+\
+\
+
+\newpage
+
+5. **Choosing the analysis approach**
+
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+
+6. **Data analysis**
+
+\
+\
+\
+\
+
+7. **What's next?** The more information we have about a population, the easier it is to devise a sampling plan that will give accurate estimates. Any past survey can serve as a guide for future samples, as it will provide information about variablity and cost.
+
+\
+
+**The rest of the semester**
