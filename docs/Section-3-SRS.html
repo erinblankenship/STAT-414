@@ -1,0 +1,1362 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.9.38">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>3&nbsp; Simple Random Samples – Stat 414 Notes</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./Section-2-Prob-Samples.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-12eeb4b20e9f5a2b0bfc604bfaf942bb.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body class="nav-sidebar floating quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./Section-3-SRS.html"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Simple Random Samples</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Stat 414 Notes</a> 
+        <div class="sidebar-tools-main">
+    <a href="./Stat-414-Notes.pdf" title="Download PDF" class="quarto-navigation-tool px-1" aria-label="Download PDF"><i class="bi bi-file-pdf"></i></a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Course Goals for STAT 414</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Section-1-Introduction.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction to Sampling</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Section-2-Prob-Samples.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">An Introduction to Probability Samples</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Section-3-SRS.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Simple Random Samples</span></span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#srs-selecting-the-sample" id="toc-srs-selecting-the-sample" class="nav-link active" data-scroll-target="#srs-selecting-the-sample"><span class="header-section-number">3.1</span> SRS: Selecting the Sample</a></li>
+  <li><a href="#estimation-from-a-srs" id="toc-estimation-from-a-srs" class="nav-link" data-scroll-target="#estimation-from-a-srs"><span class="header-section-number">3.2</span> Estimation from a SRS</a>
+  <ul class="collapse">
+  <li><a href="#estimating-a-population-mean" id="toc-estimating-a-population-mean" class="nav-link" data-scroll-target="#estimating-a-population-mean"><span class="header-section-number">3.2.1</span> Estimating a population mean</a></li>
+  <li><a href="#estimating-a-population-total" id="toc-estimating-a-population-total" class="nav-link" data-scroll-target="#estimating-a-population-total"><span class="header-section-number">3.2.2</span> Estimating a population total</a></li>
+  <li><a href="#estimating-a-population-proportion" id="toc-estimating-a-population-proportion" class="nav-link" data-scroll-target="#estimating-a-population-proportion"><span class="header-section-number">3.2.3</span> Estimating a population proportion</a></li>
+  </ul></li>
+  <li><a href="#sampling-weights" id="toc-sampling-weights" class="nav-link" data-scroll-target="#sampling-weights"><span class="header-section-number">3.3</span> Sampling Weights</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Simple Random Samples</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p><strong>Simple random sampling</strong> (SRS) is the most basic probability sampling design, and it is also used in combination with other designs like stratified and cluster sampling.</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Definition: Simple Random Sample
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>A <strong>simple random sample (SRS)</strong></p>
+<p><br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+</p>
+</div>
+</div>
+<p>This definition implies</p>
+<p><br>
+<br>
+<br>
+</p>
+<p>Specifically, the <strong>inclusion probability</strong> for any sampling unit is</p>
+<p><br>
+<br>
+</p>
+<p>Note that the converse is not true!</p>
+<p><br>
+<br>
+<br>
+<br>
+</p>
+<div style="page-break-after: always;"></div>
+<p>This is called an <strong>equal probability</strong> design, and the SRS is only one example of equal probability design. Some stratified and cluster sampling designs also have an equal inclusion probability for all sampling units.</p>
+<section id="srs-selecting-the-sample" class="level2" data-number="3.1">
+<h2 data-number="3.1" class="anchored" data-anchor-id="srs-selecting-the-sample"><span class="header-section-number">3.1</span> SRS: Selecting the Sample</h2>
+<p>There are two types of selection procedures, depending on whether or not the sampling units are returned to the population after they have been drawn:</p>
+<ul>
+<li><strong>SRSWR</strong></li>
+</ul>
+<p><br>
+<br>
+<br>
+<br>
+<br>
+</p>
+<ul>
+<li><strong>SRSWOR</strong></li>
+</ul>
+<p><br>
+<br>
+<br>
+<br>
+<br>
+</p>
+<p>Conceptually, an SRS (SRSWOR) is selected as follows:</p>
+<ul>
+<li><p><br>
+</p></li>
+<li><p><br>
+</p></li>
+<li><p><br>
+</p></li>
+<li><p><br>
+</p>
+<p><span class="math inline">\(\vdots\)</span></p></li>
+</ul>
+<p>&nbsp;</p>
+<ul>
+<li><br>
+</li>
+</ul>
+<div style="page-break-after: always;"></div>
+<p>This is useful to see why each unit has the same inclusion probability.</p>
+<p><br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+</p>
+<p>But, this is not an especially realistic way to pick a sample. In practice, an SRS (SRSWOR) is selected as follows:</p>
+<ul>
+<li>Create a sampling frame</li>
+</ul>
+<p><br>
+<br>
+<br>
+<br>
+<br>
+</p>
+<ul>
+<li>Determine a selection procedure that performs SRSWOR</li>
+</ul>
+<p><br>
+<br>
+<br>
+<br>
+<br>
+</p>
+<ul>
+<li>A sampling unit is included in the sample if its index corresponds to one of the <span class="math inline">\(n\)</span> random numbers selected.</li>
+</ul>
+<div style="page-break-after: always;"></div>
+<p>So what are some selection procedures that perform SRSWOR?</p>
+<ul>
+<li>Lottery</li>
+</ul>
+<p><br>
+</p>
+<ul>
+<li><p><a href="random.org">random.org</a></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="random org.jpg" class="img-fluid figure-img"></p>
+<figcaption>Random.org settings to generate a SRSWOR</figcaption>
+</figure>
+</div></li>
+</ul>
+<div style="page-break-after: always;"></div>
+<ul>
+<li><p>Statistical software</p>
+<ul>
+<li><p>SAS: <code>proc surveyselect method=srs;</code><br>
+</p></li>
+<li><p>Base R: <code>sample(1:N, n, replace=FALSE)</code></p></li>
+</ul>
+<p><br>
+</p>
+<ul>
+<li>R packages: Need to install and load the package <code>sampling</code>, then <code>sample&lt;-srswor(n,N)</code>. You can then use the <code>getdata</code> function to extract the sample from the population.</li>
+</ul></li>
+</ul>
+<p><br>
+<br>
+<br>
+<br>
+<br>
+<br>
+</p>
+<p><strong>Example</strong>: The dataset <code>baseball.csv</code> in Canvas contains statistics on 797 baseball players from the rosters of all major league teams in November, 2004. We’ll treat this as our population, and take an SRS of 150 players.</p>
+<p>First, we’ll read the data into R, print out the first few rows, and check the size of the population:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>baseball<span class="ot">&lt;-</span><span class="fu">read.csv</span>(<span class="st">"baseball.csv"</span>,<span class="at">header=</span><span class="cn">TRUE</span>)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(baseball)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  team leagueid   player   salary pos gplay gstart inning putout assist error
+1  ANA       AL anderga0  6200000  CF   112     92   2375    211      5     2
+2  ANA       AL colonba0 11000000   P     3     34    625      8     30     3
+3  ANA       AL davanje0   375000  CF   108     27    743     75      1     0
+4  ANA       AL donnebr0   375000   P     5      0    126      2      2     0
+5  ANA       AL eckstda0  2150000  SS   142    136   3575    198    309     6
+6  ANA       AL erstada0  7750000  1B   125    124   3196    986     66     4
+  dplay pball gbat atbat run hit secbase thirdbase homerun rbi stolenb csteal
+1     1    -9  112   442  57 133      20         1      14  75       2      1
+2     4    -9    3     3   0   0       0         0       0   0       0      0
+3     1    -9  108   285  41  79      11         4       7  34      18      3
+4     0    -9    5     0   0   0       0         0       0   0       0      0
+5    75    -9  142   566  92 156      24         1       2  35      16      5
+6    83    -9  125   495  79 146      29         1       7  69      16      1
+  walk strikeout intwalk hbp sacrhit sacrfly gidplay
+1   29        75       6   1       0       3       3
+2    0         1       0   0       0       0       0
+3   46        54       2   0       1       5       2
+4    0         0       0   0       0       0       0
+5   42        49       1  13      14       2      11
+6   37        74       1   4       3       4       9</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>N<span class="ot">&lt;-</span><span class="fu">nrow</span>(baseball)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>N</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 797</code></pre>
+</div>
+</div>
+<p>Now we’ll load the necessary package, set a seed and draw a sample of 150 players:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(sampling)</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">98263476</span>)</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>index<span class="ot">&lt;-</span><span class="fu">srswor</span>(<span class="dv">150</span>,N)</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>index[<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1] 0 0 0 0 0 0 0 1 0 1</code></pre>
+</div>
+</div>
+<p>So the <code>srswor</code> function only gives us a 0/1 for each element in the population. To get the sample, there are a couple of options:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>baseballsrs<span class="ot">&lt;-</span><span class="fu">getdata</span>(baseball,index)</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(baseballsrs)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   ID_unit team leagueid   player  salary pos gplay gstart inning putout assist
+8        8  ANA       AL figgich0  320000  3B   148     80   2116     57    129
+10      10  ANA       AL greggke0  301500   P     5      0    263      2      5
+21      21  ANA       AL rodrifr0  375000   P     3      0    252      5      9
+31      31  ARI       NL cintral0  335000  SS   154    125   3297    141    383
+33      33  ARI       NL daiglca0  300000   P    11     10    147      5      6
+50      50  ARI       NL sexsori0 8725000  1B    23     23    613    199     27
+   error dplay pball gbat atbat run hit secbase thirdbase homerun rbi stolenb
+8     11     9    -9  148   577  83 171      22        17       5  60      34
+10     0     1    -9    5     0   0   0       0         0       0   0       0
+21     0     0    -9    3     0   0   0       0         0       0   0       0
+31    15    61    -9  154   564  56 148      31         7       4  49       3
+33     0     0    -9   11    17   2   2       2         0       0   0       0
+50     1    19    -9   23    90  20  21       4         0       9  23       0
+   csteal walk strikeout intwalk hbp sacrhit sacrfly gidplay
+8      13   49        94       0   0      10       2       6
+10      0    0         0       0   0       0       0       0
+21      0    0         0       0   0       0       0       0
+31      3   31        59       2   2      12       4      11
+33      0    0         7       0   0       1       0       1
+50      0   14        21       0   0       0       0       2</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>baseballsrs2<span class="ot">&lt;-</span>baseball[(<span class="dv">1</span><span class="sc">:</span>N)[index<span class="sc">==</span><span class="dv">1</span>],]</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(baseballsrs2)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   team leagueid   player  salary pos gplay gstart inning putout assist error
+8   ANA       AL figgich0  320000  3B   148     80   2116     57    129    11
+10  ANA       AL greggke0  301500   P     5      0    263      2      5     0
+21  ANA       AL rodrifr0  375000   P     3      0    252      5      9     0
+31  ARI       NL cintral0  335000  SS   154    125   3297    141    383    15
+33  ARI       NL daiglca0  300000   P    11     10    147      5      6     0
+50  ARI       NL sexsori0 8725000  1B    23     23    613    199     27     1
+   dplay pball gbat atbat run hit secbase thirdbase homerun rbi stolenb csteal
+8      9    -9  148   577  83 171      22        17       5  60      34     13
+10     1    -9    5     0   0   0       0         0       0   0       0      0
+21     0    -9    3     0   0   0       0         0       0   0       0      0
+31    61    -9  154   564  56 148      31         7       4  49       3      3
+33     0    -9   11    17   2   2       2         0       0   0       0      0
+50    19    -9   23    90  20  21       4         0       9  23       0      0
+   walk strikeout intwalk hbp sacrhit sacrfly gidplay
+8    49        94       0   0      10       2       6
+10    0         0       0   0       0       0       0
+21    0         0       0   0       0       0       0
+31   31        59       2   2      12       4      11
+33    0         7       0   0       1       0       1
+50   14        21       0   0       0       0       2</code></pre>
+</div>
+</div>
+<div style="page-break-after: always;"></div>
+<p>Let’s plot the salaries from our sampled players</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(baseballsrs<span class="sc">$</span>salary,<span class="at">breaks=</span><span class="dv">20</span>,<span class="at">col=</span><span class="st">"gray"</span>,<span class="at">xlab=</span><span class="st">"Player Salaries"</span>,</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>   <span class="at">main=</span><span class="st">"Histogram: Player Salaries, 2004"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Section-3-SRS_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="estimation-from-a-srs" class="level2" data-number="3.2">
+<h2 data-number="3.2" class="anchored" data-anchor-id="estimation-from-a-srs"><span class="header-section-number">3.2</span> Estimation from a SRS</h2>
+<p>Once we’ve selected our sample, we can use it to estimate characteristics of the population, along with their standard errors.</p>
+<section id="estimating-a-population-mean" class="level3" data-number="3.2.1">
+<h3 data-number="3.2.1" class="anchored" data-anchor-id="estimating-a-population-mean"><span class="header-section-number">3.2.1</span> Estimating a population mean</h3>
+<p>As a reminder, the population mean is</p>
+<p>A natural estimator of <span class="math inline">\(\bar y_{\mathcal{U}}\)</span> using a SRS of sample size <span class="math inline">\(n\)</span> is the <strong>sample mean</strong>:</p>
+<p><br>
+<br>
+</p>
+<div style="page-break-after: always;"></div>
+<p><strong>Example</strong>: In our sample of <span class="math inline">\(n=150\)</span> baseball players, the mean salary is</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>mean.salary<span class="ot">&lt;-</span><span class="fu">mean</span>(baseballsrs<span class="sc">$</span>salary)</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>mean.salary</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1993886</code></pre>
+</div>
+</div>
+<p>Because we have access to the entire population, we can check to see how our sample mean compares to the population mean.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>mean.pop<span class="ot">&lt;-</span><span class="fu">mean</span>(baseball<span class="sc">$</span>salary)</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>mean.pop</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 2497669</code></pre>
+</div>
+</div>
+<p>What happens if we take a different sample? Let’s try a few. What do we need to change in R?</p>
+<p><br>
+<br>
+<br>
+<br>
+</p>
+<p>It turns out that with simple random sampling, the sample mean is an unbiased estimator of the population mean. That is,</p>
+<p><br>
+<br>
+<br>
+<br>
+<br>
+<br>
+</p>
+<p>As noted in Chapter 2, the finite population variance is</p>
+<p><br>
+<br>
+<br>
+<br>
+</p>
+<div style="page-break-after: always;"></div>
+<p>Under simple random sampling, the sample variance <span class="math inline">\(s^2\)</span><br>
+</p>
+<p>is an unbiased estimator of <span class="math inline">\(\sigma^2\)</span>. However, if we want to use <span class="math inline">\(\bar y\)</span> to draw conclusions about the population, we need the variance of <span class="math inline">\(\bar y\)</span>. It turns out that under simple random sampling,</p>
+<p><br>
+<br>
+<br>
+<br>
+<br>
+<br>
+</p>
+<p>(Proof: see section 2.9)</p>
+<p>But, we generally don’t know <span class="math inline">\(\sigma^2\)</span>, so we’ll use an unbiased estimator of Var<span class="math inline">\((\bar y)\)</span>:</p>
+<p><br>
+<br>
+<br>
+</p>
+<p>The square root of the variance of the estimator is its standard error (fun fact: standard errors are not usually unbiased).</p>
+<p><br>
+<br>
+<br>
+</p>
+<p>This quantity<br>
+</p>
+<p>is called the <strong>finite population correction factor</strong>, or <strong>fpc</strong> for short.</p>
+<p>Keep in mind that we’ve sampled <span class="math inline">\(\frac{n}{N}\)</span> of the population. This is called the <strong>sampling fraction</strong>. Why does the sampling fraction matter?</p>
+<p><br>
+<br>
+<br>
+<br>
+</p>
+<div style="page-break-after: always;"></div>
+<p><strong>Example</strong>: For the baseball SRS</p>
+<p>We know:</p>
+<p><br>
+<br>
+<br>
+</p>
+<p>With the fpc:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>var.salary<span class="ot">&lt;-</span><span class="fu">var</span>(baseballsrs<span class="sc">$</span>salary)</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>var.salary</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 8.804137e+12</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>se.mean<span class="ot">&lt;-</span><span class="fu">sqrt</span>((var.salary<span class="sc">/</span><span class="dv">150</span>)<span class="sc">*</span>(<span class="dv">1</span><span class="sc">-</span>(<span class="dv">150</span><span class="sc">/</span>N)))</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>se.mean</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 218283.4</code></pre>
+</div>
+</div>
+<p>Without the fpc:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>se.nofpc<span class="ot">&lt;-</span><span class="fu">sqrt</span>(var.salary<span class="sc">/</span><span class="dv">150</span>)</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>se.nofpc</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 242269</code></pre>
+</div>
+</div>
+<p>What if we had sampled fewer players? Let’s try 30 instead of 150. Now:</p>
+<p><br>
+<br>
+</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">98263476</span>)</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>sampsize<span class="ot">&lt;-</span><span class="dv">30</span></span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>indexsmall<span class="ot">&lt;-</span><span class="fu">srswor</span>(sampsize,N)</span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>srssmalln<span class="ot">&lt;-</span><span class="fu">getdata</span>(baseball,indexsmall)</span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>meansmall<span class="ot">&lt;-</span><span class="fu">mean</span>(srssmalln<span class="sc">$</span>salary)</span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>meansmall</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1904472</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>var.small<span class="ot">&lt;-</span><span class="fu">var</span>(srssmalln<span class="sc">$</span>salary)</span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>var.small</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 4.76297e+12</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>se.small<span class="ot">&lt;-</span><span class="fu">sqrt</span>((var.salary<span class="sc">/</span>sampsize)<span class="sc">*</span>(<span class="dv">1</span><span class="sc">-</span>(sampsize<span class="sc">/</span>N)))</span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>se.small</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 531436.4</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>nofpc.small<span class="ot">&lt;-</span><span class="fu">sqrt</span>(var.salary<span class="sc">/</span>sampsize)</span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>nofpc.small</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 541729.8</code></pre>
+</div>
+</div>
+<p>We may also be interested in a measure of relative variability (this will be most helpful in the future for selecting sample size). The <strong>coefficient of variation</strong> (CV) of <span class="math inline">\(\bar y\)</span> is</p>
+<p><br>
+<br>
+<br>
+</p>
+<p>The CV does not depend on the units of measurement. We can estimate the CV using</p>
+<p><br>
+<br>
+<br>
+</p>
+<p><strong>Example</strong>: For the baseball SRS, the estimated CV is</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>CV<span class="ot">&lt;-</span>se.mean<span class="sc">/</span>mean.salary</span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>CV</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.1094764</code></pre>
+</div>
+</div>
+<p>The salary data are quite skewed, so we should also report the median:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>med.salary<span class="ot">&lt;-</span><span class="fu">median</span>(baseballsrs<span class="sc">$</span>salary)</span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>med.salary</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 525000</code></pre>
+</div>
+</div>
+</section>
+<section id="estimating-a-population-total" class="level3" data-number="3.2.2">
+<h3 data-number="3.2.2" class="anchored" data-anchor-id="estimating-a-population-total"><span class="header-section-number">3.2.2</span> Estimating a population total</h3>
+<p>As a reminder, the population total is<br>
+</p>
+<p>We can also express the population total as a function of the population mean</p>
+<p><br>
+<br>
+</p>
+<p>It’s then natural to estimate <span class="math inline">\(t\)</span> using</p>
+<p><br>
+<br>
+</p>
+<p>It’s easy to see that</p>
+<p><br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+</p>
+<p>The CV doesn’t change because the <span class="math inline">\(N\)</span>s cancel!</p>
+<p><br>
+<br>
+<br>
+<br>
+<br>
+<br>
+</p>
+<p><strong>Example</strong>: Let’s estimate the total number of runs across the 2004 season, based on our SRS of <span class="math inline">\(n=150\)</span> players. First, let’s start with the mean runs</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>mean.runs<span class="ot">&lt;-</span><span class="fu">mean</span>(baseballsrs<span class="sc">$</span>run)</span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>mean.runs</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 24.39333</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>var.runs<span class="ot">&lt;-</span><span class="fu">var</span>(baseballsrs<span class="sc">$</span>run)</span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>var.runs</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 998.2268</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>se.meanrun<span class="ot">&lt;-</span><span class="fu">sqrt</span>((var.runs<span class="sc">/</span><span class="dv">150</span>)<span class="sc">*</span>(<span class="dv">1</span><span class="sc">-</span>(<span class="dv">150</span><span class="sc">/</span>N)))</span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>se.meanrun</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 2.324299</code></pre>
+</div>
+</div>
+<p>We can now use these to find an estimate of the total number of runs, along with its standard error:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a>tot.runs<span class="ot">&lt;-</span>N<span class="sc">*</span>mean.runs</span>
+<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a>tot.runs</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 19441.49</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a>se.totrun<span class="ot">&lt;-</span>N<span class="sc">*</span>se.meanrun</span>
+<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a>se.totrun</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1852.466</code></pre>
+</div>
+</div>
+<p>Again, since we have the whole population we can calculate the true total number of runs:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a>pop.totrun<span class="ot">&lt;-</span>N<span class="sc">*</span><span class="fu">mean</span>(baseball<span class="sc">$</span>run)</span>
+<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a>pop.totrun</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 20515</code></pre>
+</div>
+</div>
+</section>
+<section id="estimating-a-population-proportion" class="level3" data-number="3.2.3">
+<h3 data-number="3.2.3" class="anchored" data-anchor-id="estimating-a-population-proportion"><span class="header-section-number">3.2.3</span> Estimating a population proportion</h3>
+<p>A proportion is just a special case of a mean! Let <span class="math inline">\(p\)</span> be the proportion of the population that has a characteristic, and define <span class="math inline">\(y_i\)</span> as</p>
+<p><br>
+<br>
+<br>
+<br>
+</p>
+<p>Then,</p>
+<p><br>
+<br>
+<br>
+<br>
+</p>
+<p>and <span class="math inline">\(\hat p\)</span> is an unbiased estimator for <span class="math inline">\(p\)</span>.</p>
+<p>Now let’s consider the variance.</p>
+<p><br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+</p>
+<p>If we plug <span class="math inline">\(\hat p\)</span> in for <span class="math inline">\(p\)</span>:</p>
+<p><br>
+<br>
+<br>
+<br>
+<br>
+<br>
+</p>
+<p><strong>Example</strong>: Let’s estimate the population proportion of players who had at least one home run. First, we’ll need to do some fiddling with the data set.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a>n<span class="ot">&lt;-</span><span class="fu">nrow</span>(baseballsrs)</span>
+<span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a>baseballsrs<span class="sc">$</span>hr<span class="ot">&lt;-</span><span class="fu">rep</span>(<span class="dv">0</span>,n)</span>
+<span id="cb46-3"><a href="#cb46-3" aria-hidden="true" tabindex="-1"></a>baseballsrs<span class="sc">$</span>hr[baseballsrs<span class="sc">$</span>homerun<span class="sc">&gt;</span><span class="dv">0</span>]<span class="ot">&lt;-</span><span class="dv">1</span></span>
+<span id="cb46-4"><a href="#cb46-4" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(baseballsrs)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   ID_unit team leagueid   player  salary pos gplay gstart inning putout assist
+8        8  ANA       AL figgich0  320000  3B   148     80   2116     57    129
+10      10  ANA       AL greggke0  301500   P     5      0    263      2      5
+21      21  ANA       AL rodrifr0  375000   P     3      0    252      5      9
+31      31  ARI       NL cintral0  335000  SS   154    125   3297    141    383
+33      33  ARI       NL daiglca0  300000   P    11     10    147      5      6
+50      50  ARI       NL sexsori0 8725000  1B    23     23    613    199     27
+   error dplay pball gbat atbat run hit secbase thirdbase homerun rbi stolenb
+8     11     9    -9  148   577  83 171      22        17       5  60      34
+10     0     1    -9    5     0   0   0       0         0       0   0       0
+21     0     0    -9    3     0   0   0       0         0       0   0       0
+31    15    61    -9  154   564  56 148      31         7       4  49       3
+33     0     0    -9   11    17   2   2       2         0       0   0       0
+50     1    19    -9   23    90  20  21       4         0       9  23       0
+   csteal walk strikeout intwalk hbp sacrhit sacrfly gidplay hr
+8      13   49        94       0   0      10       2       6  1
+10      0    0         0       0   0       0       0       0  0
+21      0    0         0       0   0       0       0       0  0
+31      3   31        59       2   2      12       4      11  1
+33      0    0         7       0   0       1       0       1  0
+50      0   14        21       0   0       0       0       2  1</code></pre>
+</div>
+</div>
+<p>Now we can use our new variable to estimate the proportion of all players that had at least one homerun:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb48"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a>prop.hr<span class="ot">&lt;-</span><span class="fu">mean</span>(baseballsrs<span class="sc">$</span>hr)</span>
+<span id="cb48-2"><a href="#cb48-2" aria-hidden="true" tabindex="-1"></a>prop.hr</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.5066667</code></pre>
+</div>
+</div>
+<p>and find its standard error</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb50"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a>fpc<span class="ot">&lt;-</span><span class="dv">1</span><span class="sc">-</span>(<span class="dv">150</span><span class="sc">/</span>N)</span>
+<span id="cb50-2"><a href="#cb50-2" aria-hidden="true" tabindex="-1"></a>fpc</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.8117942</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb52"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a>var.prophr<span class="ot">&lt;-</span>(fpc<span class="sc">*</span>prop.hr<span class="sc">*</span>(<span class="dv">1</span><span class="sc">-</span>prop.hr))<span class="sc">/</span>(n<span class="dv">-1</span>)</span>
+<span id="cb52-2"><a href="#cb52-2" aria-hidden="true" tabindex="-1"></a>var.prophr</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.001361829</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb54"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a>se.prophr<span class="ot">&lt;-</span><span class="fu">sqrt</span>(var.prophr)</span>
+<span id="cb54-2"><a href="#cb54-2" aria-hidden="true" tabindex="-1"></a>se.prophr</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.03690296</code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="sampling-weights" class="level2" data-number="3.3">
+<h2 data-number="3.3" class="anchored" data-anchor-id="sampling-weights"><span class="header-section-number">3.3</span> Sampling Weights</h2>
+<p>Earlier, we defined the for each sampling unit. This is the probability that unit <span class="math inline">\(i\)</span> in included in the sample. In probability samples, the inclusion probabilities are used to calculate <span class="math inline">\(\bar y\)</span> and <span class="math inline">\(\hat t\)</span>.</p>
+<p>To see how they are used, we need a new concept–the .</p>
+<p> The </p>
+<p>The sampling weight is also sometimes called the .</p>
+<p>For simple random samples, all sampling units have the same inclusion probability:</p>
+<p>This means that all sampling units also have the same sampling weight:</p>
+<p>Because all units have the same sampling weight, an SRS is a . However, just because a sample is self-weighting does not mean it’s an SRS. It’s possible to have a sample design where every unit has the same inclusion probability, but not all possible sample samples have the same chance to be selected.</p>
+<p>As mentioned above, we can use the sampling weights <span class="math inline">\(w_i\)</span> to calculate <span class="math inline">\(\bar y\)</span> and <span class="math inline">\(\hat t\)</span> (and, thus, <span class="math inline">\(\hat p\)</span>).</p>
+<p>For an SRS, <span class="math inline">\(w_i = N/n\)</span>, so</p>
+<p>We didn’t need to use them in baseball example to get <span class="math inline">\(\bar y\)</span>, <span class="math inline">\(\hat t\)</span>, and <span class="math inline">\(\hat p\)</span>. But, survey software packages are written to estimate the parameters for any probability sampling design so they require the data set include sampling weights.</p>
+<p> Let’s add the sampling weights to the baseball data.</p>
+<p>The sampling weight is <span class="math inline">\(N/n = 797/150 = 5.31333\)</span>, indicating that player in our SRS represents 5.31333 players in the population of all 2004 MLB players.</p>
+<p>We can then use the sampling weights to calculate the same estimates we did earlier, using a built in function in the package in R.</p>
+<p>We first have to define the survey design, using the function:</p>
+<p>The function has several inputs:</p>
+<p>There are other inputs that we don’t need right now, but we’ll add them as we encounter more complicated sampling designs.</p>
+<p>If we print out we get:</p>
+<p>R tells us this is an Independent Sampling Design, which means there are no clusters or strata.</p>
+<p>Now that we’ve set up the sampling design in R, we can use it calculate the same estimates we did before with a lot less code. We can use the functions and to get <span class="math inline">\(\bar y\)</span> and <span class="math inline">\(\hat t\)</span>, respectively, along with their standard errors:</p>
+<p> For estimating average salary and total runs in 2004 we’d use:</p>
+<p>This would give the output</p>
+<p>The same values we got before. Since <span class="math inline">\(\hat p\)</span> is really a mean, we can also use to get <span class="math inline">\(\hat p\)</span> and its SE:</p>
+<p>which provides the output</p>
+<p>Again, the same values we got before.</p>
+<p></p>
+<p>Once we select the random sample and use the resulting data to construct estimates of a population value (mean, total, proportion), the next step is typically to make some statement about the accuracy of the estimate. This is most often accomplished by constructing a for the true population value.</p>
+<p>The confidence intervals we’ll construct have the same interpretation as those we constructed in classes like STAT 218, 318, 102, 212, 380. That is,</p>
+<p>The expected proportion of intervals containing the true population value is the . So, for example, an interval with a coverage probability of 0.95 means</p>
+<p>But, there are differences. In probability sampling with a finite population, only a finite number of possible samples exist, and we know the probability with which each sample will be chosen. This means we generate all possible samples, and all possible intervals. From these, we could then observe how many capture the population value, and get the coverage probability.</p>
+<p>In real life, we can’t do this</p>
+<p>But, the confidence intervals we used in STAT 218/318/102/212/30 relied on asymptotic theory–what happens as <span class="math inline">\(n \rightarrow \infty\)</span>. For example, we know and love the Central Limit Theorem:</p>
+<p>But we’ve only got a finite population! How can we use a result about <span class="math inline">\(n \rightarrow \infty\)</span> when we’ve got a finite population?</p>
+<p>Happily, there is a version of the Central Limit Theorem for SRSWOR, due to H’{a}jek (1960). If some conditions that are too technical for us to talk about are true and if</p>
+<p>then</p>
+<p>This means we could use this confidence interval for the population mean:</p>
+<p>Again, we don’t know <span class="math inline">\(\sigma\)</span>! We could substitute in <span class="math inline">\(s\)</span> and use the standard error. And, in practice, we typically substitute <span class="math inline">\(t_{\alpha/2, df=n-1}\)</span> for <span class="math inline">\(z_{\alpha/2}\)</span>. In small samples, it’s more conservative (wider confidence intervals) and with large samples <span class="math inline">\(t_{\alpha/2,n-1} \approx z_{\alpha/2}\)</span> anyway. So, we’ll use the interval</p>
+<p>to calculate a <span class="math inline">\((1-\alpha)\times 100\%\)</span> confidence interval for the from population mean from an SRS.</p>
+<div style="page-break-after: always;"></div>
+<p>In general,</p>
+<p>We have the same question come up that comes with the regular CLT: how large is large enough for <span class="math inline">\(n\)</span> (and <span class="math inline">\(N\)</span>?) It depends</p>
+<p>Some rules of thumb:</p>
+<p>Sugden et al.&nbsp;(2000) recommended the minimum sample size</p>
+<p>Another way to check whether the distribution is to skewed to use the CLT is bootstrapping!</p>
+<div style="page-break-after: always;"></div>
+<p> Back to the baseball data. Let’s get a 95% confidence interval for the mean salary of players in 2004. We saw already that based on our SRS of <span class="math inline">\(n=150\)</span>, <span class="math inline">\(\bar y = 2564021\)</span> and SE<span class="math inline">\((\bar y) = 274521.5\)</span>. We can use the function to get the <span class="math inline">\(t\)</span> multiplier in the confidence interval.</p>
+<p>Should we have even used the <span class="math inline">\(t\)</span>-interval for the salary data? It’s pretty skewed.</p>
+<p>What about a 95% confidence interval for the total number of runs in 2004? We already found <span class="math inline">\(\hat t = 24457\)</span> and SE<span class="math inline">\((\hat t) = 2236.436\)</span>.</p>
+<p>Let’s try a 95% confidence interval for the proportion players with at least one home run. We know <span class="math inline">\(\hat p =0.54\)</span> and SE<span class="math inline">\((\hat p) = 0.0368\)</span></p>
+<p>It turns out the package has confidence intervals built in to the and functions. Once we have created an object from either function, we can pass that object into the function. Here’s the syntax:</p>
+<p>So we could use</p>
+<p></p>
+<p>Often the first question that comes up when designing a survey is how many observations are needed. This is often a pretty complicated question, and involves balancing the objectives of the study with the available budget. You also must consider that most studies have multiple characteristics being measured on each observation unit.</p>
+<p>If the researcher can narrow down the most important variables to focus on to one or two, there are four basic steps:</p>
+<p>We’ll go through these steps one by one.</p>
+<p></p>
+<p></p>
+<div style="page-break-after: always;"></div>
+<p>Let’s start by assuming the fpc is neglible (i.e., we have an infinite population)</p>
+<p>Now, let’s assume <span class="math inline">\(\frac{n_0}{N} &lt; 1\)</span> (why is this a reasonable assumption?)</p>
+<p>So, the sample size we need is</p>
+<div style="page-break-after: always;"></div>
+<p>We could also consider finding the sample size to achieve a specified relative precision, call it <span class="math inline">\(r\)</span>. The relative precision measures the distance between the estimate and the true value, scaled by the true value.</p>
+<p>Sometimes we can calculate the required <span class="math inline">\(n\)</span> at this stage!</p>
+<p> Suppose we want to estimate the proportion of 2004 baseball players that had at least one error, and we want to be able to calculate a 95% confidence interval and have a margin of error of 0.04.</p>
+<div style="page-break-after: always;"></div>
+<p></p>
+<p>This usually involves estimating (guessing) the expected variance. Why didn’t need to do this in the baseball example above?</p>
+<p>How can we obtain the expected variance?</p>
+<p>Another option is to use the CV for a sample of size 1: <span class="math inline">\(\sigma/\bar y_{\mathcal{U}}\)</span></p>
+<p>If there are no other options, guess. An educated guess may use the suspected distribution of the data.</p>
+<p></p>
+<div style="page-break-after: always;"></div>
+<p> A botanical researchers wishes to design a survey to estimate the number of birch trees in a study area. The study area has been divided into 1000 plots. From previous experience, the variance in the number of trees per plot is about <span class="math inline">\(\sigma^2 \approx 45\)</span>. What sample size should be used to estimate the total number of trees in the study area to within 500 trees of the true value with 95% confidence?</p>
+<p>To within 1000 trees?</p>
+<p>To within 2000 trees?</p>
+<p>Does the finite population correction factor matter here? How do you know?</p>
+<div style="page-break-after: always;"></div>
+<p></p>
+<p>Suppose we have a population with <span class="math inline">\(N\)</span> units, and the units are numbered from 1 to <span class="math inline">\(N\)</span> in some order. To select a sample of <span class="math inline">\(n\)</span> units, we:</p>
+<p>For example,</p>
+<p>Note that</p>
+<p>This type of sampling design is called a </p>
+<p>Why isn’t this a SRS?</p>
+<p>When will a systematic sample behave like an SRS?</p>
+<div style="page-break-after: always;"></div>
+<p>When will a systematic sample not behave like an SRS?</p>
+<p>There are a couple of advantages over the SRS:</p>
+<p></p>
+<div style="page-break-after: always;"></div>
+<p></p>
+<p>Next up…Stratified Sampling.</p>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./Section-2-Prob-Samples.html" class="pagination-link" aria-label="An Introduction to Probability Samples">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">An Introduction to Probability Samples</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

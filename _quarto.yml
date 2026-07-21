@@ -11,6 +11,7 @@ book:
     - index.qmd
     - Section-1-Introduction.qmd
     - Section-2-Prob-Samples.qmd
+    - Section-3-SRS.qmd
 
   
 
