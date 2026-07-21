@@ -38,5 +38,25 @@
     "crumbs": [
       "<span class='chapter-number'>1</span>  <span class='chapter-title'>Introduction to Sampling</span>"
     ]
+  },
+  {
+    "objectID": "Section-2-Prob-Samples.html",
+    "href": "Section-2-Prob-Samples.html",
+    "title": "2  An Introduction to Probability Samples",
+    "section": "",
+    "text": "2.1 Probability Sampling Definitions and Notation\nBefore we can jump into sampling designs, we need to establish a few basic concepts and notation. The sampling designs we’re going to discuss are probability samples.\nThroughout this semester we’ll discuss three different ways to design a probability sample, as well as the properties of estimators arising from these designs. Probability samples allow us to avoid selection biases and help ensure the sample is representative of the population, as probability samples take selection choice away from the researcher, and put it in the hands of random selection. The three major designs we’ll discuss are:\nWe’ll also consider systematic sampling\nTo simplify things, we’ll make the following assumptions:\nDepending on how far we get, we may revisit relaxing some of these assumptions at the end of the semester.\nIn all cases, our goal is to learn about some characteristic of the target population\nand we’ll use our sample data to estimate that characteristic. We’ll also estimate standard errors, and use those to construct confidence intervals for the unknown population characteristic. We’ll also discuss determining the necessary sample size.\nThroughout this semester, we’ll assume a finite population, or universe of \\(N\\) units:\nAny sample we select from \\(\\mathcal{U}\\) will be a subset of \\(\\mathcal{U}\\), and we’ll denote the specific sample chosen as \\(\\mathcal{S}\\). \\(\\mathcal{S}\\) contains \\(n\\) elements from \\(\\mathcal{U}\\).\nExample: Suppose \\(\\mathcal{U}=\\{1,2,3,4,5\\}\\) and we consider samples of size \\(n=3\\). There are 10 possible samples that could be selected:\nRemember that in probability sampling\nBecause each possible sample \\(\\mathcal{S}\\) has a known probability of being selected, each unit in the universe \\(\\mathcal{U}\\) also has a known probability of being in the selected sample.\nLet \\(y_i\\) be\nWe consider \\(y_i\\) to a be a fixed quantity.",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>An Introduction to Probability Samples</span>"
+    ]
+  },
+  {
+    "objectID": "Section-2-Prob-Samples.html#probability-samples-inference-basics",
+    "href": "Section-2-Prob-Samples.html#probability-samples-inference-basics",
+    "title": "2  An Introduction to Probability Samples",
+    "section": "2.2 Probability Samples: Inference Basics",
+    "text": "2.2 Probability Samples: Inference Basics\nWe want to use the data from a sample to estimate some characteristic of the population. Common population characteristics of interest are\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nExample: Earlier we considered the universe \\(\\mathcal{U}=\\{1,2,3,4,5\\}\\). Suppose the values of \\(y_i\\) are\n\n\n\n\\(i\\)\n1\n2\n3\n4\n5\n\n\n\n\n\\(y_i\\)\n2\n4\n4\n6\n6\n\n\n\n\n\n\nWe also considered taking samples of size \\(n=3\\) from \\(\\mathcal{U}\\). There are 10 possible samples, and all are equally likely.\n\n\n\n\n\n\n\n\n\nJust like in other classes like STAT 102, 380, 212 our inference methods are going to rely on the sampling distribution of a statistic.\n\n\n\n\n\n\nTipDefinition: Sampling Distribution\n\n\n\nThe sampling distribution\n\n\n\n\n\n\nExample, cont.:\n\n\n\n\n\n\n\n\n\n\nFrom the sampling distribution, we can find properties of the estimator we’re using.\n\n\n\nExpected value:\n\n\n\n\n\n\n\n\n\n\nEstimation bias:\n\n\n\n\n\n\n\n\n\n\n\nVariance:\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nMean squared error:",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>An Introduction to Probability Samples</span>"
+    ]
   }
 ]
