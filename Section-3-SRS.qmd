@@ -127,20 +127,19 @@ So what are some selection procedures that perform SRSWOR?
 
 - [random.org](random.org)
 
-  ![Random.org settings to generate a SRSWOR](random org.jpg)
-  
+  ![Random.org settings to generate a SRSWOR](random%20org.jpg)
+
 \newpage
 
 - Statistical software
 
-    - SAS: `proc surveyselect method=srs;`
-    \
-    
-    - Base R: `sample(1:N, n, replace=FALSE)`
+  - SAS: `proc surveyselect method=srs;`\
 
-    \
+  - Base R: `sample(1:N, n, replace=FALSE)`
 
-    - R packages: Need to install and load the package `sampling`, then `sample<-srswor(n,N)`. You can then use the `getdata` function to extract the sample from the population.
+  \
+
+  - R packages: Need to install and load the package `sampling`, then `sample<-srswor(n,N)`. You can then use the `getdata` function to extract the sample from the population.
 
 \
 \
@@ -167,7 +166,8 @@ Now we'll load the necessary package, set a seed and draw a sample of 150 player
 library(sampling)
 
 set.seed(98263476)
-index<-srswor(150,N)
+n<-150
+index<-srswor(n,N)
 index[1:10]
 ```
 
@@ -226,7 +226,6 @@ What happens if we take a different sample? Let's try a few. What do we need to 
 \
 \
 
-
 It turns out that with simple random sampling, the sample mean is an unbiased estimator of the population mean. That is,
 
 \
@@ -243,11 +242,9 @@ As noted in Chapter 2, the finite population variance is
 \
 \
 
-
 \newpage
 
-Under simple random sampling, the sample variance $s^2$
-\
+Under simple random sampling, the sample variance $s^2$\
 
 is an unbiased estimator of $\sigma^2$. However, if we want to use $\bar y$ to draw conclusions about the population, we need the variance of $\bar y$. It turns out that under simple random sampling,
 
@@ -257,7 +254,6 @@ is an unbiased estimator of $\sigma^2$. However, if we want to use $\bar y$ to d
 \
 \
 \
-
 
 (Proof: see section 2.9)
 
@@ -273,9 +269,7 @@ The square root of the variance of the estimator is its standard error (fun fact
 \
 \
 
-
-This quantity
-\
+This quantity\
 
 is called the **finite population correction factor**, or **fpc** for short.
 
@@ -301,13 +295,14 @@ With the fpc:
 ```{r}
 var.salary<-var(baseballsrs$salary)
 var.salary
-se.mean<-sqrt((var.salary/150)*(1-(150/N)))
+se.mean<-sqrt((var.salary/n)*(1-(n/N)))
 se.mean
 ```
 
 Without the fpc:
+
 ```{r}
-se.nofpc<-sqrt(var.salary/150)
+se.nofpc<-sqrt(var.salary/n)
 se.nofpc
 ```
 
@@ -315,7 +310,6 @@ What if we had sampled fewer players? Let's try 30 instead of 150. Now:
 
 \
 \
-
 
 ```{r}
 set.seed(98263476)
@@ -332,7 +326,6 @@ nofpc.small<-sqrt(var.salary/sampsize)
 nofpc.small
 ```
 
-
 We may also be interested in a measure of relative variability (this will be most helpful in the future for selecting sample size). The **coefficient of variation** (CV) of $\bar y$ is
 
 \
@@ -344,7 +337,6 @@ The CV does not depend on the units of measurement. We can estimate the CV using
 \
 \
 \
-
 
 **Example**: For the baseball SRS, the estimated CV is
 
@@ -362,8 +354,7 @@ med.salary
 
 ### Estimating a population total
 
-As a reminder, the population total is
-\
+As a reminder, the population total is\
 
 We can also express the population total as a function of the population mean
 
@@ -402,7 +393,7 @@ mean.runs<-mean(baseballsrs$run)
 mean.runs
 var.runs<-var(baseballsrs$run)
 var.runs
-se.meanrun<-sqrt((var.runs/150)*(1-(150/N)))
+se.meanrun<-sqrt((var.runs/n)*(1-(n/N)))
 se.meanrun
 ```
 
@@ -438,7 +429,7 @@ Then,
 \
 \
 
-and $\hat p$ is an unbiased estimator for $p$. 
+and $\hat p$ is an unbiased estimator for $p$.
 
 Now let's consider the variance.
 
@@ -474,7 +465,6 @@ If we plug $\hat p$ in for $p$:
 **Example**: Let's estimate the population proportion of players who had at least one home run. First, we'll need to do some fiddling with the data set.
 
 ```{r}
-n<-nrow(baseballsrs)
 baseballsrs$hr<-rep(0,n)
 baseballsrs$hr[baseballsrs$homerun>0]<-1
 head(baseballsrs)
@@ -490,7 +480,7 @@ prop.hr
 and find its standard error
 
 ```{r}
-fpc<-1-(150/N)
+fpc<-1-(n/N)
 fpc
 var.prophr<-(fpc*prop.hr*(1-prop.hr))/(n-1)
 var.prophr
@@ -498,162 +488,214 @@ se.prophr<-sqrt(var.prophr)
 se.prophr
 ```
 
-
 ## Sampling Weights
 
-Earlier, we defined the \textbf{inclusion probability} for each sampling unit. This is the probability that unit $i$ in included in the sample. In probability samples, the inclusion probabilities are used to calculate $\bar y$ and $\hat t$.
+Earlier, we defined the **inclusion probability** $(\pi_i)$ for each sampling unit. This is the probability that unit $i$ is included in the sample. In probability samples, the inclusion probabilities are used to calculate $\bar y$ and $\hat t$.
 
-To see how they are used, we need a new concept--the \textbf{sampling weight}.
+To see how they are used, we need a new concept--the **sampling weight**.
 
-\textbf{Definition:} The \textbf{sampling weight}
+::: callout-tip
+# Definition: Sampling weight
 
-\vspace{30mm}
+The **sampling weight**
 
-The sampling weight is also sometimes called the \textbf{design weight}.
+\
+\
+\
+\
+:::
+
+For example, with the baseball data
+
+\
+
+The sampling weight is also sometimes called the **design weight**.
 
 For simple random samples, all sampling units have the same inclusion probability:
 
 This means that all sampling units also have the same sampling weight:
 
-Because all units have the same sampling weight, an SRS is a \textbf{self-weighting sample}. However, just because a sample is self-weighting does not mean it's an SRS. It's possible to have a sample design where every unit has the same inclusion probability, but not all possible sample samples have the same chance to be selected.
+\
+
+Because all units have the same sampling weight, an SRS is a **self-weighting sample**. However, just because a sample is self-weighting does not mean it's an SRS. It's possible to have a sample design where every unit has the same inclusion probability, but not all possible samples have the same chance to be selected.
 
 As mentioned above, we can use the sampling weights $w_i$ to calculate $\bar y$ and $\hat t$ (and, thus, $\hat p$).
 
-\vspace{50mm}
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
 
 For an SRS, $w_i = N/n$, so
 
-\vspace{40mm}
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
 
-We didn't need to use them in baseball example to get $\bar y$, $\hat t$, and $\hat p$. But, survey software packages are written to estimate the parameters for any probability sampling design so they require the data set include sampling weights.
+We didn't need to use them in baseball example to get $\bar y$, $\hat t$, and $\hat p$. But, survey software packages in R and SAS are written to estimate the parameters for any probability sampling design so they require the data set include sampling weights.
 
-\textbf{Example:} Let's add the sampling weights to the baseball data.
+**Example**: Let's add the sampling weights to the baseball data.
 
-\vspace{10mm}
+```{r}
+baseballsrs$sampwt<-rep(N/n,n)
+head(baseballsrs)
+```
 
 The sampling weight is $N/n = 797/150 = 5.31333$, indicating that player in our SRS represents 5.31333 players in the population of all 2004 MLB players.
 
-We can then use the sampling weights to calculate the same estimates we did earlier, using a built in function in the \texttt{survey} package in R.
+We can then use the sampling weights to calculate the same estimates we did earlier, using a built in function in the `survey` package in R. We first have to define the survey design, using the `svydesign` function:
 
-We first have to define the survey design, using the \texttt{svydesign} function:
-
-\begin{verbatim}
+```{r}
+#| warning: false
 library(survey)
 baseballdesign<-svydesign(id=~1, weights=~sampwt, fpc=rep(N,n), data=baseballsrs)
-\end{verbatim}
+```
 
-The \texttt{svydesign} function has several inputs:
+The `svydesign` function has several inputs:
 
-\begin{itemize}
-    \item id
-    \item weights
-    \item fpc
-    \item data
-\end{itemize}
+- id\
+
+- weights\
+
+- fpc\
+
+- data\
 
 There are other inputs that we don't need right now, but we'll add them as we encounter more complicated sampling designs.
 
-If we print out \texttt{baseballdesign} we get:
+\newpage
 
-\begin{verbatim}
-    > baseballdesign
-    Independent Sampling design
-    svydesign(id = ~1, weights = ~sampwt, fpc = rep(N, n), data = baseballsrs)
-\end{verbatim}
+Let's look the information included in `baseballdesign`:
+
+```{r}
+baseballdesign
+```
 
 R tells us this is an Independent Sampling Design, which means there are no clusters or strata.
 
-Now that we've set up the sampling design in R, we can use it calculate the same estimates we did before with a lot less code. We can use the functions \texttt{svymean} and \texttt{svytotal} to get $\bar y$ and $\hat t$, respectively, along with their standard errors:
+Now that we've set up the sampling design in R, we can use it calculate the same estimates we did before with a lot less code. We can use the functions `svymean` and `svytotal` to get $\bar y$ and $\hat t$, respectively, along with their standard errors. The generic code is:
 
-\begin{verbatim}
-    ybar<-svymean(~var_interest, design)
-    
-    that<-svytotal(~var_interest,design)
-\end{verbatim}
+`ybar<-svymean(~var_interest, design)`
 
-\textbf{Example:} For estimating average salary and total runs in 2004 we'd use:
+`that<-svytotal(~var_interest, design)`
 
-\begin{verbatim}
-    salmean<-svymean(~salary, baseballdesign)
-    salmean
-    
-    runtotal<-svytotal(~run,baseballdesign)
-    runtotal
-\end{verbatim}
+**Example**: For estimating average salary and total runs in 2004 we'd use:
 
-This would give the output
+```{r}
+salmean<-svymean(~salary,baseballdesign)
+salmean
+runtotal<-svytotal(~run,baseballdesign)
+runtotal
+```
 
-\begin{verbatim}
-    > salmean<-svymean(~salary, baseballdesign)
-    > salmean
-             mean     SE
-    salary 2564021 274521
-    > 
-    > runtotal<-svytotal(~run,baseballdesign)
-    > runtotal
-        total     SE
-    run 24457 2236.4
-\end{verbatim}
+The same values we got before. Since $\hat p$ is really a mean, we can also use `svymean` to get $\hat p$ and its SE:
 
-The same values we got before. Since $\hat p$ is really a mean, we can also use \texttt{svymean} to get $\hat p$ and its SE:
-
-\begin{verbatim}
-    hrprop<-svymean(~hr,baseballdesign)
-    hrprop
-\end{verbatim}
-
-which provides the output
-
-\begin{verbatim}
-    > hrprop<-svymean(~hr,baseballdesign)
-    > hrprop
-    mean     SE
-    hr 0.54 0.0368
-\end{verbatim}
+```{r}
+hrprop<-svymean(~hr,baseballdesign)
+hrprop
+```
 
 Again, the same values we got before.
 
-\textbf{Confidence Intervals}
+## Confidence Intervals
 
-Once we select the random sample and use the resulting data to construct estimates of a population value (mean, total, proportion), the next step is typically to make some statement about the accuracy of the estimate. This is most often accomplished by constructing a \textbf{confidence interval} for the true population value.
+Once we select the random sample and use the resulting data to construct estimates of a population value (mean, total, proportion), the next step is typically to make some statement about the accuracy of the estimate. This is most often accomplished by constructing a **confidence interval** for the true population value.
 
-The confidence intervals we'll construct have the same interpretation as those we constructed in classes like STAT 218, 318, 102, 212, 380. That is,
+The confidence intervals we'll construct have the same interpretation as those we constructed in classes like STAT 218, 318, 102, 212, 380.
 
-\vspace{40mm}
+::: callout-tip
+# Definition: Confidence interval
 
-The expected proportion of intervals containing the true population value is the \textbf{coverage probability}. So, for example, an interval with a coverage probability of 0.95 means
+A **confidence interval**
 
-\vspace{20mm}
+\
+\
+\
+\
+\
+:::
 
-But, there are differences. In probability sampling with a finite population, only a finite number of possible samples exist, and we know the probability with which each sample will be chosen. This means we \textit{could} generate all possible samples, and all possible intervals. From these, we could then observe how many capture the population value, and get the \textbf{exact} coverage probability.
+The expected proportion of intervals containing the true population value is the **coverage probability**. So, for example, an interval with a coverage probability of 0.95 means
+
+\
+\
+\
+
+But, there are differences. In probability sampling with a finite population, only a finite number of possible samples exist, and we know the probability with which each sample will be chosen. This means we *could* generate all possible samples, and all possible intervals. From these, we could then observe how many capture the population value, and get the *exact* coverage probability.
 
 In real life, we can't do this
 
-\vspace{30mm}
+\
+\
+\
 
-But, the confidence intervals we used in STAT 218/318/102/212/30 relied on asymptotic theory--what happens as $n \rightarrow \infty$. For example, we know and love the Central Limit Theorem:
+But, the confidence intervals we used in STAT 218/318/102/212/380 (which assumed an infinite population) relied on asymptotic theory--what happens as $n \rightarrow \infty$. For example, we know and love the Central Limit Theorem:
 
-\vspace{30mm}
+\
+\
+\
+
+\newpage
 
 But we've only got a finite population! How can we use a result about $n \rightarrow \infty$ when we've got a finite population?
 
-\vspace{60mm}
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
 
-Happily, there is a version of the Central Limit Theorem for SRSWOR, due to H'{a}jek (1960). If some conditions that are \textit{way} too technical for us to talk about are true and if
-
-\vspace{10mm}
+Happily, there is a version of the Central Limit Theorem for SRSWOR, due to Hájek (1960). If some conditions that are *way* too technical for us to talk about are true and if
+\
 
 then
 
-\vspace{20mm}
+\
+\
+\
 
 This means we could use this confidence interval for the population mean:
 
-\vspace{30mm}
+\
+\
+\
 
 Again, we don't know $\sigma$! We could substitute in $s$ and use the standard error. And, in practice, we typically substitute $t_{\alpha/2, df=n-1}$ for $z_{\alpha/2}$. In small samples, it's more conservative (wider confidence intervals) and with large samples $t_{\alpha/2,n-1} \approx z_{\alpha/2}$ anyway. So, we'll use the interval
 
-\vspace{30mm}
+\
+\
+\
+
 
 to calculate a $(1-\alpha)\times 100\%$ confidence interval for the from population mean from an SRS.
 
@@ -661,212 +703,450 @@ to calculate a $(1-\alpha)\times 100\%$ confidence interval for the from populat
 
 In general,
 
-\vspace{30mm}
+\
+\
+\
 
 We have the same question come up that comes with the regular CLT: how large is large enough for $n$ (and $N$?) It depends
 
-\vspace{50mm}
+\
+\
+\
+\
+\
+\
+\
+\
 
 Some rules of thumb:
 
-\begin{itemize}
-    \item If the population is approximately normal,
-    \vspace{10mm}
-    \item
-\end{itemize}
+- If the population is approximately normal,
+\
+
+-
 
 Sugden et al. (2000) recommended the minimum sample size
 
-\vspace{30mm}
+\
+\
+\
+\
+\
+\
 
-Another way to check whether the distribution is to skewed to use the CLT is bootstrapping!
+Another way to check whether the distribution is too skewed to use the CLT is bootstrapping!
+
+\
+\
+\
+\
 
 \newpage
 
-\textbf{Example:} Back to the baseball data. Let's get a 95% confidence interval for the mean salary of players in 2004. We saw already that based on our SRS of $n=150$, $\bar y = 2564021$ and SE$(\bar y) = 274521.5$. We can use the \texttt{qt($\alpha/2$,df)} function to get the $t$ multiplier in the confidence interval.
+**Example**: Back to the baseball data. Let's get a 95% confidence interval for the mean salary of players in 2004. We saw already that based on our SRS of $n=150$, $\bar y =$ `{r} format(mean.salary,scientific=FALSE)` and SE$(\bar y) =$ `{r} format(se.mean,scientific=FALSE)`. We can use the `qt(alpha/2,df)` function to get the $t$ multiplier in the confidence interval.
 
-\vspace{35mm}
+```{r}
+tcrit<-qt(0.025,n-1,lower.tail=FALSE)
+lower<-mean.salary-tcrit*se.mean
+upper<-mean.salary+tcrit*se.mean
+lower
+upper
+```
 
-Should we have even used the $t$-interval for the salary data? It's pretty skewed.
+\
+\
+\
 
-\vspace{25mm}
+Should we have even used the $t$-interval for the salary data? It's pretty skewed. We can find the skewness to check.
 
-What about a 95% confidence interval for the total number of runs in 2004? We already found $\hat t = 24457$ and SE$(\hat t) = 2236.436$.
+```{r}
+library(moments)
+salskew<-skewness(baseballsrs$salary)
+salskew
+```
 
-\vspace{25mm}
+And using the Sudgen et al. (2000) recommendation, we need at least
 
-Let's try a 95% confidence interval for the proportion players with at least one home run. We know $\hat p =0.54$ and SE$(\hat p) = 0.0368$
+```{r}
+nmin<-28 + 25*(salskew)**2
+nmin
+```
 
-\vspace{25mm}
+\newpage
 
-It turns out the \texttt{survey} package has confidence intervals built in to the \texttt{svymean} and \texttt{svytotal} functions. Once we have created an object from either function, we can pass that object into the \texttt{confint} function. Here's the syntax:
+What about a 95% confidence interval for the total number of runs in 2004? We already found $\hat t =$ `{r} format(tot.runs,scientific=FALSE)` and SE$(\hat t) =$ `{r} se.totrun`.
 
-\begin{verbatim}
-    confint(object,df= , level= )
-\end{verbatim}
+```{r}
+lowerrun<-tot.runs-tcrit*se.totrun
+upperrun<-tot.runs+tcrit*se.totrun
+lowerrun
+upperrun
+```
+
+\
+\
+\
+\
+
+Let's try a 95% confidence interval for the proportion players with at least one home run. We know $\hat p =$ `{r} prop.hr` and SE$(\hat p) =$ `{r} se.prophr`.
+
+```{r}
+lowerhr<-prop.hr-tcrit*se.prophr
+upperhr<-prop.hr+tcrit*se.prophr
+lowerhr
+upperhr
+```
+
+\
+\
+\
+
+\newpage
+
+It turns out the `survey` package has confidence intervals built in to the `svymean` and `svytotal` functions. Once we have created an object from either function, we can pass that object into the `confint` function. Here's the syntax:
+
+`confint(object,df= , level= )`
 
 So we could use
 
-\begin{verbatim}
-    salmean<-svymean(~salary, baseballdesign)
-    salmean
-    confint(salmean,df=n-1, level=0.95)
-\end{verbatim}
+```{r}
+salmean<-svymean(~salary, baseballdesign)
+salmean
+confint(salmean,df=n-1, level=0.95)
+```
 
-\textbf{Sample Size}
+For more practice:
+
+- draw a new sample of size $n=150$ (with no seed or pick your own seed, so everyone gets a different sample) from the baseball data set
+
+- use `svymean` to a 90% confidence interval for the mean number of errors committed by a player in 2004
+
+\newpage
+
+## Sample Size
 
 Often the first question that comes up when designing a survey is how many observations are needed. This is often a pretty complicated question, and involves balancing the objectives of the study with the available budget. You also must consider that most studies have multiple characteristics being measured on each observation unit.
 
-If the researcher can narrow down the most important variables to focus on to one or two, there are four basic steps:
+If the researcher can narrow down the most important variables to focus on one or two, there are four basic steps:
 
-\begin{enumerate}
-    \item Decide how much precision you need (basically, how much variability are you willing to live with in the estimates)
-    \item Find an equation involving the sample size $n$ and the precision (i.e., the margin of error)
-    \item Estimate anything you need to and solve for $n$ (usually an estimate of the expected variance)
-    \item Go back to square one when the $n$ turns out to be enormous.
-\end{enumerate}
+1. Decide how much precision you need (basically, how much variability are you willing to live with in the estimates)
+2. Find an equation involving the sample size $n$ and the precision (i.e., the margin of error)
+3. Estimate anything you need to and solve for $n$ (usually an estimate of the expected variance)
+4. Go back to square one when the $n$ turns out to be enormous.
 
 We'll go through these steps one by one.
 
-\textbf{1. Decide how much precision you need}
+### 1. Decide how much precision you need {.unnumbered}
 
-\vspace{50mm}
+\
+\
+\
+\
+\
+\
+\
 
-\textbf{2. Find an equation involving $n$ and the precision}
+### 2. Find an equation involving $n$ and the precision {.unnumbered}
+
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
 
 \newpage
 
 Let's start by assuming the fpc is neglible (i.e., we have an infinite population)
 
-\vspace{30mm}
+\
+\
+\
+\
+\
+
 
 Now, let's assume $\frac{n_0}{N} < 1$ (why is this a reasonable assumption?)
 
-\vspace{120mm}
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+
 
 So, the sample size we need is
+
+\
+\
 
 \newpage
 
 We could also consider finding the sample size to achieve a specified relative precision, call it $r$. The relative precision measures the distance between the estimate and the true value, scaled by the true value.
 
-\vspace{130mm}
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
 
 Sometimes we can calculate the required $n$ at this stage!
 
-\textbf{Example:} Suppose we want to estimate the proportion of 2004 baseball players that had at least one error, and we want to be able to calculate a 95% confidence interval and have a margin of error of 0.04.
+**Example**: Suppose we want to estimate the proportion of 2004 baseball players that had at least one error, and we want to be able to calculate a 95% confidence interval and have a margin of error of 0.04.
+
+\
+\
+\
+\
+\
+\
+\
 
 \newpage
 
-\textbf{3. Estimate anything you need to and solve for $n$}
+### 3. Estimate anything you need to and solve for $n$ {.unnumbered}
 
 This usually involves estimating (guessing) the expected variance. Why didn't need to do this in the baseball example above?
 
-\vspace{20mm}
+\
+\
+\
+\
 
 How can we obtain the expected variance?
 
-\vspace{30mm}
+\
+\
+\
 
 Another option is to use the CV for a sample of size 1: $\sigma/\bar y_{\mathcal{U}}$
 
-\vspace{40mm}
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
 
 If there are no other options, guess. An educated guess may use the suspected distribution of the data.
 
-\vspace{20mm}
+\
+\
+\
+\
+\
 
-\textbf{4: Go back to square one when the $n$ turns out to be enormous}
+### 4: Go back to square one when the $n$ turns out to be enormous {.unnumbered}
 
 \newpage
 
-\textbf{Example:} A botanical researchers wishes to design a survey to estimate the number of birch trees in a study area. The study area has been divided into 1000 plots. From previous experience, the variance in the number of trees per plot is about $\sigma^2 \approx 45$. What sample size should be used to estimate the total number of trees in the study area to within 500 trees of the true value with 95% confidence?
+**Example**: A botanical researchers wishes to design a survey to estimate the number of birch trees in a study area. The study area has been divided into 1000 plots. From previous experience, the variance in the number of trees per plot is about $\sigma^2 \approx 45$. What sample size should be used to estimate the total number of trees in the study area to within 500 trees of the true value with 95% confidence?
 
-\vspace{80mm}
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+
 
 To within 1000 trees?
 
-\vspace{30mm}
+\
+\
+\
+\
+\
+\
+\
+
 
 To within 2000 trees?
 
-\vspace{30mm}
+\
+\
+\
+\
+\
+\
+\
+
 
 Does the finite population correction factor matter here? How do you know?
 
 \newpage
 
-\textbf{Systematic Sampling}
+## Systematic Sampling
 
 Suppose we have a population with $N$ units, and the units are numbered from 1 to $N$ in some order. To select a sample of $n$ units, we:
 
-\vspace{30mm}
+\
+\
+\
+\
+\
 
 For example,
 
-\vspace{30mm}
+\
+\
+\
+\
 
 Note that
 
-\vspace{20mm}
+\
+\
 
-This type of sampling design is called a \textbf{systematic sample}
+This type of sampling design is called a **systematic sample**
 
-\vspace{10mm}
+\
 
 Why isn't this a SRS?
 
-\vspace{30mm}
+\
+\
+\
+\
+\
+\
 
 When will a systematic sample behave like an SRS?
+
+\
+\
+
 
 \newpage
 
 When will a systematic sample not behave like an SRS?
 
-\vspace{50mm}
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+
 
 There are a couple of advantages over the SRS:
 
-\begin{itemize}
-    \item 
-    \item 
-    \vspace{30mm}
-\end{itemize}
-
-\vspace{30mm}
-
-\textbf{When Shouldn't You Use an SRS?}
-
-\begin{itemize}
-    \item You really should be carrying out a designed experiment.
-    
-    \vspace{20mm}
-    
-    \item You don't have a sampling frame or it's too expensive.
-    
-    \vspace{20mm}
-    
-    \item You've got additional information 
-    
-\end{itemize}
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
 
 \newpage
 
-\textbf{Why Should You Use an SRS?}
+## Considerations for Choosing an SRS Design 
 
-\begin{itemize}
-    \item You don't have extra information
-    
-    \vspace{20mm}
-    
-    \item Explainability is super important
-    
-    \vspace{30mm}
-    
-    \item Easier computationally
-\end{itemize}
+### When Shouldn't You Use an SRS? {.unnumbered}
 
-\vspace{20mm}
+- You really should be carrying out a designed experiment
 
-Next up...Stratified Sampling.
+\
+\
+\
+
+- You don't have a sampling frame or it's too expensive
+
+\
+\
+\
+
+- You've got additional information
+
+\
+\
+\
+
+
+### Why Should You Use an SRS? {.unnumbered}
+
+- You don't have extra information
+    
+\
+    
+- Explainability is super important
+    
+\
+\
+    
+- Easier computationally
+
+\
+
+
+
+
