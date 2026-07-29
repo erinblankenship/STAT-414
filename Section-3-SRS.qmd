@@ -817,9 +817,21 @@ confint(salmean,df=n-1, level=0.95)
 
 For more practice:
 
-- draw a new sample of size $n=150$ (with no seed or pick your own seed, so everyone gets a different sample) from the baseball data set
+1. Estimating the mean number of errors committed by a player in 2004
 
-- use `svymean` to a 90% confidence interval for the mean number of errors committed by a player in 2004
+   - draw a new sample of size $n=150$ (with no seed or pick your own seed, so everyone gets a different sample) from the baseball data set
+
+   - use `svymean` to a 90% confidence interval for the mean number of errors committed by a player in 2004
+
+2. Estimating the total number of pitchers in 2004
+
+   - using the same sample you drew above, create a 0/1 variable that identifies whether each player in the sample is a pitcher (note that `svydesign` must be run again if a new variable is added to the data set)
+
+   - use `svymean` to get an estimate for $\hat p$
+
+   - use `svytotal` to estimate the total number of pitchers in 2004
+
+3. Estimate something of your choice!
 
 \newpage
 

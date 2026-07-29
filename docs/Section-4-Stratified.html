@@ -1,0 +1,2193 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.9.38">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>4&nbsp; Stratified Sampling – Stat 414 Notes</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./Section-3-SRS.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-12eeb4b20e9f5a2b0bfc604bfaf942bb.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body class="nav-sidebar floating quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./Section-4-Stratified.html"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Stratified Sampling</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Stat 414 Notes</a> 
+        <div class="sidebar-tools-main">
+    <a href="./Stat-414-Notes.pdf" title="Download PDF" class="quarto-navigation-tool px-1" aria-label="Download PDF"><i class="bi bi-file-pdf"></i></a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Course Goals for STAT 414</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Section-1-Introduction.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction to Sampling</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Section-2-Prob-Samples.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">An Introduction to Probability Samples</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Section-3-SRS.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Simple Random Samples</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Section-4-Stratified.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Stratified Sampling</span></span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#overview-of-stratified-sampling" id="toc-overview-of-stratified-sampling" class="nav-link active" data-scroll-target="#overview-of-stratified-sampling"><span class="header-section-number">4.1</span> Overview of Stratified Sampling</a></li>
+  <li><a href="#how-does-stratified-sampling-work" id="toc-how-does-stratified-sampling-work" class="nav-link" data-scroll-target="#how-does-stratified-sampling-work"><span class="header-section-number">4.2</span> How Does Stratified Sampling Work?</a></li>
+  <li><a href="#estimation-with-stratified-random-samples" id="toc-estimation-with-stratified-random-samples" class="nav-link" data-scroll-target="#estimation-with-stratified-random-samples"><span class="header-section-number">4.3</span> Estimation with Stratified Random Samples</a></li>
+  <li><a href="#sampling-weights" id="toc-sampling-weights" class="nav-link" data-scroll-target="#sampling-weights"><span class="header-section-number">4.4</span> Sampling Weights</a></li>
+  <li><a href="#sample-size-and-allocation" id="toc-sample-size-and-allocation" class="nav-link" data-scroll-target="#sample-size-and-allocation"><span class="header-section-number">4.5</span> Sample Size and Allocation</a>
+  <ul class="collapse">
+  <li><a href="#allocation-in-stratified-random-sampling" id="toc-allocation-in-stratified-random-sampling" class="nav-link" data-scroll-target="#allocation-in-stratified-random-sampling"><span class="header-section-number">4.5.1</span> Allocation in Stratified Random Sampling</a></li>
+  <li><a href="#defining-strata" id="toc-defining-strata" class="nav-link" data-scroll-target="#defining-strata"><span class="header-section-number">4.5.2</span> Defining Strata</a></li>
+  <li><a href="#allocation-examples" id="toc-allocation-examples" class="nav-link" data-scroll-target="#allocation-examples"><span class="header-section-number">4.5.3</span> Allocation Examples</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Stratified Sampling</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p>In the last chapter, we noted that an SRS isn’t the best option if we have additional information that could help us come up with a more cost-effective sampling design. One such option is <strong>stratified sampling</strong>.</p>
+<section id="overview-of-stratified-sampling" class="level2" data-number="4.1">
+<h2 data-number="4.1" class="anchored" data-anchor-id="overview-of-stratified-sampling"><span class="header-section-number">4.1</span> Overview of Stratified Sampling</h2>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Basic Concept: Stratification
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The idea of <strong>stratification</strong> is</p>
+<p><br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+</p>
+</div>
+</div>
+<p>For example,</p>
+<p><br>
+<br>
+<br>
+<br>
+<br>
+</p>
+<p>The basic set-up for stratified sampling is as follows:</p>
+<ul>
+<li><p><br>
+</p></li>
+<li><p><br>
+</p></li>
+<li></li>
+</ul>
+<div style="page-break-after: always;"></div>
+<p>What should we be thinking about to decide whether or not to stratify?</p>
+<ul>
+<li>Is there a chance we could draw a really bad sample?</li>
+</ul>
+<p><br>
+<br>
+<br>
+<br>
+</p>
+<ul>
+<li>Do we want to draw conclusions about a particular subgroup of the population (especially with a particular precision)?</li>
+</ul>
+<p><br>
+<br>
+<br>
+<br>
+<br>
+<br>
+</p>
+<ul>
+<li>Is it more convenient or cheaper?</li>
+</ul>
+<p><br>
+<br>
+<br>
+<br>
+<br>
+</p>
+<ul>
+<li>Can we construct the strata in a way that our estimates will be more precise?</li>
+</ul>
+<p><br>
+<br>
+<br>
+<br>
+<br>
+</p>
+<p>If the answer to any of the above is yes, stratification is probably a good idea.</p>
+<div style="page-break-after: always;"></div>
+<p><strong>Example</strong>: In the last section, we selected a SRS of <span class="math inline">\(n=150\)</span> baseball players from the 2004 MLB season. One of the variables we considered was salary. We saw that there was a lot of variability in the data, possibly due to the strong right skew. Is there also variability due to other factors? Maybe there is variability due to league as well.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="baseball league.jpeg" class="img-fluid figure-img" width="500"></p>
+<figcaption>Baseball Salary by League</figcaption>
+</figure>
+</div>
+<p>It looks like there is more variability among salary for the American League. Let’s use League as our stratification variable. It meets the requirement:</p>
+<p><br>
+</p>
+<p>We’ll stick with a sample of <span class="math inline">\(n=150\)</span> players. In the population, <span class="math inline">\(372/797 = 0.46675\)</span> players are in the AL and <span class="math inline">\(425/797=0.53325\)</span> players are in the NL. So, we’ll sample 70 AL players and 80 NL players.</p>
+<p>Another way to think about this …</p>
+<p><br>
+<br>
+<br>
+<br>
+</p>
+<p>When we found mean salary before, the SE was 218283.4. When I drew a stratified sample with the allocation above, the SE is 200945. So perhaps stratifying by league could be helpful in increasing precision.</p>
+</section>
+<section id="how-does-stratified-sampling-work" class="level2" data-number="4.2">
+<h2 data-number="4.2" class="anchored" data-anchor-id="how-does-stratified-sampling-work"><span class="header-section-number">4.2</span> How Does Stratified Sampling Work?</h2>
+<p>We’re going to start by dividing the population (<span class="math inline">\(N\)</span> sampling units) into <span class="math inline">\(H\)</span> mutually exclusive and exhaustive strata,</p>
+<ul>
+<li><p><br>
+</p></li>
+<li><p><br>
+</p></li>
+<li><p><br>
+</p></li>
+</ul>
+<p>Then, we select an independent probability sample from each stratum.</p>
+<p><br>
+<br>
+<br>
+<br>
+</p>
+<p>Some choices have to be made here, namely how to allocate the sample across the strata. In the baseball example, we used <strong>proportional allocation</strong>:</p>
+<p><br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+</p>
+<p>There are other methods of allocation as well, and we’ll talk about these later.</p>
+<p>What’s important is that</p>
+<p><br>
+<br>
+<br>
+<br>
+</p>
+<p>We could use any sampling design (SRS, Systematic, etc.) within a stratum, and they don’t all need to be the same. For simplicity, we’ll assume a SRSWOR is selected within each stratum.</p>
+<div style="page-break-after: always;"></div>
+<p>With this assumption of SRSWOR, we are carrying out <strong>stratified random sampling</strong>, and the biggest adjustment from SRS to stratified is really bookkeeping–there are a lot more subscripts to keep track of.</p>
+<p>As a reminder, we assume</p>
+<p><br>
+<br>
+<br>
+</p>
+<p>We’ll start with new notation for the population quantities:</p>
+<ul>
+<li><p><span class="math inline">\(N_h\)</span><br>
+</p></li>
+<li><p><span class="math inline">\(y_{hj}\)</span><br>
+</p></li>
+<li><p><span class="math inline">\(t_h\)</span><br>
+</p></li>
+<li><p><span class="math inline">\(t\)</span><br>
+</p></li>
+<li><p><span class="math inline">\(\bar y_{h\mathcal{U}}\)</span><br>
+</p></li>
+<li><p><span class="math inline">\(\bar y_{\mathcal{U}}\)</span><br>
+</p></li>
+<li><p><span class="math inline">\(S_h^2 = \sigma^2_h\)</span><br>
+</p></li>
+</ul>
+<p>The sample quantities will also have subscripts:</p>
+<ul>
+<li><p><span class="math inline">\(\mathcal{S}_h\)</span><br>
+</p></li>
+<li><p><span class="math inline">\(n_h\)</span><br>
+</p></li>
+<li><p><span class="math inline">\(n\)</span><br>
+</p></li>
+<li><p><span class="math inline">\(\bar y_{h}\)</span><br>
+</p></li>
+<li><p><span class="math inline">\(\hat t_h\)</span><br>
+</p></li>
+<li><p><span class="math inline">\(s^2_h\)</span><br>
+</p></li>
+</ul>
+<div style="page-break-after: always;"></div>
+</section>
+<section id="estimation-with-stratified-random-samples" class="level2" data-number="4.3">
+<h2 data-number="4.3" class="anchored" data-anchor-id="estimation-with-stratified-random-samples"><span class="header-section-number">4.3</span> Estimation with Stratified Random Samples</h2>
+<p>Suppose we sampled only the <span class="math inline">\(h^{th}\)</span> stratum:</p>
+<p><br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+</p>
+<p>This leads to an estimate for entire population total</p>
+<p><br>
+<br>
+<br>
+<br>
+</p>
+<p>and entire population mean</p>
+<p><br>
+<br>
+<br>
+<br>
+</p>
+<p>The estimated population mean is really just a weighted average of the sample stratum means, because</p>
+<p><br>
+<br>
+</p>
+<p>Because we took a SRS in each stratum, all the properties of SRS estimates are retained:</p>
+<ul>
+<li><strong>Unbiasedness</strong></li>
+</ul>
+<p><br>
+<br>
+</p>
+<div style="page-break-after: always;"></div>
+<ul>
+<li><strong>Variance of the estimators</strong></li>
+</ul>
+<p><br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+</p>
+<ul>
+<li><strong>Confidence intervals</strong></li>
+</ul>
+<p><br>
+<br>
+<br>
+<br>
+<br>
+<br>
+</p>
+<div style="page-break-after: always;"></div>
+<p><strong>Example</strong>: In Homework 1, you worked with some data on the number of publications for a SRS of <span class="math inline">\(n=50\)</span> faculty, out of a total of <span class="math inline">\(N=807\)</span> faculty members. We’ll use the areas biological sciences, physical sciences, social sciences, and humanities as the strata.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 28%">
+<col style="width: 36%">
+<col style="width: 35%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Stratum</th>
+<th>Num of Faculty in Stratum</th>
+<th>Num of Faculty in Sample</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Biological sciences</td>
+<td>102</td>
+<td>7</td>
+</tr>
+<tr class="even">
+<td>Physical sciences</td>
+<td>310</td>
+<td>19</td>
+</tr>
+<tr class="odd">
+<td>Social sciences</td>
+<td>217</td>
+<td>13</td>
+</tr>
+<tr class="even">
+<td>Humanities</td>
+<td>178</td>
+<td>11</td>
+</tr>
+<tr class="odd">
+<td>Total</td>
+<td>807</td>
+<td>50</td>
+</tr>
+</tbody>
+</table>
+<p>The actual publication data for each stratum is in the R code snippets below.</p>
+<p>Let’s set up a table similar to one shown in Example 3.3</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 16%">
+<col style="width: 10%">
+<col style="width: 9%">
+<col style="width: 12%">
+<col style="width: 12%">
+<col style="width: 18%">
+<col style="width: 21%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Stratum</th>
+<th><span class="math inline">\(N_h\)</span></th>
+<th><span class="math inline">\(n_h\)</span></th>
+<th><span class="math inline">\(\bar y_h\)</span></th>
+<th><span class="math inline">\(s^2_h\)</span></th>
+<th><span class="math inline">\(\hat t_h = N_h \bar y_h\)</span></th>
+<th><span class="math inline">\((1-\frac{n_h}{N_h}) N_h^2 \frac{s_h^2}{n_h}\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Bio sci</td>
+<td>102</td>
+<td>7</td>
+<td>3.14</td>
+<td>6.81</td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>Phy sci</td>
+<td>310</td>
+<td>19</td>
+<td>2.105</td>
+<td>8.21</td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>Soc sci</td>
+<td>217</td>
+<td>13</td>
+<td>1.231</td>
+<td>4.359</td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>Humanities</td>
+<td>178</td>
+<td>11</td>
+<td>0.4545</td>
+<td>0.8727</td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>Total</td>
+<td>807</td>
+<td>50</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>So, our estimated total number of publications is</p>
+<p><br>
+<br>
+</p>
+<p>with standard error</p>
+<p><br>
+<br>
+</p>
+<p>So, a 95% confidence interval for the total number of publications is</p>
+<p><br>
+<br>
+<br>
+<br>
+<br>
+<br>
+</p>
+<div style="page-break-after: always;"></div>
+<p>In Chapter 3 of the notes, we observed that a proportion is just a mean where the only values the variable can take on are 0 and 1. We’ll use the same idea here and define</p>
+<p><br>
+<br>
+<br>
+</p>
+<p>Then we can estimate the overall proportion of the population with the characteristic as</p>
+<p><br>
+<br>
+<br>
+</p>
+<p>with estimated variance</p>
+<p><br>
+<br>
+<br>
+<br>
+<br>
+</p>
+<p>If we want to to estimate the total number of those in the population with the characteristic we can use</p>
+<p><br>
+<br>
+</p>
+<p><strong>Example</strong>: Let’s go back to the publications data and consider the proportion of faculty with at least one publication.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 17%">
+<col style="width: 10%">
+<col style="width: 7%">
+<col style="width: 14%">
+<col style="width: 13%">
+<col style="width: 35%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Stratum</th>
+<th><span class="math inline">\(N_h\)</span></th>
+<th><span class="math inline">\(n_h\)</span></th>
+<th><span class="math inline">\(N_h/N\)</span></th>
+<th><span class="math inline">\(\bar y_h = \hat p_h\)</span></th>
+<th><span class="math inline">\((1-\frac{n_h}{N_h})(\frac{N_h}{N})^2(\frac{\hat p_h(1-\hat p_h)}{n_h -1})\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Bio sci</td>
+<td>102</td>
+<td>7</td>
+<td>0.1264</td>
+<td>0.857</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>Phy sci</td>
+<td>310</td>
+<td>19</td>
+<td>0.3841</td>
+<td>0.474</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>Soc sci</td>
+<td>217</td>
+<td>13</td>
+<td>0.2689</td>
+<td>0.308</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>Humanities</td>
+<td>178</td>
+<td>11</td>
+<td>0.2206</td>
+<td>0.273</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>Total</td>
+<td>807</td>
+<td>50</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>So,</p>
+<p><span class="math inline">\(\hat p_{str} =\)</span></p>
+<p><br>
+</p>
+<div style="page-break-after: always;"></div>
+<p>and</p>
+<p><span class="math inline">\(\hbox{SE}(\hat p_{str}) =\)</span></p>
+<p><br>
+<br>
+<br>
+<br>
+</p>
+<p>We can also estimate the total number of faculty with at least one publication and its standard error.</p>
+<p><br>
+<br>
+<br>
+</p>
+</section>
+<section id="sampling-weights" class="level2" data-number="4.4">
+<h2 data-number="4.4" class="anchored" data-anchor-id="sampling-weights"><span class="header-section-number">4.4</span> Sampling Weights</h2>
+<p>With simple random samples, we observed that the sampling weights were</p>
+<p><br>
+</p>
+<p>because all sampling units have the same inclusion probability</p>
+<p><br>
+</p>
+<p>and the sampling weights are</p>
+<p><br>
+</p>
+<p>With stratified sampling, the inclusion probability may not be the same for all units (they will be the same for all units within the same stratum).</p>
+<p>The <strong>sampling weight for unit</strong> <span class="math inline">\(j\)</span> of stratum <span class="math inline">\(h\)</span> is</p>
+<p><br>
+</p>
+<p>The interpretation of the sampling weight is the same as it was with SRS!</p>
+<p><br>
+<br>
+</p>
+<div style="page-break-after: always;"></div>
+<p>Just as before, the sampling weight is the inverse of the inclusion probability:</p>
+<p><br>
+<br>
+<br>
+<br>
+</p>
+<p>We can again re-write the population estimates using the sampling weights</p>
+<p><br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+</p>
+<p>In the last section, we observed that simple random samples are <strong>self-weighting</strong> samples, because each sample unit has the same weight. Stratified random samples will be self-weighting samples if</p>
+<p><br>
+<br>
+</p>
+<p>Even if this is true, however, we still need to acknowledge the stratification in the estimation because it will make a difference in the variances.</p>
+<p><br>
+<br>
+<br>
+<br>
+<br>
+</p>
+<p>We can use the <code>survey</code> package to calculate estimates using the <code>svymean</code> and <code>svytotal</code> functions, but we do need to specify the stratification variable and the sampling weights in the sampling design (i.e., in <code>svydesign</code>). Let’s look more carefully at the R code for the publication data. We also have a new function, <code>svyby</code>.</p>
+<div style="page-break-after: always;"></div>
+<p>First, we need to get the data in R. I am <strong>not</strong> an elegant R coder, I’m sure there are more efficient ways to do this.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>biopubs<span class="ot">&lt;-</span><span class="fu">c</span>(<span class="fu">rep</span>(<span class="dv">0</span>,<span class="dv">1</span>),<span class="fu">rep</span>(<span class="dv">1</span>,<span class="dv">2</span>),<span class="fu">rep</span>(<span class="dv">3</span>,<span class="dv">1</span>),<span class="fu">rep</span>(<span class="dv">5</span>,<span class="dv">2</span>),<span class="fu">rep</span>(<span class="dv">7</span>,<span class="dv">1</span>))</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>biopubs</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0 1 1 3 5 5 7</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>phypubs<span class="ot">&lt;-</span><span class="fu">c</span>(<span class="fu">rep</span>(<span class="dv">0</span>,<span class="dv">10</span>),<span class="fu">rep</span>(<span class="dv">1</span>,<span class="dv">2</span>),<span class="fu">rep</span>(<span class="dv">3</span>,<span class="dv">1</span>),<span class="fu">rep</span>(<span class="dv">4</span>,<span class="dv">2</span>),<span class="fu">rep</span>(<span class="dv">5</span>,<span class="dv">1</span>),<span class="fu">rep</span>(<span class="dv">6</span>,<span class="dv">1</span>),<span class="fu">rep</span>(<span class="dv">8</span>,<span class="dv">2</span>))</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>socpubs<span class="ot">&lt;-</span><span class="fu">c</span>(<span class="fu">rep</span>(<span class="dv">0</span>,<span class="dv">9</span>),<span class="fu">rep</span>(<span class="dv">2</span>,<span class="dv">1</span>),<span class="fu">rep</span>(<span class="dv">4</span>,<span class="dv">2</span>),<span class="fu">rep</span>(<span class="dv">6</span>,<span class="dv">1</span>))</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>humpubs<span class="ot">&lt;-</span><span class="fu">c</span>(<span class="fu">rep</span>(<span class="dv">0</span>,<span class="dv">8</span>),<span class="fu">rep</span>(<span class="dv">1</span>,<span class="dv">2</span>),<span class="fu">rep</span>(<span class="dv">3</span>,<span class="dv">1</span>))</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>biopubsdf<span class="ot">&lt;-</span><span class="fu">data.frame</span>(biopubs)</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>phypubsdf<span class="ot">&lt;-</span><span class="fu">data.frame</span>(phypubs)</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>socpubsdf<span class="ot">&lt;-</span><span class="fu">data.frame</span>(socpubs)</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>humpubsdf<span class="ot">&lt;-</span><span class="fu">data.frame</span>(humpubs)</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>biopubsdf<span class="sc">$</span>stratum<span class="ot">&lt;-</span><span class="st">"Biological"</span></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>biopubsdf<span class="sc">$</span>pubs<span class="ot">&lt;-</span>biopubsdf<span class="sc">$</span>biopubs</span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>biopubsdf<span class="sc">$</span>Nh<span class="ot">&lt;-</span><span class="dv">102</span></span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>biopubsdf<span class="sc">$</span>samp<span class="ot">&lt;-</span><span class="dv">7</span></span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>biopubsdf<span class="ot">&lt;-</span>biopubsdf[,<span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">5</span>)]</span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>biopubsdf</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     stratum pubs  Nh samp
+1 Biological    0 102    7
+2 Biological    1 102    7
+3 Biological    1 102    7
+4 Biological    3 102    7
+5 Biological    5 102    7
+6 Biological    5 102    7
+7 Biological    7 102    7</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>phypubsdf<span class="sc">$</span>stratum<span class="ot">&lt;-</span><span class="st">"Physical"</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>phypubsdf<span class="sc">$</span>pubs<span class="ot">&lt;-</span>phypubsdf<span class="sc">$</span>phypubs</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>phypubsdf<span class="sc">$</span>Nh<span class="ot">&lt;-</span><span class="dv">310</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>phypubsdf<span class="sc">$</span>samp<span class="ot">&lt;-</span><span class="dv">19</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>phypubsdf<span class="ot">&lt;-</span>phypubsdf[,<span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">5</span>)]</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>socpubsdf<span class="sc">$</span>stratum<span class="ot">&lt;-</span><span class="st">"Social"</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>socpubsdf<span class="sc">$</span>pubs<span class="ot">&lt;-</span>socpubsdf<span class="sc">$</span>socpubs</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>socpubsdf<span class="sc">$</span>Nh<span class="ot">&lt;-</span><span class="dv">217</span></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>socpubsdf<span class="sc">$</span>samp<span class="ot">&lt;-</span><span class="dv">13</span></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>socpubsdf<span class="ot">&lt;-</span>socpubsdf[,<span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">5</span>)]</span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>humpubsdf<span class="sc">$</span>stratum<span class="ot">&lt;-</span><span class="st">"Humanities"</span></span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>humpubsdf<span class="sc">$</span>pubs<span class="ot">&lt;-</span>humpubsdf<span class="sc">$</span>humpubs</span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>humpubsdf<span class="sc">$</span>Nh<span class="ot">&lt;-</span><span class="dv">178</span></span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>humpubsdf<span class="sc">$</span>samp<span class="ot">&lt;-</span><span class="dv">11</span></span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>humpubsdf<span class="ot">&lt;-</span>humpubsdf[,<span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">5</span>)]</span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a>pubsdf<span class="ot">&lt;-</span><span class="fu">rbind</span>(biopubsdf,phypubsdf,socpubsdf,humpubsdf)</span>
+<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a>pubsdf</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>      stratum pubs  Nh samp
+1  Biological    0 102    7
+2  Biological    1 102    7
+3  Biological    1 102    7
+4  Biological    3 102    7
+5  Biological    5 102    7
+6  Biological    5 102    7
+7  Biological    7 102    7
+8    Physical    0 310   19
+9    Physical    0 310   19
+10   Physical    0 310   19
+11   Physical    0 310   19
+12   Physical    0 310   19
+13   Physical    0 310   19
+14   Physical    0 310   19
+15   Physical    0 310   19
+16   Physical    0 310   19
+17   Physical    0 310   19
+18   Physical    1 310   19
+19   Physical    1 310   19
+20   Physical    3 310   19
+21   Physical    4 310   19
+22   Physical    4 310   19
+23   Physical    5 310   19
+24   Physical    6 310   19
+25   Physical    8 310   19
+26   Physical    8 310   19
+27     Social    0 217   13
+28     Social    0 217   13
+29     Social    0 217   13
+30     Social    0 217   13
+31     Social    0 217   13
+32     Social    0 217   13
+33     Social    0 217   13
+34     Social    0 217   13
+35     Social    0 217   13
+36     Social    2 217   13
+37     Social    4 217   13
+38     Social    4 217   13
+39     Social    6 217   13
+40 Humanities    0 178   11
+41 Humanities    0 178   11
+42 Humanities    0 178   11
+43 Humanities    0 178   11
+44 Humanities    0 178   11
+45 Humanities    0 178   11
+46 Humanities    0 178   11
+47 Humanities    0 178   11
+48 Humanities    1 178   11
+49 Humanities    1 178   11
+50 Humanities    3 178   11</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>pubsdf<span class="sc">$</span>sampwt<span class="ot">&lt;-</span><span class="fu">with</span>(pubsdf,Nh<span class="sc">/</span>samp)</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>pubsdf</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>      stratum pubs  Nh samp   sampwt
+1  Biological    0 102    7 14.57143
+2  Biological    1 102    7 14.57143
+3  Biological    1 102    7 14.57143
+4  Biological    3 102    7 14.57143
+5  Biological    5 102    7 14.57143
+6  Biological    5 102    7 14.57143
+7  Biological    7 102    7 14.57143
+8    Physical    0 310   19 16.31579
+9    Physical    0 310   19 16.31579
+10   Physical    0 310   19 16.31579
+11   Physical    0 310   19 16.31579
+12   Physical    0 310   19 16.31579
+13   Physical    0 310   19 16.31579
+14   Physical    0 310   19 16.31579
+15   Physical    0 310   19 16.31579
+16   Physical    0 310   19 16.31579
+17   Physical    0 310   19 16.31579
+18   Physical    1 310   19 16.31579
+19   Physical    1 310   19 16.31579
+20   Physical    3 310   19 16.31579
+21   Physical    4 310   19 16.31579
+22   Physical    4 310   19 16.31579
+23   Physical    5 310   19 16.31579
+24   Physical    6 310   19 16.31579
+25   Physical    8 310   19 16.31579
+26   Physical    8 310   19 16.31579
+27     Social    0 217   13 16.69231
+28     Social    0 217   13 16.69231
+29     Social    0 217   13 16.69231
+30     Social    0 217   13 16.69231
+31     Social    0 217   13 16.69231
+32     Social    0 217   13 16.69231
+33     Social    0 217   13 16.69231
+34     Social    0 217   13 16.69231
+35     Social    0 217   13 16.69231
+36     Social    2 217   13 16.69231
+37     Social    4 217   13 16.69231
+38     Social    4 217   13 16.69231
+39     Social    6 217   13 16.69231
+40 Humanities    0 178   11 16.18182
+41 Humanities    0 178   11 16.18182
+42 Humanities    0 178   11 16.18182
+43 Humanities    0 178   11 16.18182
+44 Humanities    0 178   11 16.18182
+45 Humanities    0 178   11 16.18182
+46 Humanities    0 178   11 16.18182
+47 Humanities    0 178   11 16.18182
+48 Humanities    1 178   11 16.18182
+49 Humanities    1 178   11 16.18182
+50 Humanities    3 178   11 16.18182</code></pre>
+</div>
+</div>
+<p>With data in place, we can now find some estimates for the whole population of 807 faculty members:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(survey)</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>pubsdes<span class="ot">&lt;-</span><span class="fu">svydesign</span>(<span class="at">id=</span><span class="sc">~</span><span class="dv">1</span>,<span class="at">strata=</span><span class="sc">~</span>stratum,<span class="at">weights=</span><span class="sc">~</span>sampwt,<span class="at">fpc=</span><span class="sc">~</span>Nh,<span class="at">data=</span>pubsdf)</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>strmean<span class="ot">&lt;-</span><span class="fu">tapply</span>(pubsdf<span class="sc">$</span>pubs,pubsdf<span class="sc">$</span>stratum,mean)</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>strmean</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Biological Humanities   Physical     Social 
+ 3.1428571  0.4545455  2.1052632  1.2307692 </code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>strvar<span class="ot">&lt;-</span><span class="fu">tapply</span>(pubsdf<span class="sc">$</span>pubs,pubsdf<span class="sc">$</span>stratum,var)</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>strvar</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Biological Humanities   Physical     Social 
+ 6.8095238  0.8727273  8.2105263  4.3589744 </code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>pubsstrat<span class="ot">&lt;-</span><span class="fu">svyby</span>(<span class="sc">~</span>pubs,<span class="at">by=</span><span class="sc">~</span>stratum,pubsdes,svymean, <span class="at">keep.var=</span><span class="cn">TRUE</span>)</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="fu">confint</span>(pubsstrat,<span class="at">df=</span><span class="dv">50-4</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                 2.5 %   97.5 %
+Biological  1.22687120 5.058843
+Humanities -0.09463164 1.003723
+Physical    0.82324081 3.387286
+Social      0.10064302 2.360895</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">svytotal</span>(<span class="sc">~</span>pubs,pubsdes)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>      total     SE
+pubs 1321.2 256.15</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>pubsdf<span class="sc">$</span>yes<span class="ot">&lt;-</span><span class="fu">rep</span>(<span class="dv">0</span>,<span class="dv">50</span>)</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>pubsdf<span class="sc">$</span>yes[pubsdf<span class="sc">$</span>pubs<span class="sc">&gt;</span><span class="dv">0</span>] <span class="ot">&lt;-</span> <span class="dv">1</span></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>pubsdes<span class="ot">&lt;-</span><span class="fu">svydesign</span>(<span class="at">id=</span><span class="sc">~</span><span class="dv">1</span>,<span class="at">strata=</span><span class="sc">~</span>stratum,<span class="at">weights=</span><span class="sc">~</span>sampwt,<span class="at">fpc=</span><span class="sc">~</span>Nh,<span class="at">data=</span>pubsdf)</span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a><span class="fu">svymean</span>(<span class="sc">~</span>yes,pubsdes)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>       mean     SE
+yes 0.43319 0.0658</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">svytotal</span>(<span class="sc">~</span>yes,pubsdes)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     total     SE
+yes 349.59 53.128</code></pre>
+</div>
+</div>
+</section>
+<section id="sample-size-and-allocation" class="level2" data-number="4.5">
+<h2 data-number="4.5" class="anchored" data-anchor-id="sample-size-and-allocation"><span class="header-section-number">4.5</span> Sample Size and Allocation</h2>
+<p>With simple random samples, we only had one design feature we needed to determine: the sample size <span class="math inline">\(n\)</span>. With stratified sampling, we need to determine:</p>
+<p><br>
+<br>
+<br>
+</p>
+<p>It’s actually easier to look at these in reverse order. We’ll start by assuming the strata have already been defined, and consider how to allocate observations among them.</p>
+<section id="allocation-in-stratified-random-sampling" class="level3" data-number="4.5.1">
+<h3 data-number="4.5.1" class="anchored" data-anchor-id="allocation-in-stratified-random-sampling"><span class="header-section-number">4.5.1</span> Allocation in Stratified Random Sampling</h3>
+<p>The general set-up is</p>
+<p><br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+</p>
+<p>There are several options for determining how many observations to sample in each stratum. Some allocation strategies deal with the whole population, others deal with subpopulations. Yet others are a compromise between the two. The best allocation strategy depends on the goals of the study.</p>
+<div style="page-break-after: always;"></div>
+<section id="whole-population-allocation" class="level4" data-number="4.5.1.1">
+<h4 data-number="4.5.1.1" class="anchored" data-anchor-id="whole-population-allocation"><span class="header-section-number">4.5.1.1</span> Whole Population Allocation</h4>
+<p>With whole population allocation, we first determine how many sampling units we can collect/afford in the entire sample. That is, we first determine <span class="math inline">\(n\)</span>. Then, we turn attention to how to divide <span class="math inline">\(n\)</span> across the strata. Whole population allocation is best when the objective of the study is to estimate a characteristic for the entire population. There are several factors that affect allocation rules</p>
+<p><br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+</p>
+<p>The simplest whole population method is <strong>proportional allocation</strong>.</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Proportion Allocation
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+</p>
+</div>
+</div>
+<p>In this situation, the inclusion probability for unit <span class="math inline">\(j\)</span> in stratum <span class="math inline">\(h\)</span> is</p>
+<p><br>
+</p>
+<p>and is the same across all strata. This also implies</p>
+<p><br>
+<br>
+<br>
+<br>
+<br>
+</p>
+<p>One note: rounding in proportion allocation can lead to unequal (but approximately equal) sampling weights.</p>
+<div style="page-break-after: always;"></div>
+<p><strong>Example</strong>: With the baseball data, let’s consider stratifying by position:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Stratum <span class="math inline">\(h\)</span></th>
+<th>Stratum Total <span class="math inline">\(N_h\)</span></th>
+<th>Stratum Sample Size <span class="math inline">\(n_h\)</span></th>
+<th>Sample Weight <span class="math inline">\(w_{hj}\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1 (1B)</td>
+<td>66</td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>2 (2B)</td>
+<td>50</td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>3 (3B)</td>
+<td>53</td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>4 (C)</td>
+<td>61</td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>5 (CF)</td>
+<td>43</td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>6 (LF)</td>
+<td>49</td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>7 (P)</td>
+<td>376</td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>8 (RF)</td>
+<td>54</td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>9 (SS)</td>
+<td>45</td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>Total</td>
+<td>797</td>
+<td>150</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p><br>
+<br>
+<br>
+<br>
+</p>
+<p>When the strata are large enough,</p>
+<p><br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+</p>
+<p>Proportional allocation tends to provide optimal estimates (optimal in the sense of minimum variance) when</p>
+<p><br>
+<br>
+<br>
+</p>
+<div style="page-break-after: always;"></div>
+<p>Proportional allocation is a good choice if</p>
+<p><br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+</p>
+<p>If the variances are not approximately equal across strata, then <strong>Neyman allocation</strong> is an option.</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Neyman Allocation
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Suppose the within-stratum variances for <span class="math inline">\(y_{hj}\)</span> (<span class="math inline">\(\sigma^2_h\)</span>) vary across strata. To obtain a similar level of precision in each stratum, we’d need a higher sample size in strata that are more variable.</p>
+<p>For example, consider the estimate of stratum total, <span class="math inline">\(\hat t_h\)</span>. We saw earlier that</p>
+<p><br>
+<br>
+<br>
+</p>
+<p>Neyman allocation suggests allocating stratum sample size in proportion to</p>
+<p><br>
+<br>
+</p>
+<p>It turns out (proof not shown) that the variance of an estimate for population mean or total (for a fixed total <span class="math inline">\(n\)</span>) is minimized if</p>
+<p><br>
+<br>
+</p>
+<p>and we can see the logic of this by equating</p>
+<p><br>
+<br>
+<br>
+<br>
+</p>
+</div>
+</div>
+<p><strong>Tiny Example</strong>: A population consists of three strata of sizes <span class="math inline">\(N_1=150\)</span>, <span class="math inline">\(N_2 = 90\)</span>, and <span class="math inline">\(N_3=120\)</span>, so <span class="math inline">\(N=360\)</span>. Based on previous studies, we expect the standard deviations within each strata to be <span class="math inline">\(\sigma_1 \approx 100\)</span>, <span class="math inline">\(\sigma_2 \approx 200\)</span>, and <span class="math inline">\(\sigma_3 \approx 300\)</span>. We know we can sample a total of <span class="math inline">\(n=12\)</span> sampling units.</p>
+<p>Proportional allocation:</p>
+<p><br>
+<br>
+</p>
+<p>Neyman allocation:</p>
+<p><br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+</p>
+<p>Neyman allocation tends to provide optimal (in the sense of minimum variance) estimates when</p>
+<p><br>
+<br>
+<br>
+</p>
+<p>Considerations for selecting Neyman allocation:</p>
+<p><br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+</p>
+<p>Neyman allocation is a special case of <strong>optimal allocation</strong>, which considers both variability and cost, and is often used when the sampling units themselves are of different sizes. Larger units are likely to be more variable, and are sampled at a higher rate.</p>
+<div style="page-break-after: always;"></div>
+<p><strong>Examples</strong>: Sampling units that vary in size could be</p>
+<p><br>
+<br>
+</p>
+<p>To build in variable cost, suppose data collection costs <span class="math inline">\(c_h\)</span> vary across strata.</p>
+<p><br>
+<br>
+<br>
+<br>
+<br>
+<br>
+</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Optimal allocation
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>In <strong>optimal allocation</strong>, the sample size is allocated to strata in proportion to</p>
+<p><br>
+<br>
+<br>
+<br>
+<br>
+<br>
+</p>
+<p>So again, we’re going to equate</p>
+<p><br>
+<br>
+<br>
+<br>
+</p>
+<p>and get the allocation rule</p>
+<p><br>
+<br>
+<br>
+<br>
+</p>
+</div>
+</div>
+<p>With optimal allocation we see sample size for stratum <span class="math inline">\(h\)</span> (<span class="math inline">\(n_h\)</span>) is larger in strata where:</p>
+<p><br>
+<br>
+<br>
+</p>
+<div style="page-break-after: always;"></div>
+<p><strong>Example</strong>: We’re designing a study where the objective is to estimate the fraction of UNL students on academic probation that have been attending academic coaching sessions. Here’s our sample design</p>
+<ul>
+<li><p><strong>Frame</strong>:<br>
+</p></li>
+<li><p><strong>Stratum 1</strong>: Students meeting with their advisors (based on notes in Student Success Hub)</p>
+<ul>
+<li><span class="math inline">\(N_1 = 750\)</span>, <span class="math inline">\(p_1 = 0.90\)</span>, <span class="math inline">\(c_1=\$100\)</span></li>
+</ul></li>
+<li><p><strong>Stratum 2</strong>: Students not meeting with their advisors (based on no notes in Student Success Hub)</p>
+<ul>
+<li><span class="math inline">\(N_2 = 100\)</span>, <span class="math inline">\(p_2 = 0.35\)</span>, <span class="math inline">\(c_2 = \$400\)</span></li>
+</ul></li>
+<li><p><strong>Sample size</strong>: <span class="math inline">\(n=100\)</span></p></li>
+</ul>
+<p>Here’s how optimal allocation would work:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 14%">
+<col style="width: 14%">
+<col style="width: 14%">
+<col style="width: 14%">
+<col style="width: 14%">
+<col style="width: 14%">
+<col style="width: 14%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Stratum <span class="math inline">\(h\)</span></th>
+<th><span class="math inline">\(N_h\)</span></th>
+<th><span class="math inline">\(\sigma^2_h \approx p_h(1-p_h)\)</span></th>
+<th><span class="math inline">\(c_h\)</span></th>
+<th><span class="math inline">\(N_h \sigma_h/\sqrt{c_h}\)</span></th>
+<th><span class="math inline">\(\frac{N_h \sigma_h/\sqrt{c_h}}{\sum_{h=1}^H N_h \sigma_h / \sqrt{c_h}}\)</span></th>
+<th><span class="math inline">\(n_h\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1: Notes</td>
+<td>750</td>
+<td></td>
+<td>100</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>2: No Notes</td>
+<td>100</td>
+<td></td>
+<td>400</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>Total</td>
+<td>850</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td><span class="math inline">\(n=100\)</span></td>
+</tr>
+</tbody>
+</table>
+<p>To see a summary of whole population allocation strategies, let’s again think about equating</p>
+<p><br>
+<br>
+<br>
+</p>
+<p>and look at what terms cancel out in particular circumstances. Then we can make the following summary</p>
+<p><br>
+<br>
+<br>
+<br>
+<br>
+<br>
+</p>
+<div style="page-break-after: always;"></div>
+</section>
+<section id="subpopulation-allocation" class="level4" data-number="4.5.1.2">
+<h4 data-number="4.5.1.2" class="anchored" data-anchor-id="subpopulation-allocation"><span class="header-section-number">4.5.1.2</span> Subpopulation Allocation</h4>
+<p>With subpopulation allocation, our main interest is in estimating stratum characteristics</p>
+<p><br>
+<br>
+<br>
+<br>
+</p>
+<p>One warning: <strong>subpopulation allocation generally leads to less precise whole population estimates</strong>.</p>
+<p>If stratum costs and variances are equal, then <strong>equal allocation</strong> is an option. With equal allocation we assume</p>
+<p><br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Equal allocation
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The equal allocation rule is to divide <span class="math inline">\(n\)</span> equally across the <span class="math inline">\(H\)</span> strata. So,</p>
+<p><br>
+<br>
+</p>
+</div>
+</div>
+<p><strong>Example</strong>:</p>
+<p><br>
+<br>
+<br>
+<br>
+<br>
+</p>
+<div style="page-break-after: always;"></div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Allocation for specific precision
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>If our real focus is on estimating one (or two) specific subpopulation values and <span class="math inline">\(\sigma_2^2\)</span> varies across strata, we can</p>
+<p><br>
+<br>
+<br>
+<br>
+<br>
+<br>
+</p>
+<p>Then, once each stratum sample size is determined, sum to get the total sample size:</p>
+<p><br>
+<br>
+</p>
+</div>
+</div>
+<p>This made lead to sample sizes that exceed the allowable budget. Some options for adjusting sample sizes when initial calculations look too high:</p>
+<ul>
+<li>Relax specifications for desired precision and recalculate stratum sample sizes. This can involve widening the allowable margin of error or decreasing the confidence level</li>
+<li>Decide the sample size you can afford and reduce stratum sample sizes proportionally (recheck the margin of error to make sure the confidence interval would still be useful)</li>
+<li>It’s probably going to take some fiddling</li>
+</ul>
+</section>
+<section id="compromise-allocation" class="level4" data-number="4.5.1.3">
+<h4 data-number="4.5.1.3" class="anchored" data-anchor-id="compromise-allocation"><span class="header-section-number">4.5.1.3</span> Compromise Allocation</h4>
+<p>Suppose the objective of the study is to get reasonable estimates of both whole and subpopulation values. There are allocation rules that fall somewhere between optimal for stratum estimates and optimal for population estimates. It’s easiest to visualize with a graph.</p>
+<p>Assuming equal variances and cost</p>
+<p><br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+</p>
+<div style="page-break-after: always;"></div>
+<p>The compromise is <strong>square root allocation</strong>.</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Square root allocation
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+</p>
+<p>It’s a compromise in that</p>
+<ul>
+<li>More sampling units are allocated to small strata than would be with proportional allocation</li>
+<li>More sampling units are allocated to large strata than would be with equal allocation</li>
+</ul>
+</div>
+</div>
+<p><strong>Example</strong>: Let’s compare the allocations among the baseball positions (and use <span class="math inline">\(n=153\)</span>, just so equal allocation gives us an integer)</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 16%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Stratum <span class="math inline">\(h\)</span></th>
+<th>Stratum Total <span class="math inline">\(N_h\)</span></th>
+<th><span class="math inline">\(\sqrt{N_h}\)</span></th>
+<th>Proportional <span class="math inline">\(n_h\)</span></th>
+<th>Equal <span class="math inline">\(n_h\)</span></th>
+<th>Square root <span class="math inline">\(n_h\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1 (1B)</td>
+<td>66</td>
+<td>8.124</td>
+<td></td>
+<td>17</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>2 (2B)</td>
+<td>50</td>
+<td>7.071</td>
+<td></td>
+<td>17</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>3 (3B)</td>
+<td>53</td>
+<td>7.280</td>
+<td></td>
+<td>17</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>4 (C)</td>
+<td>61</td>
+<td>7.810</td>
+<td></td>
+<td>17</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>5 (CF)</td>
+<td>43</td>
+<td>6.557</td>
+<td></td>
+<td>17</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>6 (LF)</td>
+<td>49</td>
+<td>7</td>
+<td></td>
+<td>17</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>7 (P)</td>
+<td>376</td>
+<td>19.391</td>
+<td></td>
+<td>17</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>8 (RF)</td>
+<td>54</td>
+<td>7.348</td>
+<td></td>
+<td>17</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>9 (SS)</td>
+<td>45</td>
+<td>6.708</td>
+<td></td>
+<td>17</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>Total</td>
+<td>797</td>
+<td>77.289</td>
+<td></td>
+<td>153</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>There are other strategies as well! All of these are just guidelines, and you can mix features of different allocation rules.</p>
+<div style="page-break-after: always;"></div>
+<p><strong>Example</strong>: Say you have 5 strata and can afford a total of <span class="math inline">\(n=4000\)</span> observations. You may allocate 400 to each strata to achieve a margin of error of 5% percentage points on strata confidence intervals for proportions. You’ve only allocated <span class="math inline">\(5 \times 400 = 2000\)</span> observations, so you can ‘spend’ the remaining 2000 proportionally or optimally.</p>
+<p>There are methods for determining total sample size as well, and those are derived similarly to what we did with simple random samples. They are complicated by having multiple variances for the multiple strata. More details may be found on page 96.</p>
+</section>
+</section>
+<section id="defining-strata" class="level3" data-number="4.5.2">
+<h3 data-number="4.5.2" class="anchored" data-anchor-id="defining-strata"><span class="header-section-number">4.5.2</span> Defining Strata</h3>
+<p>We started our discussion of selecting sampling design elements by stating that it’s easier to work in reverse order, and imagine that we already have defined strata. Now we turn our attention to actually selecting the strata.</p>
+<p>First, an important note: stratification almost never hurts, even if we stratify poorly.</p>
+<p><br>
+<br>
+<br>
+<br>
+<br>
+<br>
+</p>
+<p>However, stratification will be most efficient when</p>
+<p><br>
+<br>
+<br>
+<br>
+<br>
+</p>
+<p>This means</p>
+<p><br>
+<br>
+<br>
+</p>
+<p>In general, more information = more strata.</p>
+<p><br>
+<br>
+<br>
+</p>
+<p><strong>Example</strong>: (3.13) The point in time count of people experiencing homelessness is carried out on a single night on one of the last 10 nights in January. Large cities mean large areas to visit. Here’s how NYC does it:</p>
+<p><br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+</p>
+</section>
+<section id="allocation-examples" class="level3" data-number="4.5.3">
+<h3 data-number="4.5.3" class="anchored" data-anchor-id="allocation-examples"><span class="header-section-number">4.5.3</span> Allocation Examples</h3>
+<p>For all examples, we’ll be keeping in mind the general allocation rule</p>
+<p><span class="math display">\[n_h = \frac{n N_h s_h/\sqrt{c_h}}{\sum_{i=1}^H N_h s_h/\sqrt{c_h}}\]</span></p>
+<div style="page-break-after: always;"></div>
+<p>6/24. Suppose that a city has 90,000 dwelling units, of which 35,000 are houses, 45,000 are apartments, and 10,000 are condominiums.</p>
+<ol type="a">
+<li><p>You believe that the mean electricity usage is about twice as much for houses as for apartments or condominiums, and that the standard deviation is proportional to the mean so that <span class="math inline">\(S_1=2S_2=2S_3\)</span>. How would you allocate a stratified sample of 900 observations if you wanted to estimate the mean electricity consumption for all households in the city?</p></li>
+<li><p>Now suppose that you take a stratified random sample with proportional allocation and want to estimate the overall proportion of households in which energy conservation is practiced. If 45% of house dwellers, 25% of apartment dwellers, and 3% of condominium residents practice energy conservation, what is <span class="math inline">\(p\)</span> for the population? What gain would the stratified sample with proportional allocation offer over an SRS? That is, what is <span class="math inline">\(V_{\tiny{\hbox{prop}}}(\hat p_{\tiny{\hbox{str}}})/V_{\tiny{\hbox{SRS}}}(\hat p_{\tiny{\hbox{SRS}}})\)</span>?</p></li>
+</ol>
+<p><br>
+<br>
+<br>
+<br>
+<br>
+</p>
+<div style="page-break-after: always;"></div>
+<p>8/32. A public opinion researcher has a budget of $150,000 for interviewing households in a survey. She knows that 90% of all households have telephones. Telephone interviews cost $100 each; in-person interviews cost $300 each if all interviews are conducted in person, and $400 each if only nonphone households are interviewed in person (because there will be extra travel costs). Assume that the variances in the phone and nonphone groups are similar. How many households should be interviewed in each group if</p>
+<ol type="a">
+<li><p>All households are interviewed in person.</p></li>
+<li><p>Households with a phone are contacted by telephone and households without a phone are contacted in person.</p></li>
+</ol>
+<p><br>
+<br>
+<br>
+<br>
+<br>
+</p>
+<div style="page-break-after: always;"></div>
+<p>17/36. Lydersen and Ryg (1991) used stratification techniques to estimate ringed seal populations in Svalbard fjords. The 200 km<span class="math inline">\(^2\)</span> study area was divided in to three zones: Zone 1, outer Sassenfjorden, was covered with relatively new ice during the study period in March, 1990, and had little snow cover; Zone 3, Tempelfjorden, had a stable ice cover throughout the year; Zone 2, inner Sassenfjorden, was intermediate between the stable Zone 3 and unstable Zone 1. Ringed seals need good ice to establish territories with breathing holes, and snow cover enables females to dig out birth lairs. Thus, it was thought that the three zones would have different seal densities. The investigators took a stratified random sample of 20% of the 200 1-km<span class="math inline">\(^2\)</span>. The following table gives the number of plots, and the number of plots sampled, in each zone, along with the sample mean (and variance) number of breathing holes found in each zone:</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Zone</th>
+<th>Number of Plots</th>
+<th>Plots Sampled</th>
+<th><span class="math inline">\(\bar y_h\)</span></th>
+<th><span class="math inline">\(s^2_h\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td>68</td>
+<td>17</td>
+<td>1.765</td>
+<td>3.316</td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td>84</td>
+<td>12</td>
+<td>4.417</td>
+<td>11.538</td>
+</tr>
+<tr class="odd">
+<td>3</td>
+<td>48</td>
+<td>11</td>
+<td>10.545</td>
+<td>46.073</td>
+</tr>
+<tr class="even">
+<td>Total</td>
+<td>200</td>
+<td>40</td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<ol type="a">
+<li><p>Estimate the total number of breathing holes in the study region, along with its standard error.</p></li>
+<li><p>If you were designing this survey, how would you allocate observations to strata if the goal is to estimate the total number of breathing holes? If the goal is to compare the density of breathing holes in the three zones (want equal precision for <span class="math inline">\(\bar y_h\)</span> in the three zones)?</p></li>
+<li><p>The data are in the file <code>seals.csv</code> in Canvas. Use R to verify your answer in (a).</p></li>
+</ol>
+<p><br>
+<br>
+<br>
+<br>
+<br>
+<br>
+</p>
+<div style="page-break-after: always;"></div>
+<p>27/70. Suppose that, instead of emailing all 15,769 persons in the current membership list of the ASA as described in Exercise 13 of Chapter 1, the researchers wanted to take a stratified random sample of 1,100 of the 5,803 female and 9,966 male ASA members. What should the same sizes for men and women be if:</p>
+<ol type="a">
+<li><p>Proportional allocation is used?</p></li>
+<li><p>Neyman allocation is used, and it is assumed that <span class="math inline">\(S^2_{\hbox{\tiny{women}}}=(11/5)\times S^2_{\hbox{\tiny{men}}}\)</span>?</p></li>
+</ol>
+<p><br>
+<br>
+<br>
+<br>
+<br>
+<br>
+</p>
+<div style="page-break-after: always;"></div>
+<p>33/33. A stratified sample is being designed to estimate the prevalence <span class="math inline">\(p\)</span> of a rare characteristic, say the proportion of residents of Milwaukee, Wisconsin, who have Lyme design. Stratum 1, with <span class="math inline">\(N_1\)</span> units, has a high prevalence of the characteristic; stratum 2, with <span class="math inline">\(N_2\)</span> units, has low prevalence. Assume that the cost to sample a unit (for example, the cost to select a person for the sample and determine they have Lyme disease) is the same for each stratum, and that at most 2000 persons are to be sampled.</p>
+<ol type="a">
+<li><p>Let <span class="math inline">\(p_1\)</span> and <span class="math inline">\(p_2\)</span> be the proportions in stratum 1 and stratum 2 with the rare characteristic. If <span class="math inline">\(p_1=0.10, p_2=0.03\)</span>, and <span class="math inline">\(N_1/N=0.4\)</span>, what are <span class="math inline">\(n_1\)</span> and <span class="math inline">\(n_2\)</span> under optimal allocation?</p></li>
+<li><p>If <span class="math inline">\(p_1=0.10, p_2=0.03\)</span>, and <span class="math inline">\(N_1/N=0.4\)</span>, what is <span class="math inline">\(V(\hat p_{\tiny{\hbox{str}}})\)</span> under proportional allocation? Under optimal allocation? What is the variance if you take an SRS of 2000 units from the population?</p></li>
+</ol>
+<p><br>
+<br>
+<br>
+<br>
+<br>
+</p>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./Section-3-SRS.html" class="pagination-link" aria-label="Simple Random Samples">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Simple Random Samples</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

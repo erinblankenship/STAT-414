@@ -68,6 +68,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
+<link href="./Section-4-Stratified.html" rel="next">
 <link href="./Section-2-Prob-Samples.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
@@ -198,6 +199,12 @@ window.Quarto = {
   <div class="sidebar-item-container"> 
   <a href="./Section-3-SRS.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Simple Random Samples</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Section-4-Stratified.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Stratified Sampling</span></span></a>
   </div>
 </li>
     </ul>
@@ -1210,10 +1217,20 @@ salary 1562555 2425217</code></pre>
 </div>
 </div>
 <p>For more practice:</p>
+<ol type="1">
+<li><p>Estimating the mean number of errors committed by a player in 2004</p>
 <ul>
 <li><p>draw a new sample of size <span class="math inline">\(n=150\)</span> (with no seed or pick your own seed, so everyone gets a different sample) from the baseball data set</p></li>
 <li><p>use <code>svymean</code> to a 90% confidence interval for the mean number of errors committed by a player in 2004</p></li>
-</ul>
+</ul></li>
+<li><p>Estimating the total number of pitchers in 2004</p>
+<ul>
+<li><p>using the same sample you drew above, create a 0/1 variable that identifies whether each player in the sample is a pitcher (note that <code>svydesign</code> must be run again if a new variable is added to the data set)</p></li>
+<li><p>use <code>svymean</code> to get an estimate for <span class="math inline">\(\hat p\)</span></p></li>
+<li><p>use <code>svytotal</code> to estimate the total number of pitchers in 2004</p></li>
+</ul></li>
+<li><p>Estimate something of your choice!</p></li>
+</ol>
 <div style="page-break-after: always;"></div>
 </section>
 <section id="sample-size" class="level2" data-number="3.5">
@@ -1927,6 +1944,9 @@ salary 1562555 2425217</code></pre>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
+      <a href="./Section-4-Stratified.html" class="pagination-link" aria-label="Stratified Sampling">
+        <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Stratified Sampling</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
   </div>
 </nav>
 </div> <!-- /content -->
