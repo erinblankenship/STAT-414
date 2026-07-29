@@ -571,7 +571,7 @@ and is the same across all strata. This also implies
 \
 \
 
-One note: rounding in proportion allocation can lead to unequal (but approximately equal) sampling weights.
+One note: rounding in proportional allocation can lead to unequal (but approximately equal) sampling weights.
 
 \newpage
 
@@ -841,7 +841,7 @@ The equal allocation rule is to divide $n$ equally across the $H$ strata. So,
 ::: callout-tip
 # Allocation for specific precision
 
-If our real focus is on estimating one (or two) specific subpopulation values and $\sigma_2^2$ varies across strata, we can
+If our real focus is on estimating one (or two) specific subpopulation values and $\sigma_h^2$ varies across strata, we can
 
 \
 \
