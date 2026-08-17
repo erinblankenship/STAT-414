@@ -288,7 +288,7 @@ The actual publication data for each stratum is in the R code snippets below.
 Let's set up a table similar to one shown in Example 3.3
 
 | Stratum | $N_h$ | $n_h$ | $\bar y_h$ | $s^2_h$ | $\hat t_h = N_h \bar y_h$ | $(1-\frac{n_h}{N_h}) N_h^2 \frac{s_h^2}{n_h}$ |
-|-----------|-------|------|--------|--------|------------|--------------|
+|-----------|-----------|-----------|-----------|-----------|-----------|-----------|
 | Bio sci | 102 | 7 | 3.14 | 6.81 |  |  |
 | Phy sci | 310 | 19 | 2.105 | 8.21 |  |  |
 | Soc sci | 217 | 13 | 1.231 | 4.359 |  |  |
@@ -344,7 +344,7 @@ If we want to to estimate the total number of those in the population with the c
 **Example**: Let's go back to the publications data and consider the proportion of faculty with at least one publication.
 
 | Stratum | $N_h$ | $n_h$ | $N_h/N$ | $\bar y_h = \hat p_h$ | $(1-\frac{n_h}{N_h})(\frac{N_h}{N})^2(\frac{\hat p_h(1-\hat p_h)}{n_h -1})$ |
-|------------|-------|-----|----------|---------|------------------------|
+|------------|------------|------------|------------|------------|------------|
 | Bio sci | 102 | 7 | 0.1264 | 0.857 |  |
 | Phy sci | 310 | 19 | 0.3841 | 0.474 |  |
 | Soc sci | 217 | 13 | 0.2689 | 0.308 |  |
@@ -353,7 +353,7 @@ If we want to to estimate the total number of those in the population with the c
 
 So,
 
-$\hat p_{str} =$
+$\hat p_{str} =$\$\\hat p\_{str} =\$
 
 \
 

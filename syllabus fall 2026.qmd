@@ -23,24 +23,20 @@ format:
 
 **Lecture:** 2:00-3:15 Tuesday/Thursday, A130 Animal Science
 
-**Office Hours:** 9:00-10:00 Tuesday/Thursday or by appointment; 343B Hardin Hall, North Wing
+**Office Hours:** 9:00-10:00 Monday/Wednesday/Friday or by appointment; 343B Hardin Hall, North Wing
 
 **Required Materials:**
 
-- Lohr, S. (2022) Sampling Design and Analysis, 3$^{rd}$ edition. A digital version of the textbook will be linked through Canvas as part of a UNL textbook project, and the cost of the book will added to your student account.
+- Lohr, S. (2022) Sampling Design and Analysis, 3$^{rd}$\$\^{rd}\$\$\^{rd}\$\$\^{rd}\$ edition. A digital version of the textbook will be linked through Canvas as part of a UNL textbook project, and the cost of the book will added to your student account.
 - Supplementary (free downloadable) books on using R and SAS software may be found at [Dr. Lohr's website.](https://www.sharonlohr.com/sampling-design-and-analysis-3e)
 
 **Prerequisites:** STAT 262, STAT 380, or STAT 318
 
-**Course Description:** Sampling frames, methodology, questionnaire design.  Basics of
-standard sampling plans including simple random sampling, ratio estimators,
-stratified sampling, and cluster sampling.   More advanced topics may include
-complex surveys, nonresponse, confidentiality problems, and adaptive methods.
+**Course Description:** Sampling frames, methodology, questionnaire design. Basics of standard sampling plans including simple random sampling, ratio estimators, stratified sampling, and cluster sampling. More advanced topics may include complex surveys, nonresponse, confidentiality problems, and adaptive methods.
 
 **Course Goals:**
 
-- Learn the basic methodology of how classical survey samples are conducted based
-on simple random sampling.
+- Learn the basic methodology of how classical survey samples are conducted based on simple random sampling.
 
 - Recognize sampling and non-sampling errors.
 
@@ -59,12 +55,12 @@ on simple random sampling.
 
 **Grading:**
 
-| Assignment(s)      | Contribution to Final Grade |
-|--------------------|-----------------------------|
-| Homework/Participation             | 30%                         |
-| Exam 1             | 20%                         |
-| Exam 2           | 20%                         |
-| Final Project      | 30%                         |
+| Assignment(s)          | Contribution to Final Grade |
+|------------------------|-----------------------------|
+| Homework/Participation | 30%                         |
+| Exam 1                 | 20%                         |
+| Exam 2                 | 20%                         |
+| Final Project          | 30%                         |
 
 \
 
@@ -106,21 +102,13 @@ You are also expected to exhibit a professional demeanor (language, attitude) to
 
 Students may not make or distribute screen captures, audio/video recordings of, or livestream, any class-related activity, including lectures and presentations, without express prior written consent from me or an approved accommodation from Services for Students with Disabilities. If you have (or think you may have) a disability such that you need to record or tape class-related activities, you should contact Services for Students with Disabilities. If you have an accommodation to record class-related activities, those recordings may not be shared with any other student, whether in this course or not, or with any other person or on any other platform.
 
-**Homework:**  Approximately 6-8 homework assignments will be made over the course of the semester, and you will have one week to work on it. Homework will be turned in individually, and graded for completion. Over the following week, you will work collaboratively in a group to create a key for the homework. As a group, you will generate and refine answers to the homework questions, using your original submissions as a starting point. The end product will be a single, complete set of solutions with explanation for each homework problem. To earn participation credit, you must fully engage in the group solution (i.e., adding a comment like "This looks good" is not meaningful engagement) by making at least 3 contributions to each answer key. Contributions do not need to be answers! They can be clarifications, explanations, corrections, etc. More details on collaborative keys logistics will be provided with the first assignment. Other participation activities may be utilized as well, such as in-class writing assignments and group activities. 
+**Homework:** Approximately 6-8 homework assignments will be made over the course of the semester, and you will have one week to work on it. Homework will be turned in individually, and graded for completion. Over the following week, you will work collaboratively in a group to create a key for the homework. As a group, you will generate and refine answers to the homework questions, using your original submissions as a starting point. The end product will be a single, complete set of solutions with explanation for each homework problem. To earn participation credit, you must fully engage in the group solution (i.e., adding a comment like "This looks good" is not meaningful engagement) by making at least 3 contributions to each answer key. Contributions do not need to be answers! They can be clarifications, explanations, corrections, etc. More details on collaborative keys logistics will be provided with the first assignment. Other participation activities may be utilized as well, such as in-class writing assignments and group activities.
 
-**Exams:** Two in-class exams will be given during the course of the semester, on dates noted on the Tentative Course Outline. These exams are closed book and notes. The exams will
-evaluate your understanding of the material, as well as your ability to synthesize and
-transfer that knowledge to other scenarios and situations; questions will assess conceptual
-understanding as opposed to mere memorization.
+**Exams:** Two in-class exams will be given during the course of the semester, on dates noted on the Tentative Course Outline. These exams are closed book and notes. The exams will evaluate your understanding of the material, as well as your ability to synthesize and transfer that knowledge to other scenarios and situations; questions will assess conceptual understanding as opposed to mere memorization.
 
-You are expected to take exams at the scheduled times. If this is impossible due to
-extreme circumstances (illness, death in the family, previously scheduled activities vital
-to academic program), please notify me and provide appropriate documentation. No
-make-up exams will be given if I am not notified prior to the examination. You will be
-required to obtain a note from your physician or advisor explaining the nature of
-the conflict.
+You are expected to take exams at the scheduled times. If this is impossible due to extreme circumstances (illness, death in the family, previously scheduled activities vital to academic program), please notify me and provide appropriate documentation. No make-up exams will be given if I am not notified prior to the examination. You will be required to obtain a note from your physician or advisor explaining the nature of the conflict.
 
-**Final Project:** A final group project will take the place of a final exam. The project will include a presentation during the last week of class and a final written report.  More details on the project will be distributed later. 
+**Final Project:** A final group project will take the place of a final exam. The project will include a presentation during the last week of class and a final written report. More details on the project will be distributed later.
 
 **Instructional Continuity:** If in-person classes are canceled, you will be notified of the instructional continuity plan for this class through Canvas.
 
@@ -150,22 +138,21 @@ It may be useful to leverage AI tools to ensure that your work conforms to gramm
 
 **University Policies:** All [university-wide course policies.](https://executivevc.unl.edu/academic-excellence/teaching-resources/course-policies/)
 
-
 [***TENTATIVE***]{.underline} **Course Outline**
 
 | Week | Dates | Notes | Topics |
-|---------|------------|-------------|-----------------------|
+|------------------|------------------|------------------|------------------|
 | 1 | 25-27 August |  | Introduction: basic concepts in probability sampling and the survey process |
-| 2 | 1-3 September |  | Introduction: bias, questionnaire considerations  |
+| 2 | 1-3 September |  | Introduction: bias, questionnaire considerations |
 | 3 | 8-10 September |  | Simple probability samples |
 | 4 | 15-17 September |  | Simple probability samples |
 | 5 | 22-24 September |  | Simple probability samples; systematic sampling; stratified sampling |
-| 6 | 29 Sept - 1 Oct |  | Stratified sampling; allocation|
+| 6 | 29 Sept - 1 Oct |  | Stratified sampling; allocation |
 | 7 | 6-8 October |  | Allocation |
 | 8 | 13-15 October |  | Review and **Exam I** |
 | 9 | 20-22 October | No class on 20 Oct | Ratio estimation |
 | 10 | 27-29 October |  | Ratio estimation |
-| 11 | 3-5 November |  | Regression estimation; domain estimation  |
+| 11 | 3-5 November |  | Regression estimation; domain estimation |
 | 12 | 10-12 November |  | Post stratification; cluster sampling |
 | 13 | 17-19 November |  | Cluster sampling |
 | 14 | 24-26 November | No class on 26 Nov | Cluster sampling |

@@ -2,8 +2,7 @@
 
 STAT 414 is an introduction to sampling. By the end of the course, you will:
 
-- Learn the basic methodology of how classical survey samples are conducted based
-on simple random sampling.
+- Learn the basic methodology of how classical survey samples are conducted based on simple random sampling.
 
 - Recognize sampling and non-sampling errors.
 

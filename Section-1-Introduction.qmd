@@ -109,9 +109,9 @@ However, like previous courses, sample surveys do have an overarching process, s
 
 ## Considerations in planning and executing a survey
 
-1. **Objectives of the survey**
+1.  **Objectives of the survey**
 
-2. **Defining the population** In sampling, the word **population** needs some clarification. Generally, it means the larger set from which the sample is chosen, and it's the larger group we wish to make inference/draw conclusions about. And a **sample** is a subset of the population. However, we must distinguish between
+2.  **Defining the population** In sampling, the word **population** needs some clarification. Generally, it means the larger set from which the sample is chosen, and it's the larger group we wish to make inference/draw conclusions about. And a **sample** is a subset of the population. However, we must distinguish between
 
 - **Target population**
 
@@ -147,13 +147,13 @@ I love the figure on page 5 of the book:
 Within the **sampling frame** we have
 
 - **Observation unit**
-    
+
 \
 \
 \
-    
+
 - **Sampling unit**
-    
+
 \
 \
 \
@@ -165,21 +165,21 @@ For example,
 \
 \
 
-3. **Identifying potential sources of bias and ameliorating them**: In previous classes, like STAT 262 or STAT 380, we use the word **bias** to mean an estimator that systematically over- or under-estimates the true population characteristic. In sample surveys, we still use the same definition, but now biased estimators typically arise for two reasons:
+3.  **Identifying potential sources of bias and ameliorating them**: In previous classes, like STAT 262 or STAT 380, we use the word **bias** to mean an estimator that systematically over- or under-estimates the true population characteristic. In sample surveys, we still use the same definition, but now biased estimators typically arise for two reasons:
 
 \
 
 - Population characteristic of interest (Estimation bias):
-    
-    \
-    \
-    \
-    \
-    
+
+  \
+  \
+  \
+  \
+
 - Selection and/or measurement bias: Selection bias occurs when there is a mismatch between the sampled population and the target population. Measurement bias occurs when the survey observation tends to differ from the truth in a particular direction.
-    
- \
- \
+
+\
+\
 
 We'll talk about each of these in more detail.
 
@@ -191,45 +191,40 @@ We'll talk about each of these in more detail.
 \
 
 - Convenience samples
-    
-    \
-    \
-    \
-    \
-    
-    
-- Judgment samples
-    
-    \
-    \
-  
-    
-- Self-selected samples
-    
-    \
-    \
-    
-    
-- Undercoverage
-    
-    \
-    \
-    \
-    \
-    
-- Overcoverage
-    
-    \
-    \
-    \
-    \
-    
-- Nonresponse
-    
-    \
-    \
-    
 
+  \
+  \
+  \
+  \
+
+- Judgment samples
+
+  \
+  \
+
+- Self-selected samples
+
+  \
+  \
+
+- Undercoverage
+
+  \
+  \
+  \
+  \
+
+- Overcoverage
+
+  \
+  \
+  \
+  \
+
+- Nonresponse
+
+  \
+  \
 
 \newpage
 
@@ -243,40 +238,37 @@ We'll talk about each of these in more detail.
 Why can it occur?
 
 - Unavoidable Reasons
-    
-    \
-    \
-    \
-    \
-    
-- People!
-    
-    \
-    \
-    \
-    \
-    \
-    \
-    \
-    \
-    \
-    
-- Survey mode: method used to distribute and gather responses
-        
-     \
-     \
-     \
-     \
-     \
-     \
-     \
-     \
-     \
-        
-        
-    
-\newpage
 
+  \
+  \
+  \
+  \
+
+- People!
+
+  \
+  \
+  \
+  \
+  \
+  \
+  \
+  \
+  \
+
+- Survey mode: method used to distribute and gather responses
+
+  \
+  \
+  \
+  \
+  \
+  \
+  \
+  \
+  \
+
+\newpage
 
 So we're concerned about response bias--what now? Careful question design is key. We could spend weeks on just questionnaire design, but will only do a very brief overview. There are other resources on campus that can help with this aspect of surveys (Bureau of Sociological Research).
 
@@ -285,113 +277,110 @@ We'll start with types of questions to avoid, and then move on to other consider
 **Common types of biased questions**:
 
 - Leading questions
-    
-    \
-    \
-    \
-    \
-    \
-    \
-    
-    How to fix it:
-    
-    \
-    \
-    \
-    \
-    \
-    
+
+  \
+  \
+  \
+  \
+  \
+  \
+
+  How to fix it:
+
+  \
+  \
+  \
+  \
+  \
+
 - Assumptive questions
-    
-    \
-    \
-    \
-    \
-    \
-    \
-    
-    How to fix it:
-    
-     \
-     \
-     \
-     \
-     \
-    
+
+  \
+  \
+  \
+  \
+  \
+  \
+
+  How to fix it:
+
+  \
+  \
+  \
+  \
+  \
+
 - Double-barreled questions
-    
-    \
-    \
-    \
-    \
-    
-    How to fix it:
-    
-    \
-    \
-    
+
+  \
+  \
+  \
+  \
+
+  How to fix it:
+
+  \
+  \
+
 - Double negatives
-    
-    \
-    \
-    \
-    \
-    \
-    \
-    \
-    \
-    
-    How to fix it:
-    
-    \
-    \
-    \
-    
+
+  \
+  \
+  \
+  \
+  \
+  \
+  \
+  \
+
+  How to fix it:
+
+  \
+  \
+  \
 
 **Other considerations**:
 
-
 - Pay careful attention to answer scale options
-    
-    \
-    \
-    \
-    \
-    \
-    \
-    \
-    \
-    \
-    
-    
+
+  \
+  \
+  \
+  \
+  \
+  \
+  \
+  \
+  \
+
 - Check formatting
-    
-    \
-    \
-    
+
+  \
+  \
+
 - Avoid jargon, and be specific
-    
-    \
-    \
-    \
-    \
-    \
-    \
-    
+
+  \
+  \
+  \
+  \
+  \
+  \
+
 - Open or closed questions?
-    
-    \
-    \
-    \
-    \
-    \
-    \
-    \
-    
+
+  \
+  \
+  \
+  \
+  \
+  \
+  \
+
 - Question order matters
-    
-    \
-    
+
+  \
+
 Probably most important, test questions ahead of time with the target population.
 
 4.  **Choosing the sampling design/data collection approach**
@@ -405,7 +394,7 @@ Probably most important, test questions ahead of time with the target population
 
 \newpage
 
-5. **Choosing the analysis approach**
+5.  **Choosing the analysis approach**
 
 \
 \
@@ -418,14 +407,14 @@ Probably most important, test questions ahead of time with the target population
 \
 \
 
-6. **Data analysis**
+6.  **Data analysis**
 
 \
 \
 \
 \
 
-7. **What's next?** The more information we have about a population, the easier it is to devise a sampling plan that will give accurate estimates. Any past survey can serve as a guide for future samples, as it will provide information about variablity and cost.
+7.  **What's next?** The more information we have about a population, the easier it is to devise a sampling plan that will give accurate estimates. Any past survey can serve as a guide for future samples, as it will provide information about variablity and cost.
 
 \
 

@@ -675,8 +675,7 @@ But we've only got a finite population! How can we use a result about $n \righta
 \
 \
 
-Happily, there is a version of the Central Limit Theorem for SRSWOR, due to Hájek (1960). If some conditions that are *way* too technical for us to talk about are true and if
-\
+Happily, there is a version of the Central Limit Theorem for SRSWOR, due to Hájek (1960). If some conditions that are *way* too technical for us to talk about are true and if\
 
 then
 
@@ -695,7 +694,6 @@ Again, we don't know $\sigma$! We could substitute in $s$ and use the standard e
 \
 \
 \
-
 
 to calculate a $(1-\alpha)\times 100\%$ confidence interval for the from population mean from an SRS.
 
@@ -720,10 +718,9 @@ We have the same question come up that comes with the regular CLT: how large is 
 
 Some rules of thumb:
 
-- If the population is approximately normal,
-\
+- If the population is approximately normal,\
 
--
+- 
 
 Sugden et al. (2000) recommended the minimum sample size
 
@@ -817,21 +814,21 @@ confint(salmean,df=n-1, level=0.95)
 
 For more practice:
 
-1. Estimating the mean number of errors committed by a player in 2004
+1.  Estimating the mean number of errors committed by a player in 2004
 
-   - draw a new sample of size $n=150$ (with no seed or pick your own seed, so everyone gets a different sample) from the baseball data set
+    - draw a new sample of size $n=150$ (with no seed or pick your own seed, so everyone gets a different sample) from the baseball data set
 
-   - use `svymean` to a 90% confidence interval for the mean number of errors committed by a player in 2004
+    - use `svymean` to a 90% confidence interval for the mean number of errors committed by a player in 2004
 
-2. Estimating the total number of pitchers in 2004
+2.  Estimating the total number of pitchers in 2004
 
-   - using the same sample you drew above, create a 0/1 variable that identifies whether each player in the sample is a pitcher (note that `svydesign` must be run again if a new variable is added to the data set)
+    - using the same sample you drew above, create a 0/1 variable that identifies whether each player in the sample is a pitcher (note that `svydesign` must be run again if a new variable is added to the data set)
 
-   - use `svymean` to get an estimate for $\hat p$
+    - use `svymean` to get an estimate for $\hat p$
 
-   - use `svytotal` to estimate the total number of pitchers in 2004
+    - use `svytotal` to estimate the total number of pitchers in 2004
 
-3. Estimate something of your choice!
+3.  Estimate something of your choice!
 
 \newpage
 
@@ -841,10 +838,10 @@ Often the first question that comes up when designing a survey is how many obser
 
 If the researcher can narrow down the most important variables to focus on one or two, there are four basic steps:
 
-1. Decide how much precision you need (basically, how much variability are you willing to live with in the estimates)
-2. Find an equation involving the sample size $n$ and the precision (i.e., the margin of error)
-3. Estimate anything you need to and solve for $n$ (usually an estimate of the expected variance)
-4. Go back to square one when the $n$ turns out to be enormous.
+1.  Decide how much precision you need (basically, how much variability are you willing to live with in the estimates)
+2.  Find an equation involving the sample size $n$ and the precision (i.e., the margin of error)
+3.  Estimate anything you need to and solve for $n$ (usually an estimate of the expected variance)
+4.  Go back to square one when the $n$ turns out to be enormous.
 
 We'll go through these steps one by one.
 
@@ -882,7 +879,6 @@ Let's start by assuming the fpc is neglible (i.e., we have an infinite populatio
 \
 \
 
-
 Now, let's assume $\frac{n_0}{N} < 1$ (why is this a reasonable assumption?)
 
 \
@@ -911,7 +907,6 @@ Now, let's assume $\frac{n_0}{N} < 1$ (why is this a reasonable assumption?)
 \
 \
 \
-
 
 So, the sample size we need is
 
@@ -1016,7 +1011,6 @@ If there are no other options, guess. An educated guess may use the suspected di
 \
 \
 
-
 To within 1000 trees?
 
 \
@@ -1027,7 +1021,6 @@ To within 1000 trees?
 \
 \
 
-
 To within 2000 trees?
 
 \
@@ -1037,7 +1030,6 @@ To within 2000 trees?
 \
 \
 \
-
 
 Does the finite population correction factor matter here? How do you know?
 
@@ -1083,7 +1075,6 @@ When will a systematic sample behave like an SRS?
 \
 \
 
-
 \newpage
 
 When will a systematic sample not behave like an SRS?
@@ -1100,7 +1091,6 @@ When will a systematic sample not behave like an SRS?
 \
 \
 \
-
 
 There are a couple of advantages over the SRS:
 
@@ -1121,7 +1111,7 @@ There are a couple of advantages over the SRS:
 
 \newpage
 
-## Considerations for Choosing an SRS Design 
+## Considerations for Choosing an SRS Design
 
 ### When Shouldn't You Use an SRS? {.unnumbered}
 
@@ -1143,22 +1133,17 @@ There are a couple of advantages over the SRS:
 \
 \
 
-
 ### Why Should You Use an SRS? {.unnumbered}
 
 - You don't have extra information
-    
+
 \
-    
+
 - Explainability is super important
-    
+
 \
 \
-    
+
 - Easier computationally
 
 \
-
-
-
-
