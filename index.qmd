@@ -24,4 +24,9 @@ STAT 414 is an introduction to sampling. By the end of the course, you will:
   file.copy("syllabus fall 2026.html","docs/")
   file.copy("syllabus-fall-2026.pdf","docs/")
   file.copy("syllabus fall 2026_files","docs/",recursive=TRUE)
+  
+  quarto::quarto_render(input="hw1.qmd")
+  file.copy("hw1.html","docs/")
+  file.copy("hw1.pdf","docs/")
+  file.copy("hw1","docs/",recursive=TRUE)
   ```

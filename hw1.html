@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>syllabus-fall-2026</title>
+<title>hw1</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -26,47 +26,18 @@ ul.task-list li input[type="checkbox"] {
 </style>
 
 
-<script src="syllabus fall 2026_files/libs/clipboard/clipboard.min.js"></script>
-<script src="syllabus fall 2026_files/libs/quarto-html/quarto.js" type="module"></script>
-<script src="syllabus fall 2026_files/libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="syllabus fall 2026_files/libs/quarto-html/popper.min.js"></script>
-<script src="syllabus fall 2026_files/libs/quarto-html/tippy.umd.min.js"></script>
-<script src="syllabus fall 2026_files/libs/quarto-html/anchor.min.js"></script>
-<link href="syllabus fall 2026_files/libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="syllabus fall 2026_files/libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="syllabus fall 2026_files/libs/bootstrap/bootstrap.min.js"></script>
-<link href="syllabus fall 2026_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="syllabus fall 2026_files/libs/bootstrap/bootstrap-efbb37e9afcc02144ebbc7afd12a776f.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="hw1_files/libs/clipboard/clipboard.min.js"></script>
+<script src="hw1_files/libs/quarto-html/quarto.js" type="module"></script>
+<script src="hw1_files/libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="hw1_files/libs/quarto-html/popper.min.js"></script>
+<script src="hw1_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="hw1_files/libs/quarto-html/anchor.min.js"></script>
+<link href="hw1_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="hw1_files/libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="hw1_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="hw1_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="hw1_files/libs/bootstrap/bootstrap-efbb37e9afcc02144ebbc7afd12a776f.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 
-  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
-  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
-
-<script type="text/javascript">
-const typesetMath = (el) => {
-  if (window.MathJax) {
-    // MathJax Typeset
-    window.MathJax.typeset([el]);
-  } else if (window.katex) {
-    // KaTeX Render
-    var mathElements = el.getElementsByClassName("math");
-    var macros = [];
-    for (var i = 0; i < mathElements.length; i++) {
-      var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
-        window.katex.render(texText.data, mathElements[i], {
-          displayMode: mathElements[i].classList.contains('display'),
-          throwOnError: false,
-          macros: macros,
-          fleqn: false
-        });
-      }
-    }
-  }
-}
-window.Quarto = {
-  typesetMath
-};
-</script>
 
 </head>
 
@@ -74,282 +45,43 @@ window.Quarto = {
 
 <div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
 <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-<div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="syllabus-fall-2026.pdf"><i class="bi bi-file-pdf"></i>PDF</a></li></ul></div></div>
+<div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="hw1.pdf"><i class="bi bi-file-pdf"></i>PDF</a></li></ul></div></div>
 <main class="content" id="quarto-document-content">
 
 
 
 
-<section id="stat-414-introduction-to-survey-sampling" class="level1">
-<h1><strong>STAT 414: Introduction to Survey Sampling</strong></h1>
-<p><strong>Instructor:</strong> Dr.&nbsp;Erin Blankenship (she/her)</p>
-<p><strong>email:</strong> <code>erin.blankenship@unl.edu</code></p>
-<p><strong>Lecture:</strong> 2:00-3:15 Tuesday/Thursday, A130 Animal Science</p>
-<p><strong>Office Hours:</strong> 9:00-10:00 Monday/Wednesday/Friday or by appointment; 343B Hardin Hall, North Wing</p>
-<p><strong>Required Materials:</strong></p>
+<section id="homework-1" class="level1">
+<h1>Homework 1</h1>
+<p>Individual assignments due in Canvas on Thursday, 10 September</p>
+<p>Group collaborative key due on Thursday, 17 September</p>
+<ol type="1">
+<li><p>A researcher selected a simple random sample of 100 counties from the total of 3141 counties in the US. Data were collected from each of the counties regarding demographics, land use, agriculture, federal grants and employees, and military personnel. Suppose that the researcher is interested in looking at the likelihood of veterans in relation to county conditions. Of particular interest are counties for which at least 30% of the population consists of Vietnam veterans. The data from this survey are in a file called <code>counties</code> located on Dr.&nbsp;Lohr’s website. A description of the variables can be found in an exercise 28 in Chapter 4 of the textbook (Lohr 2022). For this part of the homework assignment, you are asked to write and successfully execute a program to read and analyze the data in the following steps. You may use SAS or R.</p>
+<ol type="a">
+<li>Read in the data from the external file. You may want to look at the data in Excel before writing the data step.</li>
+<li>Construct a histogram of the number of physicians for the 100 counties.</li>
+<li>Create a new variable called <code>vietind</code> that is 1 if the percent of veterans in the county is greater than or equal to 30, and 0 otherwise.</li>
+<li>Produce a frequency table for <code>vietind</code> using data from the whole sample.</li>
+</ol></li>
+<li><p>For each of the scenarios in (a) and (b), define each of these terms in the context of the scenario:</p></li>
+</ol>
 <ul>
-<li>Lohr, S. (2022) Sampling Design and Analysis, 3<span class="math inline">\(^{rd}\)</span> edition. A digital version of the textbook will be linked through Canvas as part of a UNL textbook project, and the cost of the book will added to your student account.</li>
-<li>Supplementary (free downloadable) books on using R and SAS software may be found at <a href="https://www.sharonlohr.com/sampling-design-and-analysis-3e">Dr.&nbsp;Lohr’s website.</a></li>
+<li><p>Target population</p></li>
+<li><p>Element</p></li>
+<li><p>Sampling frame</p></li>
+<li><p>Sampling unit</p></li>
+<li><p>Characteristic of interest</p></li>
+<li><p>Possible sources of non-sampling errors</p></li>
+<li><p>Possible sources of measurement errors</p></li>
+<li><p>Sampled population</p>
+<ol type="a">
+<li>To estimate how many books in the library need rebinding, a librarian uses a random number table to randomly select 100 locations on library shelves. They then walk to each location, look at the book that resides at that spot, and record whether the book needs rebinding or not.</li>
+<li>A survey is conducted to find the average weight of cows in a region. A list of all farms is available for the region, and 50 farms are selected at random. Then the weight of each cow at the 50 selected farms is recorded.</li>
+</ol></li>
 </ul>
-<p><strong>Prerequisites:</strong> STAT 262, STAT 380, or STAT 318</p>
-<p><strong>Course Description:</strong> Sampling frames, methodology, questionnaire design. Basics of standard sampling plans including simple random sampling, ratio estimators, stratified sampling, and cluster sampling. More advanced topics may include complex surveys, nonresponse, confidentiality problems, and adaptive methods.</p>
-<p><strong>Course Goals:</strong></p>
-<ul>
-<li><p>Learn the basic methodology of how classical survey samples are conducted based on simple random sampling.</p></li>
-<li><p>Recognize sampling and non-sampling errors.</p></li>
-<li><p>Be able to use extra information in sampling via ratio estimators and regression estimators.</p></li>
-<li><p>Be able to define and use stratified samples and know why they are often better than SRS.</p></li>
-<li><p>Be able to design one and two stage cluster samples and know their key properties.</p></li>
-<li><p>Recognize strengths and weaknesses of different sampling approaches.</p></li>
-<li><p>Use standard R packages to analyze survey data and estimate population means, proportions, totals, and more.</p></li>
-</ul>
-<p><br>
-<br>
-</p>
-<p><strong>Grading:</strong></p>
-<table class="caption-top table">
-<thead>
-<tr class="header">
-<th>Assignment(s)</th>
-<th>Contribution to Final Grade</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>Homework/Participation</td>
-<td>30%</td>
-</tr>
-<tr class="even">
-<td>Exam 1</td>
-<td>20%</td>
-</tr>
-<tr class="odd">
-<td>Exam 2</td>
-<td>20%</td>
-</tr>
-<tr class="even">
-<td>Final Project</td>
-<td>30%</td>
-</tr>
-</tbody>
-</table>
-<p><br>
-</p>
-<p><strong>Grading Scale:</strong></p>
-<table class="caption-top table">
-<thead>
-<tr class="header">
-<th>Grade</th>
-<th>Final Percentage Range</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>A</td>
-<td>94.0-100</td>
-</tr>
-<tr class="even">
-<td>A-</td>
-<td>90.0-93.99</td>
-</tr>
-<tr class="odd">
-<td>B+</td>
-<td>88.0-89.99</td>
-</tr>
-<tr class="even">
-<td>B</td>
-<td>84.0-87.99</td>
-</tr>
-<tr class="odd">
-<td>B-</td>
-<td>80.0-83.99</td>
-</tr>
-<tr class="even">
-<td>C+</td>
-<td>78.0-79.99</td>
-</tr>
-<tr class="odd">
-<td>C</td>
-<td>74.0-77.99</td>
-</tr>
-<tr class="even">
-<td>C-</td>
-<td>70.0-73.99</td>
-</tr>
-<tr class="odd">
-<td>D+</td>
-<td>68.0-69.99</td>
-</tr>
-<tr class="even">
-<td>D</td>
-<td>64.0-67.99</td>
-</tr>
-<tr class="odd">
-<td>D-</td>
-<td>60.0-63.99</td>
-</tr>
-<tr class="even">
-<td>F</td>
-<td>&lt;60.0</td>
-</tr>
-</tbody>
-</table>
-<p><br>
-<strong>Course Expectations:</strong> In this course, you are expected to have professional behavior. You are expected to attend all class meetings, be curious, ask questions, seek opportunities to learn, and be open and responsive to constructive feedback. In addition:</p>
-<ul>
-<li><p>Be an active participant–statistics is not a spectator sport!</p></li>
-<li><p>Be committed, take your work seriously</p></li>
-<li><p>Engage with the in-class activities and labs</p></li>
-<li><p>Help others–if you understand the material being discussed, practice your mentoring skills. This does not means sharing answers, but instead helping others understand the concepts.</p></li>
-<li><p>Complete any assigned readings.</p></li>
-</ul>
-<p>You are also expected to exhibit a professional demeanor (language, attitude) toward others. Disagreement during discussions is welcome and often productive in developing a deeper understanding of the concepts being discussed. However, disagreement does not warrant yelling or disrespectful language or behavior. Unprofessional behavior will not be tolerated, and appropriate actions will be taken to prevent future occurrences.</p>
-<p><strong>Recording of class-related activity:</strong> I invite all of you to join me in actively creating and contributing to a positive, productive, and respectful classroom culture. Each student contributes to an environment that shapes the learning process. Any work and/or communication that you are privy to as a member of this course should be treated as the intellectual property of the speaker/creator, and is not to be shared outside the context of this course.</p>
-<p>Students may not make or distribute screen captures, audio/video recordings of, or livestream, any class-related activity, including lectures and presentations, without express prior written consent from me or an approved accommodation from Services for Students with Disabilities. If you have (or think you may have) a disability such that you need to record or tape class-related activities, you should contact Services for Students with Disabilities. If you have an accommodation to record class-related activities, those recordings may not be shared with any other student, whether in this course or not, or with any other person or on any other platform.</p>
-<p><strong>Homework:</strong> Approximately 6-8 homework assignments will be made over the course of the semester, and you will have one week to work on it. Homework will be turned in individually, and graded for completion. Over the following week, you will work collaboratively in a group to create a key for the homework. As a group, you will generate and refine answers to the homework questions, using your original submissions as a starting point. The end product will be a single, complete set of solutions with explanation for each homework problem. To earn participation credit, you must fully engage in the group solution (i.e., adding a comment like “This looks good” is not meaningful engagement) by making at least 3 contributions to each answer key. Contributions do not need to be answers! They can be clarifications, explanations, corrections, etc. More details on collaborative keys logistics will be provided with the first assignment. Other participation activities may be utilized as well, such as in-class writing assignments and group activities.</p>
-<p><strong>Exams:</strong> Two in-class exams will be given during the course of the semester, on dates noted on the Tentative Course Outline. These exams are closed book and notes. The exams will evaluate your understanding of the material, as well as your ability to synthesize and transfer that knowledge to other scenarios and situations; questions will assess conceptual understanding as opposed to mere memorization.</p>
-<p>You are expected to take exams at the scheduled times. If this is impossible due to extreme circumstances (illness, death in the family, previously scheduled activities vital to academic program), please notify me and provide appropriate documentation. No make-up exams will be given if I am not notified prior to the examination. You will be required to obtain a note from your physician or advisor explaining the nature of the conflict.</p>
-<p><strong>Final Project:</strong> A final group project will take the place of a final exam. The project will include a presentation during the last week of class and a final written report. More details on the project will be distributed later.</p>
-<p><strong>Instructional Continuity:</strong> If in-person classes are canceled, you will be notified of the instructional continuity plan for this class through Canvas.</p>
-<p><strong>AI and Explainability Policy:</strong> (adapted from Dr.&nbsp;Vanderplas)</p>
-<ul>
-<li><p>Any use of generative AI must be disclosed in an appendix to your submission - this includes brainstorming, editing, using AI as spell-check/grammar-check, and so on. You must document the following:</p>
-<ul>
-<li><p>the version of the generative AI used</p></li>
-<li><p>the full sequence of prompts and responses</p></li>
-<li><p>any additional inputs you provided to the AI system</p></li>
-<li><p>a “diff” between the AI responses and your submission, showing exactly what was generated by the AI system and what you changed.</p></li>
-</ul></li>
-</ul>
-<p>It may be useful to leverage AI tools to ensure that your work conforms to grammar and style guidelines, but I very highly discourage the use of generative AI for content or code (I’ve seen it generate incorrect code too many times).</p>
-<ul>
-<li>You must be able to explain any work you turn in, including code. If you cannot explain the logic behind your approach as well as how it works in practice, then you will not receive credit for your submission.</li>
-</ul>
-<p><strong>Department Grade Appeal Policy:</strong> The Department of Statistics <a href="https://statistics.unl.edu/department-policies-grade-appeals-academic-integrity/">grade appeal policy</a></p>
-<p><strong>Academic Integrity:</strong> You are encouraged to work together on problems and exercises, but the work you turn in must be your own (unless the assignment specifically states otherwise). Work on exams must be your own. University policy will be followed in cases of academic dishonesty: In cases where an instructor finds that a student has committed any act of academic dishonesty, the instructor may in the exercise of his or her professional judgment impose an academic sanction as severe as giving the student a failing grade in the course. Before imposing an academic sanction the instructor shall first attempt to discuss the matter with the student. If deemed necessary by either the instructor or the student, the matter may be brought to the attention of the student’s major advisor, the instructor’s department chairperson or head, or the dean of the college in which the student is enrolled. For additional details see <a href="https://statistics.unl.edu/department-policies-grade-appeals-academic-integrity/">the department policy.</a></p>
-<p><strong>Services for Students with Disabilities:</strong> The University strives to make all learning experiences as accessible as possible. If you anticipate or experience barriers based on your disability (including mental health, chronic or temporary medical conditions), please let your instructor know immediately so that you can discuss options privately. To establish reasonable accommodations, your instructor may request that you register with Services for Students with Disabilities. If you are eligible for services and register with the office, make arrangements with your instructor as soon as possible to discuss your accommodations so they can be implemented in a timely manner. SSD is located in 117 Louise Pound Hall and can be reached at 402-472-3787.</p>
-<p><strong>University Policies:</strong> All <a href="https://executivevc.unl.edu/academic-excellence/teaching-resources/course-policies/">university-wide course policies.</a></p>
-<p><u><strong><em>TENTATIVE</em></strong></u> <strong>Course Outline</strong></p>
-<table class="caption-top table">
-<colgroup>
-<col style="width: 25%">
-<col style="width: 25%">
-<col style="width: 25%">
-<col style="width: 25%">
-</colgroup>
-<thead>
-<tr class="header">
-<th>Week</th>
-<th>Dates</th>
-<th>Notes</th>
-<th>Topics</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>1</td>
-<td>25-27 August</td>
-<td></td>
-<td>Introduction: basic concepts in probability sampling and the survey process</td>
-</tr>
-<tr class="even">
-<td>2</td>
-<td>1-3 September</td>
-<td></td>
-<td>Introduction: bias, questionnaire considerations</td>
-</tr>
-<tr class="odd">
-<td>3</td>
-<td>8-10 September</td>
-<td></td>
-<td>Simple probability samples</td>
-</tr>
-<tr class="even">
-<td>4</td>
-<td>15-17 September</td>
-<td></td>
-<td>Simple probability samples</td>
-</tr>
-<tr class="odd">
-<td>5</td>
-<td>22-24 September</td>
-<td></td>
-<td>Simple probability samples; systematic sampling; stratified sampling</td>
-</tr>
-<tr class="even">
-<td>6</td>
-<td>29 Sept - 1 Oct</td>
-<td></td>
-<td>Stratified sampling; allocation</td>
-</tr>
-<tr class="odd">
-<td>7</td>
-<td>6-8 October</td>
-<td></td>
-<td>Allocation</td>
-</tr>
-<tr class="even">
-<td>8</td>
-<td>13-15 October</td>
-<td></td>
-<td>Review and <strong>Exam I</strong></td>
-</tr>
-<tr class="odd">
-<td>9</td>
-<td>20-22 October</td>
-<td>No class on 20 Oct</td>
-<td>Ratio estimation</td>
-</tr>
-<tr class="even">
-<td>10</td>
-<td>27-29 October</td>
-<td></td>
-<td>Ratio estimation</td>
-</tr>
-<tr class="odd">
-<td>11</td>
-<td>3-5 November</td>
-<td></td>
-<td>Regression estimation; domain estimation</td>
-</tr>
-<tr class="even">
-<td>12</td>
-<td>10-12 November</td>
-<td></td>
-<td>Post stratification; cluster sampling</td>
-</tr>
-<tr class="odd">
-<td>13</td>
-<td>17-19 November</td>
-<td></td>
-<td>Cluster sampling</td>
-</tr>
-<tr class="even">
-<td>14</td>
-<td>24-26 November</td>
-<td>No class on 26 Nov</td>
-<td>Cluster sampling</td>
-</tr>
-<tr class="odd">
-<td>15</td>
-<td>1-3 December</td>
-<td></td>
-<td>Review and <strong>Exam II</strong></td>
-</tr>
-<tr class="even">
-<td>16</td>
-<td>8-10 December</td>
-<td></td>
-<td><strong>Final project presentations</strong></td>
-</tr>
-<tr class="odd">
-<td>Finals Week</td>
-<td></td>
-<td>No final exam</td>
-<td><strong>Final project papers due Monday, 14 December at 9:00 am</strong></td>
-</tr>
-</tbody>
-</table>
+<ol start="3" type="1">
+<li>Book problems from Chapter 2: #1, #5 (in my online book, problem 5 follows right after problem 1), #16 (starts with “A university has 807 faculty members…”), #24 (starts with “Discuss whether an SRS…”), #17 (starts with “Mayr et al.&nbsp;(1994)…”)</li>
+</ol>
 </section>
 
 </main>

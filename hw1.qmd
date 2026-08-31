@@ -1,0 +1,45 @@
+---
+project:
+  output-dir: docs
+  
+format: 
+  html: default
+  pdf:   
+    header-includes:
+        - \usepackage{float}
+        - \floatplacement{table}{H}  
+    fontsize: 11pt
+    geometry: 
+      - top=20mm
+      - left=15mm
+      - right=10mm
+---
+
+# Homework 1
+
+Individual assignments due in Canvas on Thursday, 10 September
+
+Group collaborative key due on Thursday, 17 September
+
+1.  A researcher selected a simple random sample of 100 counties from the total of 3141 counties in the US.  Data were collected from each of the counties regarding demographics, land use, agriculture, federal grants and employees, and military personnel.  Suppose that the researcher is interested in looking at the likelihood of veterans in relation to county conditions.  Of particular interest are counties for which at least 30% of the population consists of Vietnam veterans. The data from this survey are in a file called `counties` located on Dr. Lohr's website.  A description of the variables can be found in an exercise 28 in Chapter 4 of the textbook (Lohr 2022). For this part of the homework assignment, you are asked to write and successfully execute a program to read and analyze the data in the following steps.  You may use SAS or R.
+
+    a.  Read in the data from the external file.  You may want to look at the data in Excel before writing the data step.
+    b.  Construct a histogram of the number of physicians for the 100 counties.
+    c.  Create a new variable called `vietind` that is 1 if the percent of veterans in the county is greater than or equal to 30, and 0 otherwise.
+    d.  Produce a frequency table for `vietind` using data from the whole sample.  
+
+2. For each of the scenarios in (a) and (b), define each of these terms in the context of the scenario:
+- Target population
+- Element
+- Sampling frame
+- Sampling unit
+- Characteristic of interest
+- Possible sources of non-sampling errors
+- Possible sources of measurement errors
+- Sampled population
+
+    a.  To estimate how many books in the library need rebinding, a librarian uses a random number table to randomly select 100 locations on library shelves. They then walk to each location, look at the book that resides at that spot, and record whether the book needs rebinding or not. 
+    b.  A survey is conducted to find the average weight of cows in a region. A list of all farms is available for the region, and 50 farms are selected at random. Then the weight of each cow at the 50 selected farms is recorded.
+  
+3. Book problems from Chapter 2: #1, #5 (in my online book, problem 5 follows right after problem 1), #16 (starts with "A university has 807 faculty members..."), #24 (starts with "Discuss whether an SRS..."), #17 (starts with "Mayr et al. (1994)...")
+

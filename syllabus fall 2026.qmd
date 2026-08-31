@@ -27,7 +27,7 @@ format:
 
 **Required Materials:**
 
-- Lohr, S. (2022) Sampling Design and Analysis, 3$^{rd}$\$\^{rd}\$\$\^{rd}\$\$\^{rd}\$ edition. A digital version of the textbook will be linked through Canvas as part of a UNL textbook project, and the cost of the book will added to your student account.
+- Lohr, S. (2022) Sampling Design and Analysis, 3$^{rd}$ edition. A digital version of the textbook will be linked through Canvas as part of a UNL textbook project, and the cost of the book will added to your student account.
 - Supplementary (free downloadable) books on using R and SAS software may be found at [Dr. Lohr's website.](https://www.sharonlohr.com/sampling-design-and-analysis-3e)
 
 **Prerequisites:** STAT 262, STAT 380, or STAT 318
