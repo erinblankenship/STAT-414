@@ -659,15 +659,15 @@ window.Quarto = {
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 4.76297e+12</code></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>se.small<span class="ot">&lt;-</span><span class="fu">sqrt</span>((var.salary<span class="sc">/</span>sampsize)<span class="sc">*</span>(<span class="dv">1</span><span class="sc">-</span>(sampsize<span class="sc">/</span>N)))</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>se.small<span class="ot">&lt;-</span><span class="fu">sqrt</span>((var.small<span class="sc">/</span>sampsize)<span class="sc">*</span>(<span class="dv">1</span><span class="sc">-</span>(sampsize<span class="sc">/</span>N)))</span>
 <span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>se.small</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 531436.4</code></pre>
+<pre><code>[1] 390883</code></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>nofpc.small<span class="ot">&lt;-</span><span class="fu">sqrt</span>(var.salary<span class="sc">/</span>sampsize)</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>nofpc.small<span class="ot">&lt;-</span><span class="fu">sqrt</span>(var.small<span class="sc">/</span>sampsize)</span>
 <span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>nofpc.small</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 541729.8</code></pre>
+<pre><code>[1] 398454.1</code></pre>
 </div>
 </div>
 <p>We may also be interested in a measure of relative variability (this will be most helpful in the future for selecting sample size). The <strong>coefficient of variation</strong> (CV) of <span class="math inline">\(\bar y\)</span> is</p>

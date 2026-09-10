@@ -320,9 +320,9 @@ meansmall<-mean(srssmalln$salary)
 meansmall
 var.small<-var(srssmalln$salary)
 var.small
-se.small<-sqrt((var.salary/sampsize)*(1-(sampsize/N)))
+se.small<-sqrt((var.small/sampsize)*(1-(sampsize/N)))
 se.small
-nofpc.small<-sqrt(var.salary/sampsize)
+nofpc.small<-sqrt(var.small/sampsize)
 nofpc.small
 ```
 
