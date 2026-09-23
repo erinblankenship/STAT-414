@@ -1,0 +1,39 @@
+---
+project:
+  output-dir: docs
+  
+format: 
+  html: default
+  pdf:   
+    header-includes:
+        - \usepackage{float}
+        - \floatplacement{table}{H}  
+    fontsize: 11pt
+    geometry: 
+      - top=20mm
+      - left=15mm
+      - right=10mm
+---
+
+# Homework 3
+
+Individual assignments due in Canvas on Thursday, 1 October
+
+Group collaborative key due on Thursday, 8 October
+
+1.  (continued from HW #2) On Homework #1 you worked with the data in problem 15, regarding age (in months) of unassisted walking among a sample of 240 children. In that problem, you found the mean, SE, and a 95% confidence interval for average age of walking. In that problem, you were not told the size of the population and so did not account for the fpc. It turns out the data were collected from a pediatric outpatient clinic that serves 5850 children.
+
+    a.  Suppose the researchers want to conduct another study at the same clinic, and have enough funding to collect data on 500 children. The researchers want to calculate a 99\% confidence interval for the mean age of walking. What will the margin of error be? Use the knowledge learned from the initial study, and do not ignore the fpc.
+    b.  Suppose the researchers want to carry out a new study to estimate the proportion of children who begin walking before 11 months.  If we want a margin of error of 3.5\% for a 95\% confidence interval for the proportion, what sample size would we need to achieve this goal?  Do not use information from the study already conducted.  You may assume $N$ is large for this problem and the fpc can be ignored.
+    
+2. Book problem Chapter 2, #12 (Arizona cities; #35 in my online version)
+
+3. Book problem Chapter 2, #16(a) (Cullen(1994); #21 in my online version)
+    
+4. (adapted from Chapter 2, #19 and Chapter 3, #13; `agsrs` and `agstrat`) The data sets `agsrs.csv` and `agstrat.csv` may be found on Dr. Lohr's website. 
+    a. A description of `agsrs.csv` may be found in Example 2.6 in Chapter 2. Without using the `survey` package, use this data set to estimate the mean number of acres devoted to farms in 1987, along with a 95% confidence interval. (It may be helpful to look at Example 2.7)
+    b. A description of `agstrat.csv` may be found in Example 3.2 in Chapter 3. For the variable number of acres devoted to farms in 1987, set up a table like the one on page 63 of the notes. Use that table to estimate the mean number of acres devoted to farms in 1987, along with a 95% confidence interval.
+    c. Compare your answers to (a) and (b). What do you observe?
+    
+4. Book problem Chapter 3, #16 (hard shell clams). You should be able to do this problem with only a basic calculator, and is a good example of the kind of low/no-tech problem I could put on an exam.
+

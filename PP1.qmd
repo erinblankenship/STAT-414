@@ -1,0 +1,32 @@
+---
+project:
+  output-dir: docs
+  
+format: 
+  html: default
+  pdf:   
+    header-includes:
+        - \usepackage{float}
+        - \floatplacement{table}{H}  
+    fontsize: 11pt
+    geometry: 
+      - top=20mm
+      - left=15mm
+      - right=10mm
+---
+
+# Practice Problems 1
+
+Not to turn in, but may be helpful before the exam
+
+
+1.  (adapted from book problems Chapter 3, #4 and #5, data from Example 3.4) The file `PP1 Problem1.R` contains code to construct a data set with 3835 observations, with one line in the data frame for each of the surveys returned. The 8th column, `femid`, is an identifier for whether the respondent was female (1) or male (0).
+
+    a.  Add a 9th column with the sampling weight.
+    b.  Using **only** columns 8 and 9, calculate $\hat t_{str}$ (i.e., don't use the `survey` package), the estimated total number of women.
+    c.  Using **only** columns 8 and 9, calculate $\hat p_{str}$ (i.e., don't use the `survey` package), the estimated proportion of women.
+    d.  Explain why it is not possible to calculate a confidence interval for $p$ using only columns 8 and 9.
+    e.  The additional information referenced in #5 has already been added to the dataframe. Using all available information, find a 95% confidence interval for the proportion of people who agree with the statement about rarely finding an article that interests them. (Hint: you may need to do some dataframe manipulation.)
+
+2.  Book problem Chapter 3, #9 (objects in bins). The R Companion to the textbook (pdf may be downloaded from Dr. Lohr's website--the link is in Canvas) gives instructions for using R to select a stratified random sample. Use the seed 724845.
+
