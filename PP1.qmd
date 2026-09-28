@@ -19,7 +19,6 @@ format:
 
 Not to turn in, but may be helpful before the exam
 
-
 1.  (adapted from book problems Chapter 3, #4 and #5, data from Example 3.4) The file `PP1 Problem1.R` contains code to construct a data set with 3835 observations, with one line in the data frame for each of the surveys returned. The 8th column, `femid`, is an identifier for whether the respondent was female (1) or male (0).
 
     a.  Add a 9th column with the sampling weight.
@@ -30,3 +29,29 @@ Not to turn in, but may be helpful before the exam
 
 2.  Book problem Chapter 3, #9 (objects in bins). The R Companion to the textbook (pdf may be downloaded from Dr. Lohr's website--the link is in Canvas) gives instructions for using R to select a stratified random sample. Use the seed 724845.
 
+3.  A simple random sample (without replacement) of 25 students is selected from a school with 100 students. The students are asked to report how many devices (phone, tablet, laptop, etc.) they are currently carrying with them. The results are: $$
+        \sum_{i \in \mathcal{S}} y_i = 49 \hbox{\hspace{15mm}} s^2=1.957
+        $$
+
+    a.  In the context of this scenario, explain what the $i \in \mathcal{S}$ in the summation sign means.
+    b.  Using the summary statistics provided, estimate the average number of devices carried by students at the school.
+    c.  Estimate the total number of devices carried by students in the school.
+    d.  What is the fpc in this sample?
+    e.  Is the fpc important here? Explain your reasoning, making sure to reference why the fpc is used.
+    f.  Based on your answer to (e), give the standard error for your estimate of the total number of devices carried by students at the school.
+    g.  The school wi-fi can only handle 200 personal student devices. Do you think the school needs to start putting a limit on the number of devices a student can carry with them? Explain your reasoning, making sure to cite relevant statistical evidence. The statistical evidence may need to include additional evidence not calculated on the previous page, and feel free to approximate any $t_{\alpha/2}$ values with 2.
+    h.  If the school decided to conduct a new survey on the same issue, and wanted to estimate the **mean** number of devices carried to within 0.4 devices with 95% confidence, how many students would they need to select? Use the knowledge learned from the first study and do not ignore the fpc. Recall that $z_{0.025}=1.96$.
+
+4.  A chain of department stores with four locations has their own store credit card. They are interested in learning more about their delinquent accounts. The store accountant takes a sample of 50 accounts and determines whether each sample account is delinquent.
+
+    a.  Based on the values in the table below, what kind of allocation did the accountant use? Explain how you know.
+    b.  Using the data provided in the table, estimate the proportion of delinquent accounts in the entire chain of stores. Feel free to add columns to the table, if that would be helpful.
+    c.  Do you think a different allocation method should have been used? Explain your reasoning, citing relevant statistical evidence.
+
+| Store | Total number of accounts | Number of accounts sampled | Number of delinquent accounts | $\hspace{15mm}$ | $\hspace{15mm}$ |
+|----|----|----|----|----|----|
+| A | 65 | 14 | 7 |  |  |
+| B | 42 | 9 | 2 |  |  |
+| C | 93 | 21 | 8 |  |  |
+| D | 25 | 6 | 1 |  |  |
+| Total | 225 | 50 | 15 |  |  |
