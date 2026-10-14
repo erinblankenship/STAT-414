@@ -1,0 +1,2841 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.10.18">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>5&nbsp; Ratio and Regression Estimation – Stat 414 Notes</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./Section-4-Stratified.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-c574c73dd0d0ff61020859ffc61752ee.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body class="nav-sidebar floating quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./Section-5-Ratio-Reg.html"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Ratio and Regression Estimation</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Stat 414 Notes</a> 
+        <div class="sidebar-tools-main">
+    <a href="./Stat-414-Notes.pdf" title="Download PDF" class="quarto-navigation-tool px-1" aria-label="Download PDF"><i class="bi bi-file-pdf"></i></a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Course Goals for STAT 414</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Section-1-Introduction.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction to Sampling</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Section-2-Prob-Samples.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">An Introduction to Probability Samples</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Section-3-SRS.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Simple Random Samples</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Section-4-Stratified.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Stratified Sampling</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Section-5-Ratio-Reg.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Ratio and Regression Estimation</span></span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#ratio-estimation-in-the-srs" id="toc-ratio-estimation-in-the-srs" class="nav-link active" data-scroll-target="#ratio-estimation-in-the-srs"><span class="header-section-number">5.1</span> Ratio Estimation in the SRS</a>
+  <ul class="collapse">
+  <li><a href="#why-consider-a-ratio-estimator" id="toc-why-consider-a-ratio-estimator" class="nav-link" data-scroll-target="#why-consider-a-ratio-estimator"><span class="header-section-number">5.1.1</span> Why consider a ratio estimator?</a></li>
+  <li><a href="#ratio-estimators-and-their-properties" id="toc-ratio-estimators-and-their-properties" class="nav-link" data-scroll-target="#ratio-estimators-and-their-properties"><span class="header-section-number">5.1.2</span> Ratio estimators and their properties</a></li>
+  <li><a href="#sampling-weights" id="toc-sampling-weights" class="nav-link" data-scroll-target="#sampling-weights"><span class="header-section-number">5.1.3</span> Sampling weights</a></li>
+  <li><a href="#analysis-in-r" id="toc-analysis-in-r" class="nav-link" data-scroll-target="#analysis-in-r"><span class="header-section-number">5.1.4</span> Analysis in R</a></li>
+  </ul></li>
+  <li><a href="#regression-estimation" id="toc-regression-estimation" class="nav-link" data-scroll-target="#regression-estimation"><span class="header-section-number">5.2</span> Regression Estimation</a></li>
+  <li><a href="#domain-estimation" id="toc-domain-estimation" class="nav-link" data-scroll-target="#domain-estimation"><span class="header-section-number">5.3</span> Domain Estimation</a></li>
+  <li><a href="#poststratification" id="toc-poststratification" class="nav-link" data-scroll-target="#poststratification"><span class="header-section-number">5.4</span> Poststratification</a></li>
+  <li><a href="#ratio-estimation-with-stratified-sampling" id="toc-ratio-estimation-with-stratified-sampling" class="nav-link" data-scroll-target="#ratio-estimation-with-stratified-sampling"><span class="header-section-number">5.5</span> Ratio Estimation with Stratified Sampling</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Ratio and Regression Estimation</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p>At this point, we are going to change focus for a bit. Rather than discussing different sampling designs, we’re going to think about making the best use of survey data. Specifically, we’re going to consider the case where in addition to the characteristic of interest (<span class="math inline">\(y\)</span>), one or more additional variables related to <span class="math inline">\(y\)</span> are also available on that sampling unit. These additional variables are denoted by <span class="math inline">\(x\)</span> and are called <strong>auxiliary variables</strong>.</p>
+<p><strong>Examples</strong>:</p>
+<p><br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+</p>
+<p>Now, such auxiliary information can be used in setting up the sampling design.</p>
+<p><br>
+</p>
+<p>However, we are now concerned with using it for the estimation of population characteristics. The general idea is that we will exploit the relationship between <span class="math inline">\(y\)</span> and <span class="math inline">\(x\)</span> to get more precise estimates than we could get from <span class="math inline">\(y\)</span> alone. We’ll consider two methods for using this auxiliary information: ratio estimators and regression estimators.</p>
+<p>In both cases, we may know the <span class="math inline">\(x\)</span>s for the whole population or we may know the <span class="math inline">\(x\)</span>s only for the sample.</p>
+<p><strong>Examples</strong>:</p>
+<p><br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+</p>
+<p>We’re going to start with ratio estimators, and we’re going to assume the traditional, design-based context. That is, we’re going to assume:</p>
+<p><br>
+<br>
+<br>
+<br>
+<br>
+</p>
+<section id="ratio-estimation-in-the-srs" class="level2" data-number="5.1">
+<h2 data-number="5.1" class="anchored" data-anchor-id="ratio-estimation-in-the-srs"><span class="header-section-number">5.1</span> Ratio Estimation in the SRS</h2>
+<p>Here’s the set-up we’re going to start with:</p>
+<p><br>
+<br>
+<br>
+<br>
+<br>
+<br>
+</p>
+<p>This means we’re assuming</p>
+<p><br>
+<br>
+<br>
+<br>
+<br>
+<br>
+</p>
+<p>There are two potential goals of ratio estimation.</p>
+<ol type="1">
+<li></li>
+</ol>
+<p><br>
+<br>
+<br>
+</p>
+<ol start="2" type="1">
+<li></li>
+</ol>
+<p><br>
+<br>
+<br>
+</p>
+<div style="page-break-after: always;"></div>
+<p>We’ll need some new notation.</p>
+<ul>
+<li><p>Sampling plan:<br>
+</p></li>
+<li><p><span class="math inline">\(t_y =\)</span><br>
+</p></li>
+<li><p><span class="math inline">\(\bar y_{\mathcal{U}} =\)</span><br>
+</p></li>
+<li><p><span class="math inline">\(\bar y =\)</span><br>
+</p></li>
+<li><p><span class="math inline">\(t_x =\)</span><br>
+</p></li>
+<li><p><span class="math inline">\(\bar x_{\mathcal{U}} =\)</span><br>
+</p></li>
+<li><p><span class="math inline">\(\bar x =\)</span><br>
+</p></li>
+<li><p><span class="math inline">\(B =\)</span></p></li>
+</ul>
+<p><br>
+</p>
+<ul>
+<li><span class="math inline">\(\hat B =\)</span></li>
+</ul>
+<p>&nbsp;<br>
+<br>
+</p>
+<p>From these, we can get some pretty natural estimators for population characteristics:</p>
+<p><br>
+<br>
+<br>
+<br>
+<br>
+</p>
+<p>Ratio estimators (and regression estimators) work best when there is a strong relationship between <span class="math inline">\(y\)</span> and <span class="math inline">\(x\)</span>. We’re assuming a linear relationship between them, so</p>
+<p><br>
+<br>
+<br>
+<br>
+</p>
+<div style="page-break-after: always;"></div>
+<p><strong>Example</strong>:</p>
+<p><br>
+<br>
+<br>
+<br>
+<br>
+<br>
+</p>
+<p>Before we jump into the properties of these estimators (bias, variance), let’s explore why a ratio estimator may be useful.</p>
+<section id="why-consider-a-ratio-estimator" class="level3" data-number="5.1.1">
+<h3 data-number="5.1.1" class="anchored" data-anchor-id="why-consider-a-ratio-estimator"><span class="header-section-number">5.1.1</span> Why consider a ratio estimator?</h3>
+<p><strong>Maybe we actually want to estimate a ratio</strong>.</p>
+<p>Suppose we want to estimate average income per adult in the population. We record <span class="math inline">\(y_i =\)</span> household income and <span class="math inline">\(x_i =\)</span> number of adults living in a household.</p>
+<p><br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+</p>
+<p>The key question to ask is: if you took a different sample, would the denominator change? If yes, then you’re using a ratio estimator.</p>
+<p><br>
+<br>
+<br>
+<br>
+<br>
+<br>
+</p>
+<div style="page-break-after: always;"></div>
+<p><strong>Maybe we want to estimate a population total, but we don’t know</strong> <span class="math inline">\(N\)</span>.</p>
+<p>Up to now, we’ve used <span class="math inline">\(\hat t = N \bar y\)</span> to estimate a population total. But what if we don’t know <span class="math inline">\(N\)</span>?</p>
+<p><br>
+<br>
+<br>
+<br>
+<br>
+</p>
+<p><strong>Example</strong>: Suppose we want to estimate the amount of juice that will be produced by a shipment of oranges. We could take a sample of <span class="math inline">\(n\)</span> oranges and record <span class="math inline">\(y_1,\dots, y_n\)</span> (the amount of juice produced by each orange in the sample), and find the average amount of juice per orange, <span class="math inline">\(\bar y\)</span>. But, to estimate the total amount of juice we’d need the total number of oranges in the shipment. What’s easy to measure?</p>
+<p><br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+</p>
+<p><strong>Maybe we want to increase the precision of</strong> <span class="math inline">\(\bar y\)</span> and <span class="math inline">\(\hat t\)</span>.</p>
+<p>This is one of the primary uses of ratio estimation–to get better estimates of the quantities we’ve already been focused on.</p>
+<p><strong>Example</strong>: A manager at a mill wants to estimate the total weight of dry wood (<span class="math inline">\(t_y\)</span>) for a set number of truckloads of 5-foot bundles of pulp wood (freshly cut wood). The manager plans to:</p>
+<ol type="1">
+<li><p>Weigh the total amount of pulp wood (<span class="math inline">\(t_x\)</span>)</p></li>
+<li><p>Randomly select a sample of <span class="math inline">\(n\)</span> bundles</p></li>
+<li><p>Record the weight of the pulp wood (<span class="math inline">\(x_i\)</span>) for each of the <span class="math inline">\(n\)</span> bundles</p></li>
+<li><p>Remove the bark and dry the wood from the <span class="math inline">\(n\)</span> bundles</p></li>
+<li><p>Record the weight of the dry wood (<span class="math inline">\(y_i\)</span>) for each of the <span class="math inline">\(n\)</span> bundles</p></li>
+</ol>
+<p><br>
+<br>
+<br>
+<br>
+<br>
+<br>
+</p>
+<div style="page-break-after: always;"></div>
+<p><strong>Maybe we need to adjust estimates from the sample to reflect demographic totals</strong>.</p>
+<p>We can use <strong>poststratification</strong> to adjust our estimates of population means and totals using information we know about the population.</p>
+<p><strong>Example</strong>: Suppose a small town of <span class="math inline">\(N=4000\)</span> registered voters wants to estimate the total number of people that plan to vote early. They can use this information to figure out how many poll workers they need for election day. The town records show that of the 4000 registered voters, 2100 are registered Democrats and 1900 are registered Republicans. They take a random sample of <span class="math inline">\(n=200\)</span> voters, and find that 39/85 registered Republicans plan to vote early and 75/115 registered Democrats plan to vote early.</p>
+<p><br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+</p>
+<p>Ratio estimation is used within each party, and we adjust our estimate accordingly. In this case:</p>
+<p><br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+</p>
+<p><strong>Maybe we’re hoping to account for nonresponse</strong>.</p>
+<p>Not everyone responds to surveys and sometimes it’s impossible to get data from each unit selected in our sample. But, if there’s a relationship between <span class="math inline">\(y\)</span> and <span class="math inline">\(x\)</span> we can use that information to adjust our estimates.</p>
+<div style="page-break-after: always;"></div>
+<p><strong>Example</strong>: Suppose we want to estimate the total amount of money UNL students spent on books in Fall 2026. We distribute a survey to randomly selected enrolled students and record <span class="math inline">\(y_i =\)</span> amount spent and <span class="math inline">\(x_i =\)</span> number of credit hours enrolled.</p>
+<p>We know <span class="math inline">\(t_x=\)</span></p>
+<p><br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+</p>
+<p>So, there are many reasons why we may want to use a ratio estimator. However, if we want to use them we need to know their properties so we can understand their behavior and calculate quantities like confidence intervals.</p>
+</section>
+<section id="ratio-estimators-and-their-properties" class="level3" data-number="5.1.2">
+<h3 data-number="5.1.2" class="anchored" data-anchor-id="ratio-estimators-and-their-properties"><span class="header-section-number">5.1.2</span> Ratio estimators and their properties</h3>
+<p>Unlike <span class="math inline">\(\bar y\)</span> or <span class="math inline">\(\hat t = N \bar y\)</span> in a SRS or stratified random sample, ratio estimators are usually biased for estimating <span class="math inline">\(\bar y_{\mathcal{U}}\)</span> and <span class="math inline">\(t_y\)</span>. This is bias inherent to the estimation method, not selection bias.</p>
+<div style="page-break-after: always;"></div>
+<p><strong>Example</strong>: Suppose we want to estimate the total number of fish caught on a given day in nets at <span class="math inline">\(N=4\)</span> sites. The entire population is</p>
+<table class="caption-top table">
+<tbody>
+<tr class="odd">
+<td><span class="math inline">\(i\)</span>: site</td>
+<td>1</td>
+<td>2</td>
+<td>3</td>
+<td>4</td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(x_i\)</span>: nets</td>
+<td>4</td>
+<td>5</td>
+<td>8</td>
+<td>5</td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(y_i\)</span>: fish</td>
+<td>200</td>
+<td>300</td>
+<td>500</td>
+<td>400</td>
+</tr>
+</tbody>
+</table>
+<p>We will take a SRS of <span class="math inline">\(n=2\)</span> sites and use ratio estimation to estimate the total number of fish caught. We know:</p>
+<ul>
+<li><p><span class="math inline">\(t_y =\)</span><br>
+</p></li>
+<li><p><span class="math inline">\(t_x =\)</span><br>
+</p></li>
+<li><p><span class="math inline">\({N \choose n} = {4 \choose 2} =\)</span><br>
+</p></li>
+</ul>
+<p>In this super small example, we can list all the possible samples.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 14%">
+<col style="width: 14%">
+<col style="width: 14%">
+<col style="width: 14%">
+<col style="width: 14%">
+<col style="width: 14%">
+<col style="width: 14%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Sample</th>
+<th>Units</th>
+<th><span class="math inline">\(\bar x_{\mathcal{S}}\)</span></th>
+<th><span class="math inline">\(\bar y_{\mathcal{S}}\)</span></th>
+<th><span class="math inline">\(\hat B\)</span></th>
+<th><span class="math inline">\(\hat t_{yr} = \hat B t_x\)</span></th>
+<th><span class="math inline">\(\hat t_{SRS}\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td>1,2</td>
+<td><span class="math inline">\(\hbox{\hspace{20mm}}\)</span></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>2</td>
+<td>1,3</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>3</td>
+<td>1,4</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>4</td>
+<td>2,3</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>5</td>
+<td>2,4</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>6</td>
+<td>3,4</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<div style="page-break-after: always;"></div>
+<p>So if the ratio estimator is biased, why do we use it? We hope the reduced variance will compensate for the bias. That is, if <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span> are highly (positively) correlated, we expect that the sampling distributions of <span class="math inline">\(\bar y\)</span> and <span class="math inline">\(\hat{\bar y_r}\)</span> will look like this compared to each other.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="distplot.jpeg" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
+</figure>
+</div>
+<p>We have a quantity that summarizes both bias and variance!</p>
+<p><br>
+</p>
+<div style="page-break-after: always;"></div>
+<p><strong>Example</strong>:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 16%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Sample</th>
+<th>Units</th>
+<th><span class="math inline">\(\hat t_{yr}\)</span></th>
+<th><span class="math inline">\([\hat t_{yr} - \hbox{E}(\hat t_{yr})]^2\)</span></th>
+<th><span class="math inline">\(\hat t_{SRS}\)</span></th>
+<th><span class="math inline">\([\hat t_{SRS} - \hbox{E}(\hat t_{SRS})]^2\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td>1,2</td>
+<td>1222</td>
+<td></td>
+<td>1000</td>
+<td></td>
+</tr>
+<tr class="even">
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>2</td>
+<td>1,3</td>
+<td>1283</td>
+<td></td>
+<td>1400</td>
+<td></td>
+</tr>
+<tr class="even">
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>3</td>
+<td>1,4</td>
+<td>1467</td>
+<td></td>
+<td>1200</td>
+<td></td>
+</tr>
+<tr class="even">
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>4</td>
+<td>2,3</td>
+<td>1354</td>
+<td></td>
+<td>1600</td>
+<td></td>
+</tr>
+<tr class="even">
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>5</td>
+<td>2,4</td>
+<td>1540</td>
+<td></td>
+<td>1400</td>
+<td></td>
+</tr>
+<tr class="even">
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>6</td>
+<td>3,4</td>
+<td>1523</td>
+<td></td>
+<td>1800</td>
+<td></td>
+</tr>
+<tr class="even">
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p><br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+</p>
+<p>Why is the bias there? Let’s look at E<span class="math inline">\([\hat{\bar y_r}]\)</span>:</p>
+<p><br>
+<br>
+<br>
+</p>
+<div style="page-break-after: always;"></div>
+<p>Can we be more specific about the bias? Let’s consider the bias of <span class="math inline">\(\hat{\bar y_r}\)</span>:</p>
+<p><br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+</p>
+<p>From this, we could show:</p>
+<p><br>
+<br>
+<br>
+<br>
+<br>
+</p>
+<div style="page-break-after: always;"></div>
+<p>It can also be shown that:</p>
+<p><br>
+<br>
+<br>
+<br>
+<br>
+</p>
+<p>What does all this mean? The take home message is the bias of <span class="math inline">\(\hat{\bar y_r}\)</span> (and <span class="math inline">\(\hat t_{yr}\)</span> and <span class="math inline">\(\hat B\)</span>) is small if:</p>
+<ul>
+<li><p><br>
+</p></li>
+<li><p><br>
+</p></li>
+<li><p><br>
+</p></li>
+<li><p><br>
+</p></li>
+<li><p><br>
+</p></li>
+</ul>
+<p>If the bias is small, we can approximate both the variance and the MSE using</p>
+<p><br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+</p>
+<p>Again, what does all this mean? The bottom line is the MSE and variance of <span class="math inline">\(\hat{\bar y_r}\)</span> (and <span class="math inline">\(\hat t_{yr}\)</span> and <span class="math inline">\(\hat B\)</span>) is small if:</p>
+<ul>
+<li><p><span class="math inline">\(n\)</span> is large</p></li>
+<li><p>sampling fraction <span class="math inline">\(\frac{n}{N}\)</span> is large</p></li>
+<li><p>correlation <span class="math inline">\(R\)</span> is close to 1</p></li>
+<li><p><br>
+</p></li>
+</ul>
+<div style="page-break-after: always;"></div>
+<p>This approximation for the variance/MSE is still full of quantities we don’t know! How can we get estimated variances based on the data we observed so we can calculate confidence intervals? Let’s start with <span class="math inline">\(\hat B\)</span>:</p>
+<p><br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+</p>
+<p>From this, we can see what we’ll use for <span class="math inline">\(\hat{\bar y_r}\)</span> and <span class="math inline">\(\hat t_{yr}\)</span>:</p>
+<p><br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+</p>
+<p>We can then use these variances as we have before: take the square root to get the SE and find confidence intervals:</p>
+<p><br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+</p>
+<div style="page-break-after: always;"></div>
+<p><strong>Example</strong>: Let’s look at the orange juice example we considered earlier. The total shipment of oranges weighed 2000 pounds. 15 oranges were randomly selected. Let <span class="math inline">\(y_i =\)</span> the weight of the orange and let <span class="math inline">\(x_i =\)</span> the weight of the juice extracted from the orange.</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Orange</th>
+<th><span class="math inline">\(y\)</span></th>
+<th><span class="math inline">\(x\)</span></th>
+<th><span class="math inline">\(y-\hat B x\)</span></th>
+<th><span class="math inline">\((y-\hat B x)^2\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td>0.16</td>
+<td>0.22</td>
+<td>0.014866</td>
+<td>0.000220998</td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td>0.15</td>
+<td>0.26</td>
+<td>-0.021522</td>
+<td>0.000463196</td>
+</tr>
+<tr class="odd">
+<td>3</td>
+<td>0.2</td>
+<td>0.31</td>
+<td>-0.004507</td>
+<td><span class="math inline">\(2.0313 \times 10^{-5}\)</span></td>
+</tr>
+<tr class="even">
+<td>4</td>
+<td>0.25</td>
+<td>0.37</td>
+<td>0.005911</td>
+<td><span class="math inline">\(3.49399 \times 10^{-5}\)</span></td>
+</tr>
+<tr class="odd">
+<td>5</td>
+<td>0.16</td>
+<td>0.28</td>
+<td>-0.024716</td>
+<td>0.000610881</td>
+</tr>
+<tr class="even">
+<td>6</td>
+<td>0.27</td>
+<td>0.38</td>
+<td>0.019314</td>
+<td>0.000373031</td>
+</tr>
+<tr class="odd">
+<td>7</td>
+<td>0.28</td>
+<td>0.4</td>
+<td>0.01612</td>
+<td>0.000259854</td>
+</tr>
+<tr class="even">
+<td>8</td>
+<td>0.16</td>
+<td>0.21</td>
+<td>0.021463</td>
+<td>0.00046066</td>
+</tr>
+<tr class="odd">
+<td>9</td>
+<td>0.11</td>
+<td>0.18</td>
+<td>-0.008746</td>
+<td><span class="math inline">\(7.64925 \times 10^{-5}\)</span></td>
+</tr>
+<tr class="even">
+<td>10</td>
+<td>0.16</td>
+<td>0.29</td>
+<td>-0.031313</td>
+<td>0.000980504</td>
+</tr>
+<tr class="odd">
+<td>11</td>
+<td>0.17</td>
+<td>0.26</td>
+<td>-0.001522</td>
+<td><span class="math inline">\(2.31648 \times 10^{-6}\)</span></td>
+</tr>
+<tr class="even">
+<td>12</td>
+<td>0.24</td>
+<td>0.32</td>
+<td>0.028896</td>
+<td>0.000834979</td>
+</tr>
+<tr class="odd">
+<td>13</td>
+<td>0.21</td>
+<td>0.33</td>
+<td>-0.007701</td>
+<td><span class="math inline">\(5.93054 \times 10^{-5}\)</span></td>
+</tr>
+<tr class="even">
+<td>14</td>
+<td>0.11</td>
+<td>0.16</td>
+<td>0.004448</td>
+<td><span class="math inline">\(1.97847 \times 10^{-5}\)</span></td>
+</tr>
+<tr class="odd">
+<td>15</td>
+<td>0.22</td>
+<td>0.35</td>
+<td>-0.010895</td>
+<td>0.000118701</td>
+</tr>
+<tr class="even">
+<td>Total</td>
+<td>2.85</td>
+<td>4.32</td>
+<td></td>
+<td>0.00454</td>
+</tr>
+</tbody>
+</table>
+<p><br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+</p>
+<div style="page-break-after: always;"></div>
+</section>
+<section id="sampling-weights" class="level3" data-number="5.1.3">
+<h3 data-number="5.1.3" class="anchored" data-anchor-id="sampling-weights"><span class="header-section-number">5.1.3</span> Sampling weights</h3>
+<p>Recall the sampling weight is <span class="math inline">\(w_i = 1/\pi_i\)</span>, where <span class="math inline">\(\pi_i\)</span> is the inclusion probability. In previous chapters (SRS and Stratified) we observed that we we could use the sampling weights to get our estimates of population (or subpopulation) quantities. For example,</p>
+<p><br>
+<br>
+<br>
+<br>
+<br>
+</p>
+<p>But, we also know</p>
+<p><br>
+<br>
+<br>
+<br>
+<br>
+<br>
+</p>
+<p>So, these <span class="math inline">\(\bar x_{\mathcal{U}}/\bar x\)</span> (or <span class="math inline">\(t_x/\hat t_x\)</span>) values serve as an adjustment to each sampling weight. Why do the weights need adjusting?</p>
+<p><br>
+<br>
+<br>
+<br>
+<br>
+<br>
+</p>
+<p>We’re assuming</p>
+<p><br>
+<br>
+<br>
+<br>
+<br>
+<br>
+</p>
+<div style="page-break-after: always;"></div>
+<p>Let’s add some data to the plot.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="adjust plot.jpeg" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
+</figure>
+</div>
+<p>If <span class="math inline">\(\bar x &lt; \bar x_{\mathcal{U}}\)</span></p>
+<p><br>
+<br>
+<br>
+<br>
+</p>
+<div style="page-break-after: always;"></div>
+<p>If <span class="math inline">\(\bar x &gt; \bar x_{\mathcal{U}}\)</span></p>
+<p><br>
+<br>
+<br>
+<br>
+<br>
+</p>
+<p>So, back to <span class="math inline">\(t_x/\hat t_x\)</span> as an adjustment to the sampling weights. Call this adjustment <span class="math inline">\(g_i\)</span>:</p>
+<p><br>
+<br>
+<br>
+</p>
+<p>We now have adjusted weights <span class="math inline">\(w_i^* = w_i g_i\)</span> and we can think about our estimator as</p>
+<p><br>
+<br>
+<br>
+<br>
+</p>
+<p>What makes these different from the sampling weights we saw earlier?</p>
+<p><br>
+<br>
+<br>
+<br>
+<br>
+<br>
+</p>
+<p>This means the sampling weights no longer sum to <span class="math inline">\(N\)</span>, which they have done in previous sections. Instead, they are calibrated to the population total of the <span class="math inline">\(x\)</span>s, <span class="math inline">\(t_x\)</span>.</p>
+<div style="page-break-after: always;"></div>
+<p><strong>Example</strong>: Let’s go back to our small example.</p>
+<table class="caption-top table">
+<tbody>
+<tr class="odd">
+<td><span class="math inline">\(i\)</span>: site</td>
+<td>1</td>
+<td>2</td>
+<td>3</td>
+<td>4</td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(x_i\)</span>: nets</td>
+<td>4</td>
+<td>5</td>
+<td>8</td>
+<td>5</td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(y_i\)</span>: fish</td>
+<td>200</td>
+<td>300</td>
+<td>500</td>
+<td>400</td>
+</tr>
+</tbody>
+</table>
+<p><br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+</p>
+<div style="page-break-after: always;"></div>
+</section>
+<section id="analysis-in-r" class="level3" data-number="5.1.4">
+<h3 data-number="5.1.4" class="anchored" data-anchor-id="analysis-in-r"><span class="header-section-number">5.1.4</span> Analysis in R</h3>
+<p>We’ll still need to set up a design, using the <code>svydesign</code> function. Since we’re still assuming a SRS it will look just like it did before:</p>
+<p><code>design&lt;-svydesign(id=~1, weights=~sampwt, fpc=rep(N,n), data=dataset)</code></p>
+<p>These are the unadjusted sampling weights, just the inverse of the inclusion probability. If we don’t know <span class="math inline">\(N\)</span>, we can set the sampling weights to all be 1 and omit the fpc.</p>
+<p>There’s a new function, <code>svyratio</code>, that will estimate <span class="math inline">\(B\)</span> using <span class="math inline">\(\bar B = \bar y/\bar x\)</span> along with its standard error. It has the syntax:</p>
+<p><code>est_ratio&lt;-svyratio(numerator = ~y, denominator=~x, design=design)</code></p>
+<p>We could also get a confidence interval for the ratio using the <code>confint</code> function. Once we have the estimated ratio, we can use the <code>predict</code> function to get the ratio estimates of <span class="math inline">\(\bar y_{\mathcal{U}}\)</span> and <span class="math inline">\(t\)</span>. We will need to specify <span class="math inline">\(t_x\)</span>, the population total of the <span class="math inline">\(x\)</span>s. We use the syntax:</p>
+<pre><code>    xtotal&lt;-value
+    predict(est_ratio,total=xtotal)
+    predict(est_ratio,total=xtotal/N)</code></pre>
+<p><strong>Example</strong>: Back on Homework 1, you worked with the ‘counties’ data that includes information on land area, population, number of physicians, and other characteristics for a SRS of 100 counties (out of the 3141 counties) in the US. The data was collected in 1993 and at that time the total land area was 3536278 square miles and total population was 255077536.</p>
+<p>Let’s start by considering the characteristic of interest <span class="math inline">\(y =\)</span> number of physicians and use <span class="math inline">\(x =\)</span> population as an auxiliary variable.</p>
+<p>We’ll start by looking at the SRS estimate so we can compare.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>counties<span class="ot">&lt;-</span><span class="fu">read.csv</span>(<span class="st">"counties.csv"</span>,<span class="at">header=</span><span class="cn">TRUE</span>)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>N<span class="ot">&lt;-</span><span class="dv">3141</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>n<span class="ot">&lt;-</span><span class="fu">nrow</span>(counties)</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>counties<span class="sc">$</span>sampwt<span class="ot">&lt;-</span><span class="fu">rep</span>(N<span class="sc">/</span>n,n)</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(survey)</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>countiesdesign<span class="ot">&lt;-</span><span class="fu">svydesign</span>(<span class="at">id=</span><span class="sc">~</span><span class="dv">1</span>, <span class="at">weights=</span><span class="sc">~</span>sampwt, <span class="at">fpc=</span><span class="fu">rep</span>(N,n), <span class="at">data=</span>counties)</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="co">#SRS estimate#</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>totphys<span class="ot">&lt;-</span><span class="fu">svytotal</span>(<span class="sc">~</span>physician,countiesdesign)</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>totphys</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>           total     SE
+physician 933411 491983</code></pre>
+</div>
+</div>
+<p>Now we can add our auxiliary variable. We’ll first check the correlation between <span class="math inline">\(y\)</span> and <span class="math inline">\(x\)</span>:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cor</span>(counties<span class="sc">$</span>physician, counties<span class="sc">$</span>totpop)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.9771175</code></pre>
+</div>
+</div>
+<p>This is high! Population should be a good auxiliary variable. We’ll estimate the ratio</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>Bhatphys<span class="ot">&lt;-</span><span class="fu">svyratio</span>(<span class="at">numerator=</span><span class="sc">~</span>physician,<span class="at">denominator=</span><span class="sc">~</span>totpop,<span class="at">design=</span>countiesdesign)</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>Bhatphys</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Ratio estimator: svyratio.survey.design2(numerator = ~physician, denominator = ~totpop, 
+    design = countiesdesign)
+Ratios=
+               totpop
+physician 0.002507104
+SEs=
+                totpop
+physician 0.0003445433</code></pre>
+</div>
+</div>
+<p>and use that to estimate the total number of physicians (<span class="math inline">\(\hat t_y\)</span>)</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>xtotal<span class="ot">&lt;-</span><span class="dv">255077536</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="fu">predict</span>(Bhatphys,<span class="at">total=</span>xtotal)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>$total
+          totpop
+physician 639506
+
+$se
+            totpop
+physician 87885.27</code></pre>
+</div>
+</div>
+<p>Look at the reduction in the SE!</p>
+<div style="page-break-after: always;"></div>
+<p>Now let’s consider the characteristic of interest <span class="math inline">\(y =\)</span> farm population and use <span class="math inline">\(x =\)</span> land area as an auxiliary variable. Again, we’ll start with the SRS estimate.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>totfarmpop<span class="ot">&lt;-</span><span class="fu">svytotal</span>(<span class="sc">~</span>farmpop,countiesdesign)</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>totfarmpop</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>          total     SE
+farmpop 3602319 329787</code></pre>
+</div>
+</div>
+<p>We’ll compare it to the ratio estimate.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>Bhatfarmpop<span class="ot">&lt;-</span><span class="fu">svyratio</span>(<span class="at">numerator=</span><span class="sc">~</span>farmpop,<span class="at">denominator=</span><span class="sc">~</span>landarea,<span class="at">design=</span>countiesdesign)</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>Bhatfarmpop</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Ratio estimator: svyratio.survey.design2(numerator = ~farmpop, denominator = ~landarea, 
+    design = countiesdesign)
+Ratios=
+        landarea
+farmpop 1.213722
+SEs=
+         landarea
+farmpop 0.1891048</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>landtotal<span class="ot">&lt;-</span><span class="dv">3536278</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="fu">predict</span>(Bhatfarmpop,<span class="at">total=</span>landtotal)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>$total
+        landarea
+farmpop  4292058
+
+$se
+        landarea
+farmpop 668727.3</code></pre>
+</div>
+</div>
+<p>The SE more than doubled! What’s going on?</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cor</span>(counties<span class="sc">$</span>farmpop,counties<span class="sc">$</span>landarea)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] -0.05811006</code></pre>
+</div>
+</div>
+<p><br>
+</p>
+</section>
+</section>
+<section id="regression-estimation" class="level2" data-number="5.2">
+<h2 data-number="5.2" class="anchored" data-anchor-id="regression-estimation"><span class="header-section-number">5.2</span> Regression Estimation</h2>
+<p>With ratio estimation, we assumed a proportional relationship between our characteristic of interest <span class="math inline">\(y\)</span> and an auxiliary variable <span class="math inline">\(x\)</span>:</p>
+<p><br>
+<br>
+<br>
+</p>
+<p>In the last section, we noted that assuming this relationship is equivalent to regression through the origin. Sometimes the relationship between <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span>, even if strong, is not well represented by this assumption. Instead, perhaps a straight line with an intercept is a better depiction of the relationship:</p>
+<p><br>
+<br>
+<br>
+</p>
+<p><strong>Example</strong>: Suppose we want to estimate total yield of a crop in a field with <span class="math inline">\(N=100\)</span> plots. We randomly select <span class="math inline">\(n=4\)</span> plots using a SRS and in each plot we measure <span class="math inline">\(y_i=\)</span> yield. Also available is the amount of fertilizer applied to the plot. This information is available on all 100 plots.</p>
+<p><br>
+<br>
+<br>
+<br>
+</p>
+<p>The new estimator we’ll use is called a <strong>regression</strong> estimator, and we’ll focus on estimating <span class="math inline">\(\bar y_{\mathcal{U}}\)</span>. From <span class="math inline">\(\bar y_{\mathcal{U}}\)</span>, we can extend to estimating <span class="math inline">\(t_{y}\)</span>. Estimating <span class="math inline">\(\bar y_{\mathcal{U}}\)</span> turns out to be a pretty simple operation.</p>
+<p><br>
+<br>
+<br>
+<br>
+<br>
+</p>
+<p>Assume the relationship between <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span> follows</p>
+<p><br>
+<br>
+<br>
+<br>
+<br>
+</p>
+<div style="page-break-after: always;"></div>
+<p>Let <span class="math inline">\(\hat B_0\)</span> and <span class="math inline">\(\hat B_1\)</span> be the usual ordinary least squares estimates of the intercept and slope (the typical regression estimators):</p>
+<p><br>
+<br>
+<br>
+<br>
+<br>
+<br>
+</p>
+<p>Before, with the ratio estimator</p>
+<p><br>
+<br>
+<br>
+<br>
+<br>
+</p>
+<p>Now,</p>
+<p><br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+</p>
+<p>Again, the resulting regression estimator is an adjustment to the basic SRS estimator, and the adjustment is serving the same purpose it did with the ratio estimator.</p>
+<p><br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+</p>
+<div style="page-break-after: always;"></div>
+<p>Like the ratio estimator, the regression estimator is biased. But wait? Aren’t the OLS estimators unbiased? What’s going on?</p>
+<p><br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+</p>
+<p>With the ratio estimator, we showed</p>
+<p><br>
+</p>
+<p>With the regression estimator,</p>
+<p><br>
+</p>
+<p>Like the ratio estimator, the bias in the regression estimator is negligible with large samples.</p>
+<p>Also like the ratio estimator, our estimated variance for <span class="math inline">\(\hat{\bar y}_{reg}\)</span> will be based on the variance of the residuals. But now,</p>
+<p><br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+</p>
+<p>You will sometimes also see the variance estimated using</p>
+<p><br>
+<br>
+<br>
+</p>
+<p>This makes a bigger difference with small samples.</p>
+<div style="page-break-after: always;"></div>
+<p>We can use <span class="math inline">\(\hat{\bar y}_{reg}\)</span> to estimate a population total. Recall that</p>
+<p><br>
+<br>
+</p>
+<p>So, it should be intuitive to use</p>
+<p><br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+</p>
+<p><strong>Example</strong>: Let’s go back to the example we considered at the beginning of this section. We want to estimate total crop yield in a field with <span class="math inline">\(N=100\)</span> plots. We use a SRS to randomly select <span class="math inline">\(n=4\)</span> plots and measure <span class="math inline">\(y_i =\)</span> yield in the plot. We also know <span class="math inline">\(x_i =\)</span> fertilizer applied to the plot. We know that <span class="math inline">\(\bar x_{\mathcal{U}} = 100\)</span>. Here are the data:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 16%">
+</colgroup>
+<thead>
+<tr class="header">
+<th><span class="math inline">\(x_i\)</span></th>
+<th><span class="math inline">\(y_i\)</span></th>
+<th><span class="math inline">\(x_i - \bar x\)</span></th>
+<th><span class="math inline">\(y_i -\bar y\)</span></th>
+<th><span class="math inline">\((x_i-\bar x)(y_i-\bar y)\)</span></th>
+<th><span class="math inline">\((x_i- \bar x)^2\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>50</td>
+<td>1410</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>100</td>
+<td>1690</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>150</td>
+<td>1680</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>200</td>
+<td>1850</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p><br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+</p>
+<div style="page-break-after: always;"></div>
+<p><strong>Example</strong>: The Florida Game and Fish Commission is interested in estimating the average weight of alligators. They plan to use alligator length as an auxiliary variable, because it is much easier to observe. In fact, they’ve already collected so much length data they are confident that <span class="math inline">\(\bar x_{\mathcal{U}} \approx 90\)</span>. They capture and measure <span class="math inline">\(n=22\)</span> alligators and measure the length (inches) and weight (pounds) on each one. The data are in ‘alligator.csv.’ What don’t we have?</p>
+<p><br>
+<br>
+</p>
+<p>We’ll estimate the average alligator weight a few different ways: using summary statistics calculated in R, using the <code>lm</code> function in R to fit the regression, and using the <code>survey</code> package. In the <code>survey</code> package, there is a new function, <code>svyglm</code>. It has the general syntax:</p>
+<pre><code> svyglm(y ~ x, design = design)</code></pre>
+<p>Like with ratio estimation, we can then use the <code>predict</code> function to estimate <span class="math inline">\(\bar y_{\mathcal{U}}\)</span> and <span class="math inline">\(t_y\)</span>.</p>
+<p><strong>Using Summary Statistics</strong>:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>alligator<span class="ot">&lt;-</span><span class="fu">read.csv</span>(<span class="st">"alligator.csv"</span>,<span class="at">header=</span><span class="cn">TRUE</span>)</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(alligator)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  Alligator Length Weight
+1         1     94    130
+2         2     74     51
+3         3     82     80
+4         4     58     28
+5         5     86     80
+6         6     94    110</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>n<span class="ot">&lt;-</span><span class="fu">nrow</span>(alligator)</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a><span class="do">##### Summary Stats ###########</span></span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>xbar<span class="ot">&lt;-</span><span class="fu">mean</span>(alligator<span class="sc">$</span>Length)</span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>xbar</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 78.86364</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>ybar<span class="ot">&lt;-</span><span class="fu">mean</span>(alligator<span class="sc">$</span>Weight)</span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>ybar</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 68.27273</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>varx<span class="ot">&lt;-</span><span class="fu">var</span>(alligator<span class="sc">$</span>Length)</span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>varx</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 117.3615</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>vary<span class="ot">&lt;-</span><span class="fu">var</span>(alligator<span class="sc">$</span>Weight)</span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>vary</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 819.8268</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>corrxy<span class="ot">&lt;-</span><span class="fu">cor</span>(alligator<span class="sc">$</span>Length,alligator<span class="sc">$</span>Weight)</span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>corrxy</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.9180046</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>bhat1<span class="ot">&lt;-</span>corrxy<span class="sc">*</span><span class="fu">sqrt</span>(vary)<span class="sc">/</span><span class="fu">sqrt</span>(varx)</span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>bhat0<span class="ot">&lt;-</span>ybar<span class="sc">-</span>bhat1<span class="sc">*</span>xbar</span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>bhat1</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 2.426292</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>bhat0</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] -123.0735</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>xbarU<span class="ot">&lt;-</span><span class="dv">90</span></span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a>ybarhatreg<span class="ot">&lt;-</span>ybar<span class="sc">+</span>bhat1<span class="sc">*</span>(xbarU<span class="sc">-</span>xbar)</span>
+<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a>ybarhatreg</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 95.2928</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>alligator<span class="sc">$</span>resid<span class="ot">&lt;-</span>alligator<span class="sc">$</span>Weight <span class="sc">-</span> (bhat0<span class="sc">+</span>bhat1<span class="sc">*</span>alligator<span class="sc">$</span>Length)</span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>s2e<span class="ot">&lt;-</span><span class="fu">sum</span>(alligator<span class="sc">$</span>resid<span class="sc">**</span><span class="dv">2</span>)<span class="sc">/</span>(n<span class="dv">-1</span>)</span>
+<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a>s2e</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 128.9322</code></pre>
+</div>
+</div>
+<div style="page-break-after: always;"></div>
+<p><strong>Using the <code>lm</code> function in R</strong>: We can fit the regression model directly in R</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>alreg<span class="ot">&lt;-</span><span class="fu">lm</span>(Weight<span class="sc">~</span>Length,<span class="at">data=</span>alligator)</span>
+<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a>alreg</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = Weight ~ Length, data = alligator)
+
+Coefficients:
+(Intercept)       Length  
+   -123.074        2.426  </code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(alreg)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Analysis of Variance Table
+
+Response: Weight
+          Df  Sum Sq Mean Sq F value    Pr(&gt;F)    
+Length     1 14508.8 14508.8  107.17 1.762e-09 ***
+Residuals 20  2707.6   135.4                      
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
+</div>
+</div>
+<div style="page-break-after: always;"></div>
+<p><strong>Using the <code>survey</code> package</strong>:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(survey)</span>
+<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a>aldesign<span class="ot">&lt;-</span><span class="fu">svydesign</span>(<span class="at">id=</span><span class="sc">~</span><span class="dv">1</span>, <span class="at">weights=</span><span class="sc">~</span><span class="dv">1</span>, <span class="at">data=</span>alligator)</span>
+<span id="cb43-3"><a href="#cb43-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-4"><a href="#cb43-4" aria-hidden="true" tabindex="-1"></a>alreg2<span class="ot">&lt;-</span><span class="fu">svyglm</span>(Weight<span class="sc">~</span>Length,<span class="at">design=</span>aldesign)</span>
+<span id="cb43-5"><a href="#cb43-5" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(alreg2)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+svyglm(formula = Weight ~ Length, design = aldesign)
+
+Survey design:
+svydesign(id = ~1, weights = ~1, data = alligator)
+
+Coefficients:
+             Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept) -123.0735    20.6956  -5.947 8.14e-06 ***
+Length         2.4263     0.2642   9.184 1.30e-08 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+(Dispersion parameter for gaussian family taken to be 128.9322)
+
+Number of Fisher Scoring iterations: 2</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a>xbarU<span class="ot">&lt;-</span><span class="fu">data.frame</span>(<span class="at">Length=</span><span class="dv">90</span>)</span>
+<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-3"><a href="#cb45-3" aria-hidden="true" tabindex="-1"></a><span class="fu">predict</span>(alreg2,xbarU)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>    link     SE
+1 95.293 4.0207</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="fu">confint</span>(<span class="fu">predict</span>(alreg2,xbarU),<span class="at">df=</span>n<span class="dv">-2</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     2.5 %   97.5 %
+1 86.90577 103.6798</code></pre>
+</div>
+</div>
+<div style="page-break-after: always;"></div>
+</section>
+<section id="domain-estimation" class="level2" data-number="5.3">
+<h2 data-number="5.3" class="anchored" data-anchor-id="domain-estimation"><span class="header-section-number">5.3</span> Domain Estimation</h2>
+<p>Sometimes we’re interested in estimating characteristics (means, totals, proportions) for subpopulations. But wait, don’t we already know how to do this? We estimated subpopulation characteristics when we discussed stratified sampling.</p>
+<p>Here’s what is different: now we’re considering the situation where the sampling design did not include stratification. That is,</p>
+<p><br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+</p>
+<p>This is called <strong>domain estimation</strong>, and is a special case of ratio estimation.</p>
+<p><strong>Example</strong>: We are interested in comparing transportation challenges in low-income households with other households. A sampling frame of households is available, but we don’t have information on household income.</p>
+<p><br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+</p>
+<div style="page-break-after: always;"></div>
+<p>Our first inclination might be to use the sample mean for the domain</p>
+<p><br>
+<br>
+</p>
+<p>But, <span class="math inline">\(n_d\)</span> for each domain is not fixed by the design. <span class="math inline">\(n_d\)</span> was unknown prior to drawing the sample. This means the denominator is a random variable.</p>
+<p>Instead, we’ll use ratio estimation (with some new variables <span class="math inline">\(u_i\)</span> and <span class="math inline">\(x_i\)</span>) to estimate domain means, totals, and proportions.</p>
+<p>Let’s set up the framework for domain estimation, and some new notation. We’ll divide the population into <span class="math inline">\(D\)</span> mutually exclusive and exhaustive domains.</p>
+<p><br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+</p>
+<p>We’ll denote our domain sizes as</p>
+<p><br>
+<br>
+<br>
+</p>
+<p>After collecting data, we can observe/calculate the number of sampling units in each domain.</p>
+<p><br>
+<br>
+<br>
+</p>
+<p>In domain estimation:</p>
+<ul>
+<li><p><br>
+</p></li>
+<li><p><br>
+</p></li>
+<li><p><br>
+</p></li>
+</ul>
+<div style="page-break-after: always;"></div>
+<p>We can contrast this with what we do know:</p>
+<ul>
+<li><p><br>
+</p></li>
+<li><p><br>
+</p></li>
+</ul>
+<p>So, of course we have some new notation:</p>
+<ul>
+<li><p><span class="math inline">\(\mathcal{U}_d=\)</span><br>
+</p></li>
+<li><p><span class="math inline">\(\mathcal{S}_d=\)</span><br>
+</p></li>
+<li><p><span class="math inline">\(\bar y_{\mathcal{U}_d} =\)</span><br>
+</p></li>
+<li><p><span class="math inline">\(t_{\mathcal{U}_d} =\)</span><br>
+</p></li>
+</ul>
+<p>These are population values, and <span class="math inline">\(i \in \mathcal{U}_d\)</span> means</p>
+<p><br>
+<br>
+<br>
+<br>
+<br>
+<br>
+</p>
+<p><strong>Example</strong>: (book problem #4) A SRS of <span class="math inline">\(n=1500\)</span> licensed boat owners was sampled from a list of <span class="math inline">\(N=400,000\)</span> names of currently licensed boat owners. There are two domains of interest: owners of large motorboats (over 16 feet) and boat owners who own something other than a large motorboat. After collecting data, the researchers observed they had sampled <span class="math inline">\(n_1 = 472\)</span> owners in domain 1 and <span class="math inline">\(n_2=1028\)</span> owners in domain 2. The boat owners were asked to report <span class="math inline">\(y_i =\)</span> how many children they have. We want to estimate:</p>
+<ul>
+<li><p>the mean number of children for boat owners in domain 1<br>
+</p></li>
+<li><p>the total number of children for large boat owners<br>
+</p></li>
+</ul>
+<p>Now, the population domain mean is</p>
+<p><br>
+<br>
+</p>
+<div style="page-break-after: always;"></div>
+<p>We’re going to need some new variables. The first one really isn’t new. We’re going to construct our denominator using</p>
+<p><br>
+<br>
+<br>
+</p>
+<p>We can still think of this as an auxiliary variable!</p>
+<p>So, for domain 1 in our example:</p>
+<p><br>
+<br>
+<br>
+</p>
+<p>For our numerator, we’ll define</p>
+<p><br>
+<br>
+<br>
+<br>
+</p>
+<p>In our example,</p>
+<p><br>
+<br>
+<br>
+</p>
+<p>So, our population ratio is now</p>
+<p><br>
+<br>
+<br>
+<br>
+</p>
+<p>and our ratio estimator for <span class="math inline">\(\bar y_{\mathcal{U}_d}\)</span> is</p>
+<p><br>
+<br>
+<br>
+<br>
+</p>
+<div style="page-break-after: always;"></div>
+<p><strong>Example</strong>: So, to summarize <span class="math inline">\(y_i\)</span>, <span class="math inline">\(u_i\)</span>, and <span class="math inline">\(x_i\)</span> in our example:</p>
+<p><br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+</p>
+<p>So, an excerpt of the full data set might look something like this:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Owner</th>
+<th>Domain</th>
+<th>Num. Kids (<span class="math inline">\(y_i\)</span>)</th>
+<th>Numerator (<span class="math inline">\(u_i\)</span>)</th>
+<th>Denominator (<span class="math inline">\(x_i\)</span>)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td>1</td>
+<td>3</td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td>1</td>
+<td>2</td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>3</td>
+<td>2</td>
+<td>5</td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>4</td>
+<td>1</td>
+<td>0</td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>5</td>
+<td>2</td>
+<td>0</td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>6</td>
+<td>2</td>
+<td>1</td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>7</td>
+<td>1</td>
+<td>1</td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>8</td>
+<td>2</td>
+<td>2</td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(\vdots\)</span></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>If we focus on Domain 1 (large motorboats), we can summarize the data as follows:</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th><span class="math inline">\(y_i\)</span></th>
+<th>Num. Respondents</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>0</td>
+<td>1104</td>
+</tr>
+<tr class="even">
+<td>1</td>
+<td>139</td>
+</tr>
+<tr class="odd">
+<td>2</td>
+<td>166</td>
+</tr>
+<tr class="even">
+<td>3</td>
+<td>63</td>
+</tr>
+<tr class="odd">
+<td>4</td>
+<td>19</td>
+</tr>
+<tr class="even">
+<td>5</td>
+<td>5</td>
+</tr>
+<tr class="odd">
+<td>6</td>
+<td>3</td>
+</tr>
+<tr class="even">
+<td>8</td>
+<td>1</td>
+</tr>
+<tr class="odd">
+<td>Total</td>
+<td>1500</td>
+</tr>
+</tbody>
+</table>
+<div style="page-break-after: always;"></div>
+<p>So, <span class="math display">\[
+\bar u =  \hspace{150mm}
+\]</span></p>
+<p>and</p>
+<p><span class="math display">\[
+\bar x =  \hspace{150mm}
+\]</span></p>
+<p>Then,</p>
+<p><br>
+<br>
+<br>
+</p>
+<p>We do still need to figure out the estimated variance!</p>
+<p>When we initially talked about ratio estimation, we noted that</p>
+<p><br>
+<br>
+<br>
+</p>
+<p>So now,</p>
+<p><br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+</p>
+<p>If <span class="math inline">\(n_d\)</span> and <span class="math inline">\(n\)</span> are large then <span class="math inline">\(n_d - 1 \approx n_d\)</span> and <span class="math inline">\(n \approx n-1\)</span>, so</p>
+<div style="page-break-after: always;"></div>
+<p><strong>Example</strong>:</p>
+<p><br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+</p>
+<p>Suppose instead we are interested in estimating the total for a domain:</p>
+<p>There are two possibilities:</p>
+<ol type="1">
+<li><span class="math inline">\(N_d\)</span> is known</li>
+</ol>
+<p><br>
+<br>
+<br>
+</p>
+<ol start="2" type="1">
+<li><span class="math inline">\(N_d\)</span> is unknown</li>
+</ol>
+<p><br>
+<br>
+<br>
+<br>
+<br>
+</p>
+<div style="page-break-after: always;"></div>
+<p><strong>Example</strong>: We don’t know the total number of boat owners that fall into Domain 1.</p>
+<p><br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+We can construct confidence intervals for domain estimates</p>
+<p><br>
+<br>
+<br>
+</p>
+<p>We can also compare domains using hypothesis testing!</p>
+<p><br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+</p>
+<div style="page-break-after: always;"></div>
+<p>We can use R to carry out domain estimation. It’s easiest to use the <code>subset</code> or <code>svyby</code> functions in the <code>survey</code> package to do so. If we’ve already set up our design using <code>svydesign</code> we can use the <code>subset</code> function to redefine the design for the domain of interest. The generic syntax is</p>
+<pre><code>newdesign&lt;-subset(design,domain)</code></pre>
+<p>Let’s check our boats estimates in R. The first thing we need to do is get the data ready for analysis.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb50"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a>boats <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb50-2"><a href="#cb50-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">numkids=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">5</span>,<span class="dv">6</span>,<span class="dv">8</span>),</span>
+<span id="cb50-3"><a href="#cb50-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">dom1=</span><span class="fu">c</span>(<span class="dv">76</span>,<span class="dv">139</span>,<span class="dv">166</span>,<span class="dv">63</span>,<span class="dv">19</span>,<span class="dv">5</span>,<span class="dv">3</span>,<span class="dv">1</span>),</span>
+<span id="cb50-4"><a href="#cb50-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">dom2=</span><span class="fu">c</span>(<span class="dv">528</span>,<span class="dv">189</span>,<span class="dv">225</span>,<span class="dv">76</span>,<span class="dv">8</span>,<span class="dv">2</span>,<span class="dv">0</span>,<span class="dv">0</span>))</span>
+<span id="cb50-5"><a href="#cb50-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb50-6"><a href="#cb50-6" aria-hidden="true" tabindex="-1"></a>boats</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  numkids dom1 dom2
+1       0   76  528
+2       1  139  189
+3       2  166  225
+4       3   63   76
+5       4   19    8
+6       5    5    2
+7       6    3    0
+8       8    1    0</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb52"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a>boatdom1<span class="ot">&lt;-</span>boats[<span class="fu">rep</span>(<span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(boats),<span class="at">times=</span>boats<span class="sc">$</span>dom1),]</span>
+<span id="cb52-2"><a href="#cb52-2" aria-hidden="true" tabindex="-1"></a>boatdom1<span class="sc">$</span>dom<span class="ot">&lt;-</span><span class="dv">1</span></span>
+<span id="cb52-3"><a href="#cb52-3" aria-hidden="true" tabindex="-1"></a>boatdom2<span class="ot">&lt;-</span>boats[<span class="fu">rep</span>(<span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(boats),<span class="at">times=</span>boats<span class="sc">$</span>dom2),]</span>
+<span id="cb52-4"><a href="#cb52-4" aria-hidden="true" tabindex="-1"></a>boatdom2<span class="sc">$</span>dom<span class="ot">&lt;-</span><span class="dv">2</span></span>
+<span id="cb52-5"><a href="#cb52-5" aria-hidden="true" tabindex="-1"></a>boatdf<span class="ot">&lt;-</span><span class="fu">rbind</span>(boatdom1,boatdom2)</span>
+<span id="cb52-6"><a href="#cb52-6" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(boatdf)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1500    4</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb54"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(boatdf)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>    numkids dom1 dom2 dom
+1         0   76  528   1
+1.1       0   76  528   1
+1.2       0   76  528   1
+1.3       0   76  528   1
+1.4       0   76  528   1
+1.5       0   76  528   1</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb56"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a>N<span class="ot">&lt;-</span><span class="dv">400000</span></span>
+<span id="cb56-2"><a href="#cb56-2" aria-hidden="true" tabindex="-1"></a>n<span class="ot">&lt;-</span><span class="fu">nrow</span>(boatdf)</span>
+<span id="cb56-3"><a href="#cb56-3" aria-hidden="true" tabindex="-1"></a>boatdf<span class="sc">$</span>sampwt<span class="ot">&lt;-</span>N<span class="sc">/</span>n</span>
+<span id="cb56-4"><a href="#cb56-4" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(boatdf)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>    numkids dom1 dom2 dom   sampwt
+1         0   76  528   1 266.6667
+1.1       0   76  528   1 266.6667
+1.2       0   76  528   1 266.6667
+1.3       0   76  528   1 266.6667
+1.4       0   76  528   1 266.6667
+1.5       0   76  528   1 266.6667</code></pre>
+</div>
+</div>
+<p>Now we can find the estimates:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb58"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb58-1"><a href="#cb58-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(survey)</span>
+<span id="cb58-2"><a href="#cb58-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb58-3"><a href="#cb58-3" aria-hidden="true" tabindex="-1"></a>boatdesign<span class="ot">&lt;-</span><span class="fu">svydesign</span>(<span class="at">id=</span><span class="sc">~</span><span class="dv">1</span>,<span class="at">weights=</span><span class="sc">~</span>sampwt,<span class="at">fpc=</span><span class="fu">rep</span>(N,n),<span class="at">data=</span>boatdf)</span>
+<span id="cb58-4"><a href="#cb58-4" aria-hidden="true" tabindex="-1"></a>dlarge<span class="ot">&lt;-</span><span class="fu">subset</span>(boatdesign,dom<span class="sc">==</span><span class="st">'1'</span>)</span>
+<span id="cb58-5"><a href="#cb58-5" aria-hidden="true" tabindex="-1"></a>smean1<span class="ot">&lt;-</span><span class="fu">svymean</span>(<span class="sc">~</span>numkids,<span class="at">design=</span>dlarge)</span>
+<span id="cb58-6"><a href="#cb58-6" aria-hidden="true" tabindex="-1"></a>smean1</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>          mean     SE
+numkids 1.6674 0.0543</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb60"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb60-1"><a href="#cb60-1" aria-hidden="true" tabindex="-1"></a>stot1<span class="ot">&lt;-</span><span class="fu">svytotal</span>(<span class="sc">~</span>numkids,dlarge)</span>
+<span id="cb60-2"><a href="#cb60-2" aria-hidden="true" tabindex="-1"></a>stot1</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>         total    SE
+numkids 209867 10510</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb62"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb62-1"><a href="#cb62-1" aria-hidden="true" tabindex="-1"></a>bothmean<span class="ot">&lt;-</span><span class="fu">svyby</span>(<span class="sc">~</span>numkids,<span class="at">by=</span><span class="sc">~</span><span class="fu">factor</span>(dom),<span class="at">design=</span>boatdesign,svymean)</span>
+<span id="cb62-2"><a href="#cb62-2" aria-hidden="true" tabindex="-1"></a>bothmean</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  factor(dom)   numkids         se
+1           1 1.6673729 0.05429457
+2           2 0.8842412 0.03289729</code></pre>
+</div>
+</div>
+</section>
+<section id="poststratification" class="level2" data-number="5.4">
+<h2 data-number="5.4" class="anchored" data-anchor-id="poststratification"><span class="header-section-number">5.4</span> Poststratification</h2>
+<p>We mentioned <strong>poststratification</strong> earlier as a reason we might want to use ratio estimation, as it allows us to adjust for demographics or similar. How is it different from stratification?</p>
+<p><br>
+<br>
+<br>
+<br>
+<br>
+</p>
+<p>In the study process, poststratification fits in like this:</p>
+<p><strong>Before the study</strong>: Information is either not available on poststrata membership, or it’s not used in designing the study. Information is available on poststrata sizes (<span class="math inline">\(N_h\)</span>) and these values are fixed.</p>
+<p><strong>During the study</strong>: Obtain information on poststrata membership, along with other responses.</p>
+<p><strong>After the study</strong>: Data includes poststrata membership and responses for each sampling unit. Researcher has <span class="math inline">\(n_h\)</span>, which are random. Can now estimate poststratum sample means (totals) and pool them for an overall population estimate based on poststratification weights.</p>
+<p>Here’s the set up</p>
+<p><br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+</p>
+<p>The estimation process is basically the same as domain estimation, but now <span class="math inline">\(N_1,\dots, N_h\)</span> are known and the values can be used in estimation. So, for example,</p>
+<p><br>
+<br>
+</p>
+<div style="page-break-after: always;"></div>
+<p>Define</p>
+<p><br>
+<br>
+<br>
+</p>
+<p>In ratio estimation, weights were calibrated to add to <span class="math inline">\(t_x\)</span> (we saw this with the small fish/nets examples). Now,</p>
+<p><br>
+<br>
+<br>
+<br>
+</p>
+<p>So we can get ratio estimates for the poststrata totals (means)</p>
+<p><br>
+<br>
+<br>
+<br>
+<br>
+</p>
+<p>and then pool across them just like we did in stratified sampling</p>
+<p><br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+</p>
+<p>Remember that stratification was not built into the sampling design, so if an SRS was used as the design and <span class="math inline">\(n_h\)</span> (and thus <span class="math inline">\(n\)</span>) is pretty large, we can use the variance from proportional allocation:</p>
+<p><br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+</p>
+<div style="page-break-after: always;"></div>
+<p>Often, you’ll hear pollsters talk about weighting the data. What they are doing is using poststratification weights. As mentioned above, poststratification modifies the sampling weights to they sum to <span class="math inline">\(N_h\)</span> in poststratum <span class="math inline">\(h\)</span>. Remember that in an SRS,</p>
+<p><br>
+<br>
+</p>
+<p>and in stratified</p>
+<p><br>
+<br>
+</p>
+<p>Now, based on the way we’ve defined <span class="math inline">\(x_{ih}=\)</span></p>
+<p><br>
+<br>
+<br>
+<br>
+<br>
+<br>
+</p>
+<p>So we can write our poststratification population estimates the same way we did with simple random samples back in Chapter 3:</p>
+<p><br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+</p>
+<div style="page-break-after: always;"></div>
+<p><strong>Example</strong>: Let’s revisit the faculty publication data we used back in Chapter 4, and suppose that the data were collected as a SRS. The researchers knew how many faculty fell into each discipline class, but only had faculty names and emails available for the sampling frame. They drew a random sample of <span class="math inline">\(n=50\)</span> faculty members from the <span class="math inline">\(N=807\)</span> and asked them about both their discipline and the number of publications they had in the last year.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 13%">
+<col style="width: 9%">
+<col style="width: 8%">
+<col style="width: 13%">
+<col style="width: 13%">
+<col style="width: 13%">
+<col style="width: 13%">
+<col style="width: 13%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Stratum</th>
+<th><span class="math inline">\(N_h\)</span></th>
+<th><span class="math inline">\(n_h\)</span></th>
+<th><span class="math inline">\(\hat N_h\)</span></th>
+<th><span class="math inline">\(w_i\)</span></th>
+<th><span class="math inline">\(w_i^*=\frac{N_h}{\hat N_h}w_i\)</span></th>
+<th><span class="math inline">\(\bar y_h\)</span></th>
+<th><span class="math inline">\(s_h^2\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Bio Sci</td>
+<td>102</td>
+<td>7</td>
+<td></td>
+<td></td>
+<td></td>
+<td>3.14</td>
+<td>6.81</td>
+</tr>
+<tr class="even">
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>Phy Sci</td>
+<td>310</td>
+<td>19</td>
+<td></td>
+<td></td>
+<td></td>
+<td>2.105</td>
+<td>8.21</td>
+</tr>
+<tr class="even">
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>Soc Sci</td>
+<td>217</td>
+<td>13</td>
+<td></td>
+<td></td>
+<td></td>
+<td>1.231</td>
+<td>4.359</td>
+</tr>
+<tr class="even">
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>Humanities</td>
+<td>178</td>
+<td>11</td>
+<td></td>
+<td></td>
+<td></td>
+<td>0.4545</td>
+<td>0.8727</td>
+</tr>
+<tr class="even">
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>Total</td>
+<td>807</td>
+<td>50</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p><br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+</p>
+<div style="page-break-after: always;"></div>
+<p>I set up the data as we did in Chapter 4. We can check our work use the <code>postStratify</code> function in the <code>survey</code> package. We set up the design in <code>svydesign</code> assuming a SRS:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb64"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb64-1"><a href="#cb64-1" aria-hidden="true" tabindex="-1"></a>N<span class="ot">&lt;-</span><span class="dv">807</span></span>
+<span id="cb64-2"><a href="#cb64-2" aria-hidden="true" tabindex="-1"></a>n<span class="ot">&lt;-</span><span class="fu">nrow</span>(pubsdf)</span>
+<span id="cb64-3"><a href="#cb64-3" aria-hidden="true" tabindex="-1"></a>pubsdesign<span class="ot">&lt;-</span><span class="fu">svydesign</span>(<span class="at">id=</span><span class="sc">~</span><span class="dv">1</span>,<span class="at">weights=</span><span class="fu">rep</span>(N<span class="sc">/</span>n,n),<span class="at">fpc=</span><span class="fu">rep</span>(N,n),<span class="at">data=</span>pubsdf)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>and then tell R the size of each poststratum:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb65"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb65-1"><a href="#cb65-1" aria-hidden="true" tabindex="-1"></a>pop.disc<span class="ot">&lt;-</span><span class="fu">data.frame</span>(<span class="at">discipline=</span><span class="fu">c</span>(<span class="st">"Biological"</span>,<span class="st">"Physical"</span>,<span class="st">"Social"</span>,<span class="st">"Humanities"</span>),</span>
+<span id="cb65-2"><a href="#cb65-2" aria-hidden="true" tabindex="-1"></a>                  <span class="at">Freq=</span><span class="fu">c</span>(<span class="dv">102</span>,<span class="dv">310</span>,<span class="dv">217</span>,<span class="dv">178</span>))</span>
+<span id="cb65-3"><a href="#cb65-3" aria-hidden="true" tabindex="-1"></a>pop.disc</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  discipline Freq
+1 Biological  102
+2   Physical  310
+3     Social  217
+4 Humanities  178</code></pre>
+</div>
+</div>
+<p>We can use <code>postStratify</code> to set up the poststratification weights.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb67"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb67-1"><a href="#cb67-1" aria-hidden="true" tabindex="-1"></a>pubsdesps<span class="ot">&lt;-</span><span class="fu">postStratify</span>(pubsdesign,<span class="sc">~</span>discipline,pop.disc)</span>
+<span id="cb67-2"><a href="#cb67-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(pubsdesps)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Independent Sampling design
+postStratify(pubsdesign, ~discipline, pop.disc)
+Probabilities:
+   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+0.05991 0.06025 0.06129 0.06207 0.06180 0.06863 
+Population size (PSUs): 807 
+Data variables:
+[1] "discipline" "pubs"       "Nh"         "samp"      </code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb69"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb69-1"><a href="#cb69-1" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span><span class="sc">/</span><span class="fu">unique</span>(pubsdesps<span class="sc">$</span>prob)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 14.57143 16.31579 16.69231 16.18182</code></pre>
+</div>
+</div>
+<div style="page-break-after: always;"></div>
+<p>Then once those weights are set up, we can use <code>svymean</code> and <code>svytotal</code> just like before</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb71"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb71-1"><a href="#cb71-1" aria-hidden="true" tabindex="-1"></a><span class="fu">svymean</span>(<span class="sc">~</span>pubs,pubsdesps)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>       mean     SE
+pubs 1.6372 0.3088</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb73"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb73-1"><a href="#cb73-1" aria-hidden="true" tabindex="-1"></a><span class="fu">svytotal</span>(<span class="sc">~</span>pubs,pubsdesps)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>      total    SE
+pubs 1321.2 249.2</code></pre>
+</div>
+</div>
+<p>We can compare these to the SRS estimates</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb75"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb75-1"><a href="#cb75-1" aria-hidden="true" tabindex="-1"></a><span class="fu">svymean</span>(<span class="sc">~</span>pubs,pubsdesign)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     mean     SE
+pubs 1.66 0.3316</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb77"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb77-1"><a href="#cb77-1" aria-hidden="true" tabindex="-1"></a><span class="fu">svytotal</span>(<span class="sc">~</span>pubs,pubsdesign)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>      total     SE
+pubs 1339.6 267.61</code></pre>
+</div>
+</div>
+</section>
+<section id="ratio-estimation-with-stratified-sampling" class="level2" data-number="5.5">
+<h2 data-number="5.5" class="anchored" data-anchor-id="ratio-estimation-with-stratified-sampling"><span class="header-section-number">5.5</span> Ratio Estimation with Stratified Sampling</h2>
+<p>Everything we’ve done so far with ratio and regression estimations assumed the sampling design was SRS. But, these concepts can be applied to any sampling design, including stratified sampling. We just have to set up the design to include the stratification.</p>
+<p><strong>Example</strong>: On Homework 4, you used the auxiliary variable of <span class="math inline">\(x_i =\)</span> number of acres devoted to farming in 1987 along with the response <span class="math inline">\(y_i =\)</span> number of acres devoted to farming in 1992. There’s another version of this data set (<code>agstrat</code>) on Dr.&nbsp;Lohr’s website that includes a stratification variable: region (North Central, Northeast, South, and West). The manual on using R to carry out these analyses linked in Canvas shows example code implementing ratio estimation with stratification using this data set.</p>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./Section-4-Stratified.html" class="pagination-link" aria-label="Stratified Sampling">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Stratified Sampling</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
