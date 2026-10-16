@@ -1201,7 +1201,7 @@ window.Quarto = {
 <p>We’ll still need to set up a design, using the <code>svydesign</code> function. Since we’re still assuming a SRS it will look just like it did before:</p>
 <p><code>design&lt;-svydesign(id=~1, weights=~sampwt, fpc=rep(N,n), data=dataset)</code></p>
 <p>These are the unadjusted sampling weights, just the inverse of the inclusion probability. If we don’t know <span class="math inline">\(N\)</span>, we can set the sampling weights to all be 1 and omit the fpc.</p>
-<p>There’s a new function, <code>svyratio</code>, that will estimate <span class="math inline">\(B\)</span> using <span class="math inline">\(\bar B = \bar y/\bar x\)</span> along with its standard error. It has the syntax:</p>
+<p>There’s a new function, <code>svyratio</code>, that will estimate <span class="math inline">\(B\)</span> using <span class="math inline">\(\hat B = \bar y/\bar x\)</span> along with its standard error. It has the syntax:</p>
 <p><code>est_ratio&lt;-svyratio(numerator = ~y, denominator=~x, design=design)</code></p>
 <p>We could also get a confidence interval for the ratio using the <code>confint</code> function. Once we have the estimated ratio, we can use the <code>predict</code> function to get the ratio estimates of <span class="math inline">\(\bar y_{\mathcal{U}}\)</span> and <span class="math inline">\(t\)</span>. We will need to specify <span class="math inline">\(t_x\)</span>, the population total of the <span class="math inline">\(x\)</span>s. We use the syntax:</p>
 <pre><code>    xtotal&lt;-value

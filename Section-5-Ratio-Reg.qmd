@@ -646,7 +646,7 @@ We'll still need to set up a design, using the `svydesign` function. Since we're
 
 These are the unadjusted sampling weights, just the inverse of the inclusion probability. If we don't know $N$, we can set the sampling weights to all be 1 and omit the fpc.
 
-There's a new function, `svyratio`, that will estimate $B$ using $\bar B = \bar y/\bar x$ along with its standard error. It has the syntax:
+There's a new function, `svyratio`, that will estimate $B$ using $\hat B = \bar y/\bar x$ along with its standard error. It has the syntax:
 
 `est_ratio<-svyratio(numerator = ~y, denominator=~x, design=design)`
 
