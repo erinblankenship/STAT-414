@@ -1,0 +1,41 @@
+---
+project:
+  output-dir: docs
+  
+format: 
+  html: default
+  pdf:   
+    header-includes:
+        - \usepackage{float}
+        - \floatplacement{table}{H}  
+    fontsize: 11pt
+    geometry: 
+      - top=20mm
+      - left=15mm
+      - right=10mm
+---
+
+# Homework 4
+
+Individual assignments due in Canvas on Thursday, 29 October
+
+Group collaborative key due on Thursday, 5 November
+
+For all problems, use R as a calculator without using the `survey` package. Show work to indicate you could calculate estimates and standard errors by hand given summary statistics.
+
+1.  Book problem #3 from Chapter 4, parts (a) and (b) (no SE, just mean tree age)
+
+2.  (adapted from book problem #10, number of farms) On Problem #4 of Homework 3, you estimated the mean number of acres devoted to farming in 1987 assuming both SRS and stratification and compared the estimates and SEs. In 1987, there were a total of 2,087,759 farms.
+
+    a.  Using the `agsrs.csv` data set, implement ratio estimation to estimate the mean number of acres devoted to farming in 1987, using the number of farms in 1987 as the auxiliary variable.
+    
+    b.  Compare your estimate to those from Homework 3. Without calculating SE for the ratio estimator, do you think it will be smaller, larger, or about the same as the SRS SE from Homework 3. What is your reasoning?
+
+3.  Book problem #11 from Chapter 4, parts (a) and (b) (no confidence interval, just total cherry tree volume)
+
+4.  (adapted from problem #13, counties) On Homework 1 and in class we used the `counties.csv` data set. Note that the total population of the US when the data were collected was 255,077,536.
+
+    a.  Estimate the total number of veterans in the US, along with its standard error, using methods from Chapter 2 (SRS).
+    b.  Use ratio estimation to estimate the total number of veterans in the US using population as the auxiliary variable.
+    c.  Without calculating SE for the ratio estimator, do you think it will be smaller, larger, or about the same as the SRS SE from (a)? What is your reasoning?
+

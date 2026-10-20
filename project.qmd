@@ -1,0 +1,106 @@
+---
+project:
+  output-dir: docs
+  
+format: 
+  html: default
+  pdf:   
+    header-includes:
+        - \usepackage{float}
+        - \floatplacement{table}{H}  
+    fontsize: 11pt
+    geometry: 
+      - top=20mm
+      - left=15mm
+      - right=10mm
+---
+
+# Final Project
+
+The purpose of this project is to give you practical experience with the following skills:
+
+- Formulating research questions that can be answered based on available data, analyzing the data, and interpreting the results
+
+- Writing a detailed report (in journal article form) that a non-statistician would also understand
+
+- Presenting your work in way that non-statisticians would understand
+
+- Working in a group in an efficient way where everyone is involved
+
+The MASDER (Motivational Attitudes in Statistics and Data Science Education Research) project is an NSF grant-funded project that aims to investigate trends and attitudes in statistics and data science education. In the data set provided, the MASDER team was addressing overall questions involving how many schools have data science courses and programs and how many schools have statistics courses and programs.
+
+The MASDER team provided details on their sampling design:
+
+- Population of interest: US colleges and universities. They excluded non-US schools, service schools, graduate only schools, schools with a total enrollment under 300, some special focus schools. They built their sampling frame using the US Department of Education College Scorecard Database.
+
+- They used a stratified sample with 8 strata. The strata were based on highest level of degree, selectivity, and minority-serving status:
+
+  - Highest level of degree: **G**raduate, $^*$, **B**achelors, **A**ssociates. $^*$ means Grad and Bach were combined for MSI due to small stratum size. To define this they used basic Carnegie definitions, then predominant degree offered, then highest degree offered
+  - Selectivity: **S**elective (includes selective and highly selective using the college scorecard), **I**nclusive, **X** (Associates)
+  - Minority-serving institution: **M**SI (includes HBCU, HSI, Tribal Colleges), **N**on-MSI
+
+The resulting 8 strata were:
+
+| Strata | Definition | $N_h$ | $n_h$ | Example School |
+|--------|-----------------------|------|------|------------------------|
+| GSN | Grad, Selective, not MSI | 438 | 19 | George Mason University |
+| GIN | Grad, Inclusive, not MSI | 386 | 18 | University of Central Missouri |
+| $^*$SM | Bach/Grad, Selective, MSI | 64 | 12 | University of Illinois - Chicago |
+| $^*$IM | Bach/Grad, Inclusive, MSI | 207 | 12 | Fayetteville State University |
+| BSN | Bach, Selective, not MSI | 232 | 11 | Swarthmore College |
+| BIN | Bach, Inclusive, not MSI | 315 | 16 | Wilmington College |
+| AxM | Associate, All, MSI | 259 | 11 | Las Positas College |
+| AxN | Associate, All, not MSI | 850 | 48 | Des Moines Area Community College |
+|  | Total | 2751 | 147 |  |
+
+You are provided with:
+
+- The data codebook: commonly attached to large data sets, explains the variables included in data sets. For example, the line below means the column labeled 'Calc Prereq' was collected at the course level, describes whether the course has a calculus pre-requisite, and has possible entries yes and no.
+
+![](codebook.jpg){fig-align="center"}
+
+- The data collected by the MASDER Team. All data were collected from publicly available institution websites and catalogs. This includes
+
+  - Data collected at the university level (in the University tab)
+
+  - Data collected at the course level (in the Course tab)
+
+For this project, your group will:
+
+- Select at least 5 research questions that can be addressed by the data provided. At least 4 of the research questions must be at the university level and at least 1 must be at the course level.
+- All university-level research questions should be addressed at both the population level and the stratum level.
+- Completely analyze the data to answer the research questions, and be sure to include appropriate measures of variability (SEs/confidence intervals). Do not ignore the fpc.
+
+**Deliverables**:
+
+- **December 8 & 10**: Oral presentation of projects. Each group will have about 15 minutes.
+
+- **December 14**: Written report due in Canvas. The report should have the same structure as a scientific publication: abstract, introduction, methods, results, discussion/conclusion (no references are required, unless you used some. You may wish to do some additional research into the the US Dept of Ed College Scorecard!).
+
+  - **Abstract**: This section is typically written after the document is completed. It is basically a paragraph summarizing the motivation for the study being conducted, the research question, the findings, and the conclusion.
+
+  - **Introduction**: This section introduces the problem and what motivated you to address these specific questions. Basically, tell a story that makes the project interesting to the readers. The introduction section also explains how the paper is organized (what sections and subsections you have and what you include in the sections/subsections).
+
+  - **Methods**: This section describes the data set and the analysis. This is where you define variables, sampling design, sampling unit, observation unit, and specify how you will be analyzing the data. Basically, if someone wanted to reproduce your results, they could do so based on what is included in this section. Make sure you explain everything so non-statisticians can understand too.
+
+  **Results**: This section should have tables/plots, and they should be explained thoroughly. Typically, output is not included in the body of the paper itself. Useful parts of the output are summarized in tables and figures and explained in words.
+
+  **Discussion**: This section concludes why your findings are interesting/important and future avenues for the research. It can also include limitations of the results or any issues you ran into while conducting the analysis.
+
+**A few tips**:
+
+- Make sure your text is grammatically correct without typos.
+- Your document should not be longer than 10 pages (including tables and plots).
+- If it helps you with organization, the Introduction, Methods, and Results sections can have subsections.
+- You should include an Appendix with your code (there is no page limit for this part).
+- Since this is a group project is it very important that **everyone** is involved and works on the project. During the week of December 7, I will provide a questionnaire where you can reflect on your contribution and your teammates' contributions to the project. The outcome of this reflection may impact individual project grades.
+- It may be helpful to imagine a specific audience (beyond me/your classmates) for your paper and presentation.
+
+**Grading** (65 total points):
+
+- Group Evaluation: completion of group evaluation: 5 points
+- Presentation: makes use of appropriate visual aids, highlights the unique features of the project, is clear and well-organized: 10 points
+- The paper "makes sense and hangs together"; it is thorough, well-organized, and clearly written, with no run-on sentences, sentence fragments, or other grammatical errors. The paper is carefully proofread, so there are no spelling or punctuation errors, and uses double spacing. It does not read like it was written different people: 10 points
+- All of the items mentioned above are included appropriately, and all sections in the report are correct and thoroughly explained: 40 points
+
+**Thank you to the MASDER team**: Amira Colón (California State University - Monterey Bay), Alana Unfried (California State University - Monterey Bay), April Kerby-Helm (Winona State University), Douglas Whitaker (Mount Saint Vincent University), Leyla Batakci (Elizabethtown College), Marjorie Bond (Penn State University), Michael Posner (Villanova University)
