@@ -53,6 +53,8 @@ The resulting 8 strata were:
 | AxN | Associate, All, not MSI | 850 | 48 | Des Moines Area Community College |
 |  | Total | 2751 | 147 |  |
 
+\newpage
+
 You are provided with:
 
 - The data codebook: commonly attached to large data sets, explains the variables included in data sets. For example, the line below means the column labeled 'Calc Prereq' was collected at the course level, describes whether the course has a calculus pre-requisite, and has possible entries yes and no.
@@ -83,9 +85,9 @@ For this project, your group will:
 
   - **Methods**: This section describes the data set and the analysis. This is where you define variables, sampling design, sampling unit, observation unit, and specify how you will be analyzing the data. Basically, if someone wanted to reproduce your results, they could do so based on what is included in this section. Make sure you explain everything so non-statisticians can understand too.
 
-  **Results**: This section should have tables/plots, and they should be explained thoroughly. Typically, output is not included in the body of the paper itself. Useful parts of the output are summarized in tables and figures and explained in words.
+  - **Results**: This section should have tables/plots, and they should be explained thoroughly. Typically, output is not included in the body of the paper itself. Useful parts of the output are summarized in tables and figures and explained in words.
 
-  **Discussion**: This section concludes why your findings are interesting/important and future avenues for the research. It can also include limitations of the results or any issues you ran into while conducting the analysis.
+  - **Discussion**: This section concludes why your findings are interesting/important and future avenues for the research. It can also include limitations of the results or any issues you ran into while conducting the analysis.
 
 **A few tips**:
 

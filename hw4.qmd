@@ -29,7 +29,7 @@ For all problems, use R as a calculator without using the `survey` package. Show
 
     a.  Using the `agsrs.csv` data set, implement ratio estimation to estimate the mean number of acres devoted to farming in 1987, using the number of farms in 1987 as the auxiliary variable.
     
-    b.  Compare your estimate to those from Homework 3. Without calculating SE for the ratio estimator, do you think it will be smaller, larger, or about the same as the SRS SE from Homework 3. What is your reasoning?
+    b.  Compare your estimate to those from Homework 3. Without calculating SE for the ratio estimator, do you think it will be smaller, larger, or about the same as the SRS SE from Homework 3? What is your reasoning?
 
 3.  Book problem #11 from Chapter 4, parts (a) and (b) (no confidence interval, just total cherry tree volume)
 
