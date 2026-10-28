@@ -1,0 +1,60 @@
+---
+project:
+  output-dir: docs
+  
+format: 
+  html: default
+  pdf:   
+    header-includes:
+        - \usepackage{float}
+        - \floatplacement{table}{H}  
+    fontsize: 11pt
+    geometry: 
+      - top=20mm
+      - left=15mm
+      - right=10mm
+---
+
+# Homework 5
+
+Individual assignments due in Canvas on Tuesday, 10 November
+
+Group collaborative key due on Tuesday, 17 November
+
+Unless indicated otherwise, use R as a calculator without using the `survey` package. Show work to indicate you could calculate estimates and standard errors by hand given summary statistics.
+
+1.  On Homework #4, you completed Book problem #3 from Chapter 4, parts (a) and (b) but did not calculate the SE of your ratio estimate of mean tree age.
+    a. Find the SE of your ratio estimate of mean tree age. Use that SE to construct and interpret a 95% confidence interval for the mean age of all trees in the stand.
+    b. Find the regression estimate of mean tree age, along with its SE. Construct and interpret a 95% confidence interval for the mean age of all trees in the stand.
+    c. Compare your ratio and regression estimates. Which do you think is better and why?
+    d. Use the `survey` package to check your work on (a) and (b).
+
+2.  #2, Homework 4 continued. 
+
+    a. Find the SE for the ratio estimate of mean number of acres devoted to farming in 1987.
+    b. Compare your SE in (a) to your prediction in Homework 4. What do you find?
+    c. Use ratio estimation to estimate the total number of acres devoted to farming in 1992 using an auxiliary variable that will ensure an improvement over the SRS estimate. Be sure to demonstrate the improvement, and explain your reasoning in selecting the auxiliary variable.
+
+
+3.  On Homework #4, you completed Book problem #11 from Chapter 4, parts (a) and (b) but not calculate a confidence interval for total cherry tree volume.
+    a. Find the SE of your ratio estimate of total cherry tree volume. Use that SE to construct and interpret a 95% confidence interval for total volume of all trees.
+    b. Find the regression estimate of total tree volume, along with its SE. Construct and interpret a 95% confidence interval for total tree volume.
+    c. Is ratio or regression estimation more appropriate? Explain  your reasoning.
+    d. Use the `survey` package to check your work on (a) and (b).
+    
+4.  #4, Homework 4 continued.
+
+    a. Find the  SE for the ratio estimate of total number of veterans.
+    b. Compare your SE in (a) to your prediction in Homework 4. What do you find?
+    
+\newpage    
+
+5. A local store needs to manage the amount of time needed to get online orders ready for pick-up by customers. To estimate the mean time required to get an order ready for pickup, the retailer takes a random sample of 100 orders placed so far in 2026 and records the number of items in each order and the time required to get the order ready. The data are in the file `orders.csv`. So far in 2026 there have been 2572 total online orders, with 19290 total items ordered. Feel free to use the `survey` package on this problem.
+   a. Find the SRS estimate of the mean time required, along with its SE.
+   b. For the random sample sample of 100 orders, what is $\frac{\bar x_{\mathcal{U}}}{\bar x}$?
+   c. Without calculating the ratio estimate of mean time required, will the ratio estimate of mean time be smaller, larger, or about the same as the SRS estimate? Explain how you know.
+   d. Without calculating the SE of the ratio estimate, do you think it will be larger, smaller, or about the same as the SE of the SRS estimate? Explain  your reasoning.
+   e. Calculate the ratio estimate of the mean time time required, along with its SE. 
+   f. Calculate the regression estimate of the mean time required, along with its SE.
+   g. Do you think a ratio or regression estimate is more appropriate in this scenario? Explain your reasoning.
+   h. The store wants to provide an estimated pick up time for online orders in which the customer indicates they would like to pick up ASAP (rather than schedule pick up for a later time). What would you suggest? Explain your reasoning.
