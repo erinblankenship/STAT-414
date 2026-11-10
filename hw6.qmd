@@ -1,0 +1,40 @@
+---
+project:
+  output-dir: docs
+  
+format: 
+  html: default
+  pdf:   
+    header-includes:
+        - \usepackage{float}
+        - \floatplacement{table}{H}  
+    fontsize: 11pt
+    geometry: 
+      - top=20mm
+      - left=15mm
+      - right=10mm
+---
+
+# Homework 6
+
+Individual assignments due in Canvas on Thursday, 19 November
+
+Group collaborative key due on **Monday, 30 November**
+
+You may use the `survey` package for all problems.
+
+1.  Problem #5 of Chapter 4 (using `ssc.cvs`).
+
+2.  Problem #6 of Chapter 4 (average greens fee on a weekend for 18 holes). In this problem, note the data are an SRS of $n=120$ US golf courses from a list of $N=14938$ US golf courses.
+
+3.  Problem #8 of Chapter 4 (mean weekday greens fee for 9 holes with and without a professional available).
+
+4.  Problem #17 of Chapter 4 (lead and copper). Note that because the data were taken on grid points, $N_h/N = n_h/n$.
+
+5.  This problem uses the Rural Poll data, found in the Homework 6 Dataset Access module on Canvas. As you complete this problem, including code, output, and summary statistics in your Collaborative Key is fine. Please don't include any data snippets. The dataset contains many rows of incomplete data (i.e., a respondent left one or more questions blank). Using the `na.rm=TRUE` option in `R` will omit any missing rows from an analysis. For example, `Q4mean<-svymean(~Q4,design=ruralpolldesign,na.rm=TRUE)`. You will have to create some additional columns in the dataset, and you may ignore the fpc.
+    a. Question 5 (`Q5` in the dataset) asked residents "Based on what you see of the situation today, do you think that in ten years from now your community will be a worse place to live (1), a better place to live (3), or about the same(2)?"  Based on the Rural Poll data, estimate the proportion of Nebraska rural residents who believe their community will be a better place to live in 10 years, along with its standard error.
+    b. Again using Question 5, together with `childreninhh`, estimate the proportion of Nebraska rural residents who believe their community will be a better place to live in 10 years for those both with (2) and without (1) at least one child in the household. Do these two domains have the same level of belief of a better community in 10 years? Cite relevant statistical evidence.
+    c. Question 6 asked residents "Do you agree or disagree with the following statement? My community is powerless to control its own future." Possible answers were (1) Strongly disagree, (2) Disagree, (3) Undecided, (4) Agree, (5) Strongly Agree. Estimate the proportion of Nebraska rural residents who agree at least to some extent (agree or strongly agree) with the statement.
+    d. Again using Question 6, together with `yrslivedincomm`, estimate the proportion of Nebraska rural residents who agree with the statement to at least some extent for those who have lived in their community for years or less and those who have lived in their community for more than 5 years. Do these two domains have the same level of agreement with the statement? Cite relevant statistical evidence.
+    e. Question 13 asked residents "How would you describe your own mental health or emotional wellbeing at this time? Would you say it is...". Possible answers were (1) Poor, (2) Only fair, (3) Good, (4) Excellent. Estimate the proportion of rural Nebraska residents who would describe their mental health as either poor or fair for each age category (`agecat`), and provide 95% confidence intervals.
+

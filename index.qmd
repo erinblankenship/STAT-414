@@ -34,29 +34,34 @@ STAT 414 is an introduction to sampling. By the end of the course, you will:
   file.copy("hw2.html","docs/")
   file.copy("hw2.pdf","docs/")
   file.copy("hw2_files","docs/",recursive=TRUE)
-  
+
   quarto::quarto_render(input="hw3.qmd")
   file.copy("hw3.html","docs/")
   file.copy("hw3.pdf","docs/")
   file.copy("hw3_files","docs/",recursive=TRUE)
-  
+
   quarto::quarto_render(input="PP1.qmd")
   file.copy("PP1.html","docs/")
   file.copy("PP1.pdf","docs/")
   file.copy("PP1_files","docs/",recursive=TRUE)
-  
+
   quarto::quarto_render(input="hw4.qmd")
   file.copy("hw4.html","docs/")
   file.copy("hw4.pdf","docs/")
   file.copy("hw4_files","docs/",recursive=TRUE)
-  
+
   quarto::quarto_render(input="project.qmd")
   file.copy("project.html","docs/")
   file.copy("project.pdf","docs/")
   file.copy("project_files","docs/",recursive=TRUE)
-  
+
   quarto::quarto_render(input="hw5.qmd")
   file.copy("hw5.html","docs/")
   file.copy("hw5.pdf","docs/")
   file.copy("hw5_files","docs/",recursive=TRUE)
+  
+  quarto::quarto_render(input="hw6.qmd")
+  file.copy("hw6.html","docs/")
+  file.copy("hw6.pdf","docs/")
+  file.copy("hw6_files","docs/",recursive=TRUE)
   ```
