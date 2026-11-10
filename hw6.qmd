@@ -21,7 +21,7 @@ Individual assignments due in Canvas on Thursday, 19 November
 
 Group collaborative key due on **Monday, 30 November**
 
-You may use the `survey` package for all problems.
+You may use the `survey` package for all problems except #4 (lead and copper).
 
 1.  Problem #5 of Chapter 4 (using `ssc.cvs`).
 
