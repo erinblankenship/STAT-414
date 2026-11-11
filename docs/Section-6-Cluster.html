@@ -1,0 +1,1869 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.10.18">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>6&nbsp; Cluster Sampling – Stat 414 Notes</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./Section-5-Ratio-Reg.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-c574c73dd0d0ff61020859ffc61752ee.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body class="nav-sidebar floating quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./Section-6-Cluster.html"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Cluster Sampling</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Stat 414 Notes</a> 
+        <div class="sidebar-tools-main">
+    <a href="./Stat-414-Notes.pdf" title="Download PDF" class="quarto-navigation-tool px-1" aria-label="Download PDF"><i class="bi bi-file-pdf"></i></a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Course Goals for STAT 414</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Section-1-Introduction.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction to Sampling</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Section-2-Prob-Samples.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">An Introduction to Probability Samples</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Section-3-SRS.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Simple Random Samples</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Section-4-Stratified.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Stratified Sampling</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Section-5-Ratio-Reg.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Ratio and Regression Estimation</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Section-6-Cluster.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Cluster Sampling</span></span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#one-stage-cluster-sampling" id="toc-one-stage-cluster-sampling" class="nav-link active" data-scroll-target="#one-stage-cluster-sampling"><span class="header-section-number">6.1</span> One-Stage Cluster Sampling</a>
+  <ul class="collapse">
+  <li><a href="#equal-size-clusters" id="toc-equal-size-clusters" class="nav-link" data-scroll-target="#equal-size-clusters"><span class="header-section-number">6.1.1</span> Equal size clusters</a></li>
+  <li><a href="#unequal-size-clusters" id="toc-unequal-size-clusters" class="nav-link" data-scroll-target="#unequal-size-clusters"><span class="header-section-number">6.1.2</span> Unequal size clusters</a></li>
+  </ul></li>
+  <li><a href="#two-stage-cluster-sampling" id="toc-two-stage-cluster-sampling" class="nav-link" data-scroll-target="#two-stage-cluster-sampling"><span class="header-section-number">6.2</span> Two-Stage Cluster Sampling</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Cluster Sampling</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p>So far we’ve talked about two sampling designs in detail: simple random sampling (SRS) and stratified random sampling. Sometimes, however, it’s impossible (or at least very difficult) to collect an SRS or stratified random sample. This could be due to many things, including</p>
+<ul>
+<li>cost (in time or money)</li>
+<li>lack of a sampling frame for the target population from which to draw our sample</li>
+</ul>
+<p>We’ll consider a couple of examples to demonstrate this.</p>
+<p><strong>Example</strong>: About a decade ago, the journal <em>Basic and Applied Social Psychology</em> banned p-values from its publication, and this sparked a lot of thought, articles, and talks about the role of p-values in science. Suppose we want to estimate the proportion of articles in the social and behavioral sciences literature that contained p-values in 2023. There are 1285 such journals. There are a couple of options:</p>
+<ul>
+<li></li>
+</ul>
+<p><br>
+</p>
+<p><br>
+</p>
+<ul>
+<li></li>
+</ul>
+<p><br>
+</p>
+<p><strong>Example</strong>: Suppose we want to estimate the proportion of Nebraska high school students who are taking (or have taken) a dual credit course.</p>
+<p><br>
+<br>
+<br>
+<br>
+<br>
+</p>
+<div style="page-break-after: always;"></div>
+<p>Both of these are examples of <strong>cluster samples</strong>. In cluster sampling,</p>
+<p><br>
+<br>
+<br>
+<br>
+<br>
+<br>
+</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 53%">
+<col style="width: 23%">
+<col style="width: 21%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Population of Interest</th>
+<th><p>Elements</p>
+<p>secondary units</p></th>
+<th><p>Cluster</p>
+<p>primary units</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Articles in social/behavioral journals</td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>US residents</td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>Lincoln households</td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>UNL staff members</td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>Maple trees in Vermont</td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>So, a <strong>cluster sample</strong> is a probability sample in which a sampling unit is a cluster. Sometimes the cluster is determined by the availability of a sampling frame.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 23%">
+<col style="width: 23%">
+<col style="width: 40%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Frame</th>
+<th>Sampling Unit</th>
+<th>Element (Observation Unit)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>This might at first blush look like stratification. Both clustering and stratification group population members. But, selection is totally different. Additionally,</p>
+<p><br>
+<br>
+<br>
+<br>
+<br>
+<br>
+</p>
+<div style="page-break-after: always;"></div>
+<p><strong>Example</strong>: High school dual credit</p>
+<p><br>
+<br>
+<br>
+<br>
+<br>
+<br>
+</p>
+<section id="one-stage-cluster-sampling" class="level2" data-number="6.1">
+<h2 data-number="6.1" class="anchored" data-anchor-id="one-stage-cluster-sampling"><span class="header-section-number">6.1</span> One-Stage Cluster Sampling</h2>
+<p>We’re going to start with <strong>one-stage cluster sampling</strong>. One-stage means</p>
+<p><br>
+<br>
+<br>
+<br>
+</p>
+<p>Here’s the set-up:</p>
+<ul>
+<li>Divide the population into <span class="math inline">\(N\)</span> clusters, also known as (PSUs).</li>
+<li>Cluster <span class="math inline">\(i\)</span> has size <span class="math inline">\(M_i\)</span>, so <span class="math inline">\(M_i\)</span> is the number of (SSUs).</li>
+</ul>
+<p><br>
+<br>
+</p>
+<ul>
+<li>Clusters can be selected using any sampling design. We’ll assume an SRS.</li>
+<li>On each SSU in a selected PSU, the characteristic of interest is observed. We are back to 2 subscripts:</li>
+</ul>
+<p><br>
+<br>
+</p>
+<p>We’ve got lots of new notation, which we’ll break up by sampling level in addition to population/sample.</p>
+<p><strong>Population Quantities: PSU level</strong></p>
+<p><span class="math display">\[
+\begin{array}{ll}
+N \hbox{\hspace{70mm}} &amp; t_i \hbox{\hspace{70mm}} \\
+&amp; \\
+&amp; \\
+M_i &amp; t \\
+&amp; \\
+&amp; \\
+M_0 &amp; \sigma^2_t
+\end{array}
+\]</span></p>
+<div style="page-break-after: always;"></div>
+<p><strong>Population Quantities: SSU level</strong></p>
+<p><span class="math display">\[
+\begin{array}{ll}
+    \bar y_{\mathcal{U}} = \frac{1}{M_0} \sum_{i=1}^N \sum_{j=1}^{M_i} y_{ij} &amp; \hbox{\hspace{100mm}} \\
+    &amp; \\
+    \bar y_{i\mathcal{U}} = \frac{1}{M_i}\sum_{j=1}^{M_i} y_{ij} = \frac{t_i}{M_i} &amp;  \\
+    &amp; \\
+    \sigma^2 = \frac{1}{M_0-1} \sum_{i=1}^N \sum_{j=1}^{M_i} (y_{ij} -\bar y_{\mathcal{U}})^2  &amp;  \\
+    &amp; \\
+    \sigma^2_i = \frac{1}{M_i-1} \sum_{j=1}^{M_i} (y_{ij} - \bar y_{i\mathcal{U}})^2  &amp; \\
+    &amp; \\
+\end{array}
+\]</span></p>
+<p><strong>Sample Quantities</strong></p>
+<p><span class="math display">\[
+\begin{array}{ll}
+    \mathcal{S} = \hbox{sample of PSUs from the whole population} &amp;  \hbox{\hspace{80mm}} \\
+    &amp; \\
+    \mathcal{S}_i = \hbox{sample of SSUs selected from PSU } i &amp; \\
+    &amp; \\
+    n = \hbox{number of PSUs in the sample} &amp; \\
+    &amp; \\
+    m_i = \hbox{number of SSUs from PSU } i \hbox{ in the sample} &amp; \\
+    &amp; \\
+    \bar y_{i} = \frac{1}{m_i} \sum_{j \in \mathcal{S}_i} y_{ij} &amp;  \\
+    &amp; \\
+    \hat t_i = \frac{M_i}{m_i} \sum_{j \in \mathcal{S}_i} y_{ij} &amp;  \\
+    &amp; \\
+    s^2_t = \frac{1}{n-1} \sum_{i \in \mathcal{S}} \left ( \hat t_i - \frac{\sum_{i \in \mathcal{S}} \hat t_i}{n} \right )^2 &amp; \\
+    &amp; \\
+    s^2_i = \frac{1}{m_i-1}\sum_{j \in \mathcal{S}_i} (y_{ij} - \bar y_i )^2 &amp; \\
+    &amp; \\
+    w_{ij} = \hbox{sampling weight for SSU } j \hbox{ in PSU } i &amp; \\
+\end{array}
+\]</span></p>
+<p>What does cluster sampling look like?</p>
+<p><br>
+</p>
+<div style="page-break-after: always;"></div>
+<p>Now, because we are considering 1-stage cluster sampling</p>
+<p><br>
+<br>
+<br>
+</p>
+<section id="equal-size-clusters" class="level3" data-number="6.1.1">
+<h3 data-number="6.1.1" class="anchored" data-anchor-id="equal-size-clusters"><span class="header-section-number">6.1.1</span> Equal size clusters</h3>
+<p>We’re going to start with the simplest case: clusters of equal size. This means</p>
+<p><br>
+</p>
+<p>If clusters are equal size, estimating population means and totals is easy–we treat the PSU mean/total as the observation and ignore the individual elements.</p>
+<p><br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+</p>
+<p>The clusters are a SRS of the population, so we can use the variances from the SRS</p>
+<p><br>
+<br>
+<br>
+<br>
+</p>
+<p>Dealing with means is also straightforward</p>
+<p><br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+</p>
+<div style="page-break-after: always;"></div>
+<p><strong>Example</strong>: Inspecting cases of canned goods for damaged cans. We have a truckload of 100 cases, each with 12 cans. We select a SRS of 4 cases. Here’s the data.</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Can #</th>
+<th>Case 1</th>
+<th>Case 2</th>
+<th>Case 3</th>
+<th>Case 4</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr class="odd">
+<td>3</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr class="even">
+<td>4</td>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr class="odd">
+<td>5</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr class="even">
+<td>6</td>
+<td>1</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr class="odd">
+<td>7</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+</tr>
+<tr class="even">
+<td>8</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr class="odd">
+<td>9</td>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr class="even">
+<td>10</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr class="odd">
+<td>11</td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr class="even">
+<td>12</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(t_i\)</span></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p><br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+</p>
+<div style="page-break-after: always;"></div>
+<p>Suppose while checking the cans for damage the cans were also weighed, to make sure they are labeled correctly. The cans are labeled 8 oz.</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Can #</th>
+<th>Case 1</th>
+<th>Case 2</th>
+<th>Case 3</th>
+<th>Case 4</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td>8.15</td>
+<td>8.03</td>
+<td>7.65</td>
+<td>7.99</td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td>7.70</td>
+<td>8.16</td>
+<td>7.90</td>
+<td>7.79</td>
+</tr>
+<tr class="odd">
+<td>3</td>
+<td>7.76</td>
+<td>7.73</td>
+<td>7.84</td>
+<td>7.96</td>
+</tr>
+<tr class="even">
+<td>4</td>
+<td>7.59</td>
+<td>7.67</td>
+<td>8.14</td>
+<td>8.20</td>
+</tr>
+<tr class="odd">
+<td>5</td>
+<td>7.71</td>
+<td>7.92</td>
+<td>8.07</td>
+<td>7.92</td>
+</tr>
+<tr class="even">
+<td>6</td>
+<td>7.55</td>
+<td>7.94</td>
+<td>7.83</td>
+<td>7.98</td>
+</tr>
+<tr class="odd">
+<td>7</td>
+<td>8.30</td>
+<td>7.93</td>
+<td>8.07</td>
+<td>7.67</td>
+</tr>
+<tr class="even">
+<td>8</td>
+<td>8.26</td>
+<td>7.77</td>
+<td>7.96</td>
+<td>7.99</td>
+</tr>
+<tr class="odd">
+<td>9</td>
+<td>8.01</td>
+<td>7.93</td>
+<td>7.96</td>
+<td>7.85</td>
+</tr>
+<tr class="even">
+<td>10</td>
+<td>8.06</td>
+<td>8.01</td>
+<td>7.91</td>
+<td>8.13</td>
+</tr>
+<tr class="odd">
+<td>11</td>
+<td>7.69</td>
+<td>7.88</td>
+<td>7.95</td>
+<td>7.56</td>
+</tr>
+<tr class="even">
+<td>12</td>
+<td>8.08</td>
+<td>7.58</td>
+<td>7.79</td>
+<td>7.94</td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(t_i\)</span></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p><br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+</p>
+<div style="page-break-after: always;"></div>
+<p>Like with previous designs, each unit has a <strong>sampling weight</strong>. Sampling weights are associated with SSUs.</p>
+<p>Let <span class="math inline">\(w_{ij}\)</span> be the weight for observation unit (SSU) <span class="math inline">\(j\)</span> in PSU <span class="math inline">\(i\)</span>.</p>
+<p><br>
+<br>
+<br>
+</p>
+<p><span class="math display">\[
+\sum_{i \in \mathcal{S}} \sum_{j=1}^M w_{ij} = \sum_i \sum_j \frac{N}{n} = \sum_i \frac{N}{n}\sum_j 1 = \sum_i \frac{N}{n}(M) = \frac{NM}{n} \sum_{i \in \mathcal{S}} 1 = \frac{NM}{n}(n) = NM
+\]</span><br>
+</p>
+<p>Sample weights can be used just like they are in the SRS to calculate estimators:</p>
+<p><span class="math display">\[
+\hat t = \sum_i \sum_j w_{ij}y_{ij} \hbox{ and } \hat{\bar y} = \frac{\sum_i \sum_j w_{ij} y_{ij}}{\sum_i \sum_j w_{ij}}
+\]</span></p>
+<p>Survey packages use these weights to get the estimates, just as with other designs.</p>
+<p>In R, the main thing that will change is in the <code>svydesign</code> statement. The <code>id</code> option identifies clusters, so now we will use that. With previous designs, our R code looked like:</p>
+<pre><code>design&lt;-svydesign(id=~1,weights=~sampwt,fpc=rep(N,n),data=dataset)</code></pre>
+<p>with potentially a <code>strata=</code> option included. Now, our generic syntax will be</p>
+<pre><code>design&lt;-svydesign(id=~cluster,weights=~sampwt,fpc=~fpc,data=dataset)</code></pre>
+<p>where <code>cluster</code> is the column identifying the PSU in the data set.</p>
+<p><strong>Example</strong>: For the cans data set, I used the code</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>cans<span class="ot">&lt;-</span><span class="fu">read.csv</span>(<span class="st">"cans.csv"</span>,<span class="at">header=</span><span class="cn">TRUE</span>)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>N<span class="ot">&lt;-</span><span class="dv">100</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>n<span class="ot">&lt;-</span><span class="dv">4</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>cans<span class="sc">$</span>sampwt<span class="ot">&lt;-</span>N<span class="sc">/</span>n</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(cans)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  weight case sampwt
+1   8.15    1     25
+2   7.70    1     25
+3   7.76    1     25
+4   7.59    1     25
+5   7.71    1     25
+6   7.55    1     25</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(survey)</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>candesign<span class="ot">&lt;-</span><span class="fu">svydesign</span>(<span class="at">id=</span><span class="sc">~</span>case,<span class="at">weights=</span><span class="sc">~</span>sampwt,<span class="at">fpc=</span><span class="sc">~</span><span class="fu">rep</span>(<span class="dv">100</span>,<span class="dv">48</span>),<span class="at">data=</span>cans)</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>candesign</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>1 - level Cluster Sampling design
+With (4) clusters.
+svydesign(id = ~case, weights = ~sampwt, fpc = ~rep(100, 48), 
+    data = cans)</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>wtmean<span class="ot">&lt;-</span><span class="fu">svymean</span>(<span class="sc">~</span>weight,candesign)</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>wtmean</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>         mean     SE
+weight 7.9054 0.0093</code></pre>
+</div>
+</div>
+</section>
+<section id="unequal-size-clusters" class="level3" data-number="6.1.2">
+<h3 data-number="6.1.2" class="anchored" data-anchor-id="unequal-size-clusters"><span class="header-section-number">6.1.2</span> Unequal size clusters</h3>
+<p>Often clusters are not the same size (for example, household sizes) so frequently we need to account for the cluster size. Recall that</p>
+<p><br>
+</p>
+<p>We could use the same (unbiased) estimators we did when cluster sizes are all equal:</p>
+<p><span class="math display">\[
+\hat t_{unb} = \frac{N}{n}\sum_{i \in \mathcal{S}} t_i \hbox{ with } \hbox{SE}(\hat t_{unb}) = N \sqrt{\left (1 - \frac{n}{N}\right ) \frac{s_t^2}{n}}
+\]</span> and</p>
+<p><span class="math display">\[
+\hat{\bar y} = \frac{\hat t_{unb}}{M_0} \hbox{ with } \hbox{SE}(\hat{\bar y}) = \frac{N}{M_0}\sqrt{\left (1 - \frac{n}{N}\right ) \frac{s_t^2}{n}}
+\]</span></p>
+<div style="page-break-after: always;"></div>
+<p>These aren’t usually the estimators we use, though. Why not? Why is it important to account for cluster sizes? Typically, cluster total <span class="math inline">\(t_i\)</span> is correlated with cluster size <span class="math inline">\(M_i\)</span></p>
+<p><br>
+<br>
+<br>
+</p>
+<p>We know how to deal with this situation!</p>
+<p>So now, <span class="math inline">\(M_i\)</span> serves as our auxiliary variable and our response is <span class="math inline">\(t_i\)</span>. We can then use our ratio estimate for population mean, and its corresponding variance estimate</p>
+<p><span class="math display">\[
+\hat{\bar y_r} = \frac{\sum_{i=1}^n t_i}{\sum_{i=1}^n M_i}
+\]</span></p>
+<p>with</p>
+<p><span class="math display">\[\begin{eqnarray*}
+\widehat{\hbox{Var}(\hat{\bar y_r})} &amp;=&amp; \left (1 - \frac{n}{N} \right )\frac{1}{n\bar M_{\mathcal{U}}^2} \frac{\sum_{i=1}^n (t_i - \hat{\bar y_r} M_i)^2}{n-1} \\
+&amp;=&amp; \left (1 - \frac{n}{N} \right )\frac{1}{n\bar M_{\mathcal{U}}^2} \frac{\sum_{i=1}^n M_i^2 (\bar y_i - \hat{\bar y_r})^2}{n-1}
+\end{eqnarray*}\]</span></p>
+<p><strong>Example</strong>: Can weights, revisited.</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Can #</th>
+<th>Case 1</th>
+<th>Case 2</th>
+<th>Case 3</th>
+<th>Case 4</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td>8.15</td>
+<td>8.03</td>
+<td>7.65</td>
+<td>7.99</td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(\vdots\)</span></td>
+<td><span class="math inline">\(\vdots\)</span></td>
+<td><span class="math inline">\(\vdots\)</span></td>
+<td><span class="math inline">\(\vdots\)</span></td>
+<td><span class="math inline">\(\vdots\)</span></td>
+</tr>
+<tr class="odd">
+<td>12</td>
+<td>8.08</td>
+<td>7.58</td>
+<td>7.79</td>
+<td>7.94</td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(t_i\)</span></td>
+<td>94.86</td>
+<td>94.55</td>
+<td>95.07</td>
+<td>94.98</td>
+</tr>
+</tbody>
+</table>
+<p><br>
+<br>
+<br>
+<br>
+</p>
+<div style="page-break-after: always;"></div>
+<p>We can then easily get an estimate for the population total as well as an estimate of variance.</p>
+<p><br>
+<br>
+<br>
+</p>
+<p><strong>Example</strong>:</p>
+<p><br>
+<br>
+<br>
+<br>
+</p>
+<p><strong>Example</strong>: (adapted from Example 5.6 in the book) A school district in a large city has <span class="math inline">\(N=187\)</span> algebra classes. A researcher takes an SRS of <span class="math inline">\(n=4\)</span> classes and each student is given a quiz. In our sample, class sizes range from 17 to 34.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 12%">
+<col style="width: 12%">
+<col style="width: 14%">
+<col style="width: 12%">
+<col style="width: 44%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Class</th>
+<th><span class="math inline">\(M_i\)</span></th>
+<th><span class="math inline">\(\bar y_i\)</span></th>
+<th><span class="math inline">\(t_i\)</span></th>
+<th><span class="math inline">\(M_i^2(\bar y_i - \hat{\bar y_r})^2\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td>34</td>
+<td>58</td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td>28</td>
+<td>64.9</td>
+<td>1816</td>
+<td>899.28</td>
+</tr>
+<tr class="odd">
+<td>3</td>
+<td>32</td>
+<td>72.1</td>
+<td>2308</td>
+<td>70051.268</td>
+</tr>
+<tr class="even">
+<td>4</td>
+<td>17</td>
+<td>58.2</td>
+<td>989</td>
+<td>9157.150</td>
+</tr>
+<tr class="odd">
+<td></td>
+<td>111</td>
+<td></td>
+<td>7085</td>
+<td>119385.389</td>
+</tr>
+</tbody>
+</table>
+<p><br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+</p>
+<div style="page-break-after: always;"></div>
+<p>We can extend the idea of sample weights to different cluster sizes. We’re still in 1-stage clustering, so all SSUs are observed for a selected PSU. This means</p>
+<p><span class="math display">\[
+w_{ij} = \frac{1}{\hbox{P(SSU } j \hbox{ in PSU } i \hbox{ is in the sample})} = \frac{1}{n/N} = \frac{N}{n}
+\]</span></p>
+<p>When all clusters are the same size</p>
+<p><span class="math display">\[
+\sum_{i \in \mathcal{S}} \sum_{j \in \mathcal{S}_i} w_{ij} = NM = M_0
+\]</span></p>
+<p>But when the PSUs have different sizes, <span class="math inline">\(\sum_i \sum_j w_{ij}\)</span> estimates population size:</p>
+<p><span class="math display">\[
+\sum_{i \in \mathcal{S}} \sum_{j \in \mathcal{S}_i} w_{ij} = \sum_i \sum_j \frac{N}{n} = \sum_{i \in \mathcal{S}} \frac{N}{n} \sum_{j \in \mathcal{S}_i} 1 = \sum_{i \in \mathcal{S}} \frac{N}{n} M_i = \frac{N}{n} \sum_{i \in \mathcal{S}}M_i = \hat M_0
+\]</span></p>
+<p>The weights can be used to get estimators in exactly the same way, and this is what survey packages do.</p>
+</section>
+</section>
+<section id="two-stage-cluster-sampling" class="level2" data-number="6.2">
+<h2 data-number="6.2" class="anchored" data-anchor-id="two-stage-cluster-sampling"><span class="header-section-number">6.2</span> Two-Stage Cluster Sampling</h2>
+<p>In <strong>two-stage cluster sampling</strong>, not all of the SSUs are observed for a selected PSU. Instead,</p>
+<ul>
+<li><p>Stage 1: Select clusters (PSUs)</p></li>
+<li><p>Stage 2: Select elements within each selected cluster (SSUs)</p></li>
+</ul>
+<p>and we only collect data on the SSUs that were sampled from the cluster. Here’s what two-stage cluster sampling looks like</p>
+<p><br>
+<br>
+<br>
+<br>
+<br>
+<br>
+</p>
+<div style="page-break-after: always;"></div>
+<p>Now, because there are two stages of sampling, there are two sets of sampling units.</p>
+<ul>
+<li><p>Stage 1: Select SRS of <span class="math inline">\(n\)</span> PSU from the population of <span class="math inline">\(N\)</span> PSUs</p></li>
+<li><p>Stage 2: Select SRS of <span class="math inline">\(m_i\)</span> SSUs from the <span class="math inline">\(M_i\)</span> elements of PSU <span class="math inline">\(i\)</span></p></li>
+</ul>
+<p>What are the implications?</p>
+<p>With one-stage cluster sampling, we had data on every single element in the selected clusters</p>
+<p><span class="math display">\[
+\Rightarrow \hbox{Cluster population values are known. We directly observe } \bar y_i, t_i
+\]</span></p>
+<p>But with two-stage cluster sampling, we only observe data on a sample of the elements in a selected cluster.</p>
+<p><span class="math display">\[
+\Rightarrow \hbox{We have to calculate estimates of } \bar y_i, t_i
+\]</span></p>
+<p>So why use two-stage cluster sampling?</p>
+<ul>
+<li><p>Maybe we only have access to a frame that lists clusters</p></li>
+<li><p>Elements in a PSU are so similar that it’s a waste of resources to sample all of them. Extra effort does not provide much additional information.</p></li>
+</ul>
+<p>As you can maybe guess, the variance estimates in two-stage cluster sampling are a LOT messier because we have to account for variance among the PSU (like before) but also the variance among the SSUs within the PSUs.</p>
+<p>Let’s consider the unbiased estimator of the population total</p>
+<p><span class="math display">\[
+\hat t_{unb} = \frac{N}{n} \sum_{i \in \mathcal{S}} t_i
+\]</span></p>
+<p>We now no longer know <span class="math inline">\(t_i\)</span>, and we have to estimate it. We’ve observed data on <span class="math inline">\(m_i\)</span> elements in cluster <span class="math inline">\(i\)</span>, so</p>
+<p><span class="math display">\[
+\hat t_i = M_i \bar y_i = \sum_{j=1}^{m_i} \frac{M_i}{m_i} y_{ij}
+\]</span></p>
+<p>Basically, we’re using the same estimator we did with one-stage clustering, but plugging in estimated cluster totals rather than known cluster totals.</p>
+<ul>
+<li><p>One-stage: <span class="math inline">\(\hat t_{unb} = \frac{N}{n} \sum_i \underbrace{t_i}_{\text{known}} = \frac{N}{n} \sum_i M_i \underbrace{\bar y_{i\mathcal{U}}}_{\text{known}}\)</span></p></li>
+<li><p>Two-stage: <span class="math inline">\(\hat t_{unb} = \frac{N}{n} \sum_i \underbrace{\hat t_i}_{\text{est}} = \frac{N}{n} \sum_i M_i \underbrace{\bar y_i}_{\text{est from } m_i \text{ elements}}\)</span></p></li>
+</ul>
+<div style="page-break-after: always;"></div>
+<p>The variance of <span class="math inline">\(\hat t_{unb}\)</span> has two components, associated with the 2 sampling stages: variation among PSUs and variation among SSUs within PSUs:</p>
+<ul>
+<li>One-stage: only variation among PSUs</li>
+</ul>
+<p><span class="math display">\[
+\widehat{\hbox{Var}(\hat t)} = N^2 \left (1 - \frac{n}{N} \right ) \frac{s_t^2}{n}, \hbox{\hspace{5mm}} s^2_t=\frac{1}{n-1}\sum_i \left (\underbrace{t_i}_{\text{known}} - \frac{\hat t}{N} \right )^2
+\]</span> - Two-stage: we now have to estimate <span class="math inline">\(t_i\)</span> with <span class="math inline">\(hat t_i\)</span></p>
+<p><span class="math display">\[
+\widehat{\hbox{Var}(\hat t_{unb})} = \underbrace{N^2 \left ( 1- \frac{n}{N} \right ) \frac{s^2_t}{n}}_{\text{among PSUs}} + \underbrace{\frac{N}{n}\sum_{i \in \mathcal{S}} \left ( 1-\frac{m_i}{M_i} \right ) M_i^2 \frac{s_i^2}{m_i}}_{\text{within PSUs}}
+\]</span></p>
+<p>where <span class="math inline">\(s_t^2 = \frac{1}{n-1}\sum_{i \in \mathcal{S}} \left ( \hat t_i - \frac{\hat t_{unb}}{N} \right)^2\)</span> and <span class="math inline">\(s_i^2 = \frac{1}{m_i-1} \sum_{j \in \mathcal{S_i}} (y_{ij} - \bar y_i)^2\)</span>.</p>
+<p><strong>Example</strong>: Let’s go back to the can example, and suppose we weighed only 3 cans in each case.</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Can #</th>
+<th>Case 1</th>
+<th>Case 2</th>
+<th>Case 3</th>
+<th>Case 4</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td>8.15</td>
+<td>8.03</td>
+<td>7.65</td>
+<td>7.99</td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td>7.70</td>
+<td>8.16</td>
+<td>7.90</td>
+<td>7.79</td>
+</tr>
+<tr class="odd">
+<td>3</td>
+<td>8.08</td>
+<td>7.58</td>
+<td>7.79</td>
+<td>7.94</td>
+</tr>
+<tr class="even">
+<td></td>
+<td>23.93</td>
+<td>23.77</td>
+<td>23.34</td>
+<td>23.72</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>Stage 1:
+<ul>
+<li>Cluster = Case</li>
+<li><span class="math inline">\(N=100\)</span></li>
+<li><span class="math inline">\(n = 4\)</span></li>
+</ul></li>
+<li>Stage 2:
+<ul>
+<li>Element = Can</li>
+<li><span class="math inline">\(M_i = 12\)</span></li>
+<li><span class="math inline">\(m_i = 3\)</span></li>
+</ul></li>
+</ul>
+<div style="page-break-after: always;"></div>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 61%">
+<col style="width: 8%">
+<col style="width: 8%">
+<col style="width: 8%">
+<col style="width: 9%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: center;">Can #</th>
+<th>Case 1</th>
+<th>Case 2</th>
+<th>Case 3</th>
+<th>Case 4</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">1</td>
+<td>8.15</td>
+<td>8.03</td>
+<td>7.65</td>
+<td>7.99</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">2</td>
+<td>7.70</td>
+<td>8.16</td>
+<td>7.90</td>
+<td>7.79</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">3</td>
+<td>8.08</td>
+<td>7.58</td>
+<td>7.79</td>
+<td>7.94</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><span class="math inline">\(\bar y_i\)</span></td>
+<td>7.977</td>
+<td>7.923</td>
+<td>7.78</td>
+<td>7.917</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><span class="math inline">\(\hat t_i = M_i \bar y_i\)</span></td>
+<td>95.724</td>
+<td>95.076</td>
+<td>93.36</td>
+<td>95.004</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><span class="math inline">\(s_i^2=\frac{1}{m_i -1} \sum_{j=1}^{m_i} (y_{ij}-\bar y_i)^2\)</span></td>
+<td>0.0586</td>
+<td>0.0926</td>
+<td>0.0157</td>
+<td>0.01099</td>
+</tr>
+</tbody>
+</table>
+<p>So, <span class="math display">\[
+\hat t_{unb} = \frac{N}{n} \sum_{i=1}^n \hat t_i = \frac{100}{4} [95.724 + \cdots + 95.004] = 9479.85
+\]</span> and</p>
+<p><span class="math display">\[
+s_t^2 = \frac{1}{n-1}\sum_{i \in \mathcal{S}} \left ( \hat t_i - \frac{\hat t_{unb}}{N} \right)^2 = \frac{1}{3}\left [ \left ( 95.724 - \frac{9479.85}{100} \right)^2 + \cdots + \left ( 95.004 - \frac{9479.85}{100} \right)^2\right ] = 1.015
+\]</span></p>
+<p>So, <span class="math display">\[\begin{eqnarray*}
+\widehat{\hbox{Var}(\hat t_{unb})} &amp;=&amp; \underbrace{N^2 \left ( 1- \frac{n}{N} \right ) \frac{s^2_t}{n}}_{\text{among PSUs}} + \underbrace{\frac{N}{n}\sum_{i \in \mathcal{S}} \left ( 1-\frac{m_i}{M_i} \right ) M_i^2 \frac{s_i^2}{m_i}}_{\text{within PSUs}} \\
+&amp;=&amp; (100)^2\left (1 -\frac{4}{100}\right)\frac{1.015}{4} + \frac{100}{4}\left [ \left ( 1-\frac{3}{12}\right)(12)^2\frac{0.0586}{3} + \cdots + \left ( 1-\frac{3}{12}\right)(12)^2\frac{0.01099}{3} \right ] \\
+&amp;=&amp; 2436.055 + 480.303 = 2916.358 \Rightarrow \hbox{SE} = 54.0033
+\end{eqnarray*}\]</span></p>
+<div style="page-break-after: always;"></div>
+<p>We can use this estimator for the total (and its estimated variance) to get an estimator for the population mean <span class="math inline">\(\bar y_{\mathcal{U}}\)</span>.</p>
+<p><span class="math display">\[
+\hat{\bar y_{unb}} = \frac{\hat t_{unb}}{M_0}
+\]</span></p>
+<p><span class="math display">\[
+\widehat{\hbox{Var}(\hat{\bar y_{unb})}} = \frac{1}{M_0^2}\widehat{\hbox{Var}(\hat t_{unb})}
+\]</span></p>
+<p><strong>Example</strong>: For the can data,</p>
+<p><span class="math display">\[
+\hat{\bar y_{unb}} = \frac{\hat t_{unb}}{M_0} = \frac{9479.85}{1200} = 7.8999
+\]</span> and <span class="math display">\[
+\widehat{\hbox{Var}(\hat{\bar y_{unb})}} = \frac{1}{M_0^2}\widehat{\hbox{Var}(\hat t_{unb})} = \frac{1}{1200^2} 2596.156 = 0.0018
+\]</span></p>
+<p>We can also use ratio estimation like we did with one-stage cluster sampling. The ratio estimate for the population mean <span class="math inline">\(\bar y_{\mathcal{U}}\)</span> is</p>
+<p><span class="math display">\[
+\hat{\bar y_r} = \frac{\sum_{i=1}^n \hat t_i}{\sum_{i=1}^n M_i} = \frac{\sum_i M_i \bar y_i}{\sum_i M_i}
+\]</span></p>
+<p>with estimated variance <span class="math display">\[
+\widehat{\hbox{Var}(\hat{\bar y_r})} = \frac{1}{\bar M_{\mathcal{U}}^2} \left [ \left (1-\frac{n}{N} \right ) \frac{s_r^2}{n} + \frac{1}{nN}\sum_{i=1}^n M_i^2 \left (1-\frac{m_i}{M_i} \right ) \frac{s_i^2}{m_i} \right]
+\]</span> where <span class="math display">\[
+s_r^2 = \frac{1}{n-1}\sum_{i=1}^n (M_i \bar y_i - M_i \hat{\bar y_r})^2 = \frac{1}{n-1}\sum_{i=1}^n M_i^2 (\bar y_i - \hat{\bar y_r})^2.
+\]</span></p>
+<p><strong>Example</strong>:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 61%">
+<col style="width: 8%">
+<col style="width: 8%">
+<col style="width: 8%">
+<col style="width: 9%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: center;">Can #</th>
+<th>Case 1</th>
+<th>Case 2</th>
+<th>Case 3</th>
+<th>Case 4</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">1</td>
+<td>8.15</td>
+<td>8.03</td>
+<td>7.65</td>
+<td>7.99</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">2</td>
+<td>7.70</td>
+<td>8.16</td>
+<td>7.90</td>
+<td>7.79</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">3</td>
+<td>8.08</td>
+<td>7.58</td>
+<td>7.79</td>
+<td>7.94</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><span class="math inline">\(\bar y_i\)</span></td>
+<td>7.977</td>
+<td>7.923</td>
+<td>7.78</td>
+<td>7.917</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><span class="math inline">\(\hat t_i = M_i \bar y_i\)</span></td>
+<td>95.724</td>
+<td>95.076</td>
+<td>93.36</td>
+<td>95.004</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><span class="math inline">\(s_i^2=\frac{1}{m_i -1} \sum_{j=1}^{m_i} (y_{ij}-\bar y_i)^2\)</span></td>
+<td>0.0586</td>
+<td>0.0926</td>
+<td>0.0157</td>
+<td>0.01099</td>
+</tr>
+</tbody>
+</table>
+<p>So,</p>
+<p><span class="math display">\[
+\hat{\bar y_r} = \frac{\sum_{i=1}^n \hat t_i}{\sum_{i=1}^n M_i} = \frac{95.724 + \cdots + 95.004}{12 + \cdots + 12} = 7.899
+\]</span> and <span class="math display">\[
+s_r^2 = \frac{1}{n-1}\sum_{i=1}^n M_i^2 (\bar y_i - \hat{\bar y_r})^2 = \frac{1}{3}\left [ 12^2(7.977-7.899)^2 + \cdots + 12^2(7.917-7.899)^2\right ] = 1.01496
+\]</span> and therefore <span class="math display">\[\begin{eqnarray*}
+\widehat{\hbox{Var}(\hat{\bar y_r})} &amp;=&amp; \frac{1}{\bar M_{\mathcal{U}}^2} \left [ \left (1-\frac{n}{N} \right ) \frac{s_r^2}{n} + \frac{1}{nN}\sum_{i=1}^n M_i^2 \left (1-\frac{m_i}{M_i} \right ) \frac{s_i^2}{m_i} \right] \\
+&amp;=&amp; \frac{1}{12^2}\left [ \left ( 1-\frac{4}{100}\right ) \frac{1.01496}{4} + \frac{1}{(4)(100)} (19.2121)\right ] = 0.00205
+\end{eqnarray*}\]</span></p>
+<p>so the SE is 0.045.</p>
+<p>We can use the ratio estimate of the population mean to get the ratio estimate for the population total</p>
+<p><span class="math display">\[
+\hat t_r = M_0 \hat{\bar y_r} \hbox{ with } \widehat{\hbox{Var}(\hat t_r)} = M_0^2 \widehat{\hbox{Var}(\hat {\bar y_r)}}
+\]</span> In the can example,</p>
+<p><span class="math display">\[
+\hat t_r = M_0 \hat{\bar y_r} = (1200)(7.899) = 9478.8
+\]</span></p>
+<p>and</p>
+<p><span class="math display">\[
+\widehat{\hbox{Var}(\hat t_r)} = M_0^2 \widehat{\hbox{Var}(\hat {\bar y_r)}}=(1200^2)(0.002025)=2916.207
+\]</span></p>
+<p>Why do the unbiased estimators and their variances match so closely with the (biased) ratio estimators? There is little variance among cases and cans and the clusters are all the same sizes.</p>
+<div style="page-break-after: always;"></div>
+<p>When should we use the unbiased estimators versus the (biased) ratio estimators? Some things to keep in mind:</p>
+<ul>
+<li>Unbiased estimation requires that we know <span class="math inline">\(N\)</span> and <span class="math inline">\(M_0\)</span>.</li>
+<li>Ratio estimation only requires knowledge of <span class="math inline">\(M_i\)</span></li>
+<li>Unbiased estimation can have poor precision (big variance) if
+<ul>
+<li>Cluster sizes (<span class="math inline">\(M_i\)</span>) are unequal</li>
+<li>Cluster totals (<span class="math inline">\(t_i\)</span>) are roughly proportional to cluster size<br>
+</li>
+</ul></li>
+<li>Ratio (biased) estimation can be precise if
+<ul>
+<li><span class="math inline">\(t_i\)</span> is roughly proportional to <span class="math inline">\(M_i\)</span></li>
+</ul></li>
+</ul>
+<p><strong>Example</strong>: (Example 5.9 in book) We want to estimate the average number of legs on healthy puppies in animal shelters. There are two animal shelters in the town. Shelter A has 30 puppies and Shelter B has 10 puppies. We select one shelter at random. After selecting the shelter, we’ll select 2 puppies at random.</p>
+<p><strong>Pick Shelter A</strong>: <span class="math inline">\(y_{A1}=4\)</span>, <span class="math inline">\(y_{A2}=4\)</span></p>
+<p><span class="math display">\[\begin{eqnarray*}
+\hat t_A &amp;=&amp; M_A \bar y_A = (30)(4) = 120 \\
+\hat t_{unb} &amp;=&amp; \frac{N}{n}\sum_i \hat t_i = \frac{2}{1}(120)=240 \\
+\Rightarrow \hat{\bar y_{unb}} &amp;=&amp; \frac{\hat t_{unb}}{M_0} = \frac{240}{40} = 6 \hbox{ puppy legs!}
+\end{eqnarray*}\]</span></p>
+<p><strong>Pick Shelter B</strong>: <span class="math inline">\(y_{B1}=4\)</span>, <span class="math inline">\(y_{B2}=4\)</span></p>
+<p><span class="math display">\[\begin{eqnarray*}
+\hat t_B &amp;=&amp; M_B \bar y_B = (10)(4) = 40 \\
+\hat t_{unb} &amp;=&amp; \frac{N}{n}\sum_i \hat t_i = \frac{2}{1}(40)=80 \\
+\Rightarrow \hat{\bar y_{unb}} &amp;=&amp; \frac{\hat t_{unb}}{M_0} = \frac{80}{40} = 2 \hbox{ puppy legs!}
+\end{eqnarray*}\]</span></p>
+<p>So the estimator is unbiased (6+2/2=4), but gives ridiculous estimates (not shown, but the variance of the unbiased mean here is 6400).</p>
+<p>The ratio estimator on the other hand,</p>
+<p><strong>Shelter A</strong>: <span class="math inline">\(\hat{\bar y_r}=\frac{\sum_i \hat t_i}{\sum_i M_i} = \frac{120}{30} = 4\)</span></p>
+<p><strong>Shelter B</strong>: <span class="math inline">\(\hat{\bar y_r}=\frac{\sum_i \hat t_i}{\sum_i M_i} = \frac{40}{10} = 4\)</span>, and the variance is 0.</p>
+<p>Let’s go back to the estimator for the population total</p>
+<p><span class="math display">\[\begin{eqnarray*}
+\hat t_{unb} &amp;=&amp; \frac{N}{n} \sum_i \hat t_i = \frac{N}{n} \sum_i M_i \bar y_i = \frac{N}{n} \sum_i \frac{M_i}{m_i} \sum_{j=1}^{m_i} y_{ij} \\
+&amp;=&amp; \sum_i \sum_j \frac{N}{n}\frac{M_i}{m_i} y_{ij} = \sum_i\sum_j w_{ij}y_{ij}
+\end{eqnarray*}\]</span></p>
+<p>So, the weight for element <span class="math inline">\(j\)</span> in cluster <span class="math inline">\(i\)</span> is</p>
+<p><span class="math display">\[
+w_{ij} = \frac{N}{n}\frac{M_i}{m_i}
+\]</span></p>
+<p>Is this still an equal probability sample? Let’s look more closely as the inclusion probabilities</p>
+<ul>
+<li><p><span class="math inline">\(\pi_i = \hbox{P(cluster } i \hbox{ is in the sample)} = \frac{n}{N}\)</span> because clusters are selected in a SRS</p></li>
+<li><p><span class="math inline">\(\pi_{j|i} = \hbox{P(element } j \hbox{ is selected GIVEN cluster } i \hbox{ is in the sample)} = \frac{m_i}{M_i} = \frac{\hbox{total selected}}{\hbox{total in cluster}}\)</span></p></li>
+<li><p><span class="math inline">\(\pi_{ij} = \hbox{P(element } j \hbox{ and cluster } i \hbox{ is in the sample)} = \pi_i \pi_{j|i} = \left (\frac{n}{N} \right) \left (\frac{m_i}{M_i} \right ) = \frac{nm_i}{NM_i} \Rightarrow w_{ij} = \frac{NM_i}{nm_i}\)</span></p></li>
+</ul>
+<p>This is only constant if <span class="math inline">\(M_i/m_i\)</span> is constant, <span class="math inline">\(M_i/m_i=c\)</span>.</p>
+<p>So, if we want a self-weighting design with two-stage clustering</p>
+<ul>
+<li>Stage 1: Select <span class="math inline">\(n\)</span> PSUs from <span class="math inline">\(N\)</span> population PSUs using SRS</li>
+<li>Stage 2: Choose <span class="math inline">\(m_i\)</span> proportional to <span class="math inline">\(M_i\)</span> so that <span class="math inline">\(m_i/M_i\)</span> is constant. Select the <span class="math inline">\(m_i\)</span> SSUs using a SRS.</li>
+<li>The sample weight for SSU <span class="math inline">\(j\)</span> in Cluster <span class="math inline">\(i\)</span> is then constant for all elements</li>
+</ul>
+<p>What are the implications of <span class="math inline">\(m_i/M_i\)</span> constant? You have to subsample many more elements in big clusters than in small clusters.</p>
+<div style="page-break-after: always;"></div>
+<p>We can use <code>R</code> to get estimates from one-stage clustering with unequal cluster sizes, as well as two-stage clustering. The differences are going to come in the <code>svydesign</code> statement, and the inputs we pass to it.</p>
+<p>For one-stage clustering with unequal cluster sizes, nothing really changes from equal cluster sizes.</p>
+<p><strong>Example</strong>: Algebra classes. Let’s now use all <span class="math inline">\(n=12\)</span> classes that were randomly selected out of the <span class="math inline">\(N=187\)</span>, rather than just 4.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>algebra<span class="ot">&lt;-</span><span class="fu">read.csv</span>(<span class="st">"algebra.csv"</span>,<span class="at">header=</span><span class="cn">TRUE</span>)</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(algebra)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  class Mi score
+1    23 20    57
+2    23 20    90
+3    23 20    56
+4    23 20    57
+5    23 20    46
+6    23 20    55</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>N<span class="ot">&lt;-</span><span class="dv">187</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>n<span class="ot">&lt;-</span><span class="dv">12</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>m<span class="ot">&lt;-</span><span class="dv">299</span></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>algebra<span class="sc">$</span>sampwt<span class="ot">&lt;-</span>N<span class="sc">/</span>n</span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(algebra)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  class Mi score   sampwt
+1    23 20    57 15.58333
+2    23 20    90 15.58333
+3    23 20    56 15.58333
+4    23 20    57 15.58333
+5    23 20    46 15.58333
+6    23 20    55 15.58333</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>algdesign<span class="ot">&lt;-</span><span class="fu">svydesign</span>(<span class="at">id=</span><span class="sc">~</span>class,<span class="at">weights=</span><span class="sc">~</span>sampwt,<span class="at">fpc=</span><span class="sc">~</span><span class="fu">rep</span>(N,m),<span class="at">data=</span>algebra)</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>algdesign</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>1 - level Cluster Sampling design
+With (12) clusters.
+svydesign(id = ~class, weights = ~sampwt, fpc = ~rep(N, m), data = algebra)</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>scoremean<span class="ot">&lt;-</span><span class="fu">svymean</span>(<span class="sc">~</span>score,algdesign)</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>scoremean</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>        mean     SE
+score 62.569 1.4916</code></pre>
+</div>
+</div>
+<p>Note the fpc option uses <span class="math inline">\(m=299\)</span>, since there were a total of 299 students in our sample of 12 classes. This gives the output</p>
+<p>For two-stage clustering we do need to adjust the code. We’ll need to identify both the PSUs and the SSUs</p>
+<p><strong>Example</strong>: (Book Problem #8) A person with a large library needs to estimate the purchase cost and replace value of a book collection for their insurance. They have 44 shelves with books and randomly select 12 shelves. They then count the number of books <span class="math inline">\(M_i\)</span> on each of the selected shelves, and generate five random numbers between 1 and <span class="math inline">\(M_i\)</span> for each selected shelf to determine which books to examine. They select the specific books determined by the random numbers and look up the replacement value. The data are in <code>books.csv</code> on Canvas. We’ll estimate total replacement cost for the library as well as average replacement cost per book.</p>
+<p>In R, we’ll use the code</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>    books<span class="ot">&lt;-</span><span class="fu">read.csv</span>(<span class="st">'books.csv'</span>,<span class="at">header=</span><span class="cn">TRUE</span>)</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">head</span>(books)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  shelf Mi booknumber purchase replace
+1     2 26          3        1      13
+2     2 26          5        1      13
+3     2 26          6        1       3
+4     2 26         18        8       8
+5     2 26         19        7      11
+6     4 52          2        1       6</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>    N<span class="ot">&lt;-</span><span class="dv">44</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>    n<span class="ot">&lt;-</span><span class="dv">12</span></span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>    nbooks<span class="ot">&lt;-</span><span class="fu">nrow</span>(books)</span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>    booksdesign<span class="ot">&lt;-</span><span class="fu">svydesign</span>(<span class="at">id=</span><span class="sc">~</span>shelf<span class="sc">+</span>booknumber,<span class="at">fpc=</span><span class="sc">~</span><span class="fu">rep</span>(N,nbooks)<span class="sc">+</span>Mi,<span class="at">nest=</span><span class="cn">TRUE</span>,<span class="at">data=</span>books)</span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">svytotal</span>(<span class="sc">~</span>replace,booksdesign)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>        total     SE
+replace 32638 5733.5</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>    <span class="fu">svymean</span>(<span class="sc">~</span>replace,booksdesign)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>          mean     SE
+replace 23.611 5.4759</code></pre>
+</div>
+</div>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./Section-5-Ratio-Reg.html" class="pagination-link" aria-label="Ratio and Regression Estimation">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Ratio and Regression Estimation</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

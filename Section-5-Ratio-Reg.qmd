@@ -1172,11 +1172,9 @@ If we focus on Domain 1 (large motorboats), we can summarize the data as follows
 
 \newpage
 
-So, 
-$$
+So, $$
 \bar u =  \hspace{150mm}
-$$
-\
+$$\
 
 and
 

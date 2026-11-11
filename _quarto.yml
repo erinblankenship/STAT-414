@@ -14,6 +14,7 @@ book:
     - Section-3-SRS.qmd
     - Section-4-Stratified.qmd
     - Section-5-Ratio-Reg.qmd
+    - Section-6-Cluster.qmd
 
   
 
@@ -24,6 +25,7 @@ format:
   pdf:   
     header-includes:
         - \usepackage{float}
+        - \usepackage{amsmath}
         - \floatplacement{table}{H}  
     output-file: pdf-book
     fontsize: 12pt

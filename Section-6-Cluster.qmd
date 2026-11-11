@@ -7,94 +7,135 @@ So far we've talked about two sampling designs in detail: simple random sampling
 
 We'll consider a couple of examples to demonstrate this.
 
-**Example**: About a decade ago, the journal \textit{Basic and Applied Social Psychology} banned p-values from its publication, and this sparked a lot of thought, articles, and talks about the role of p-values in science. Suppose we want to estimate the proportion of articles in the social and behavioral sciences literature that contained p-values in 2023. There are 1285 such journals. There are a couple of options:
+**Example**: About a decade ago, the journal *Basic and Applied Social Psychology* banned p-values from its publication, and this sparked a lot of thought, articles, and talks about the role of p-values in science. Suppose we want to estimate the proportion of articles in the social and behavioral sciences literature that contained p-values in 2023. There are 1285 such journals. There are a couple of options:
 
-\begin{itemize}
-	\item 
-	
-	\item 
-	
-	\vspace{35mm}
-	
-\end{itemize}
+- 
 
-\vspace{35mm}
+\
 
-\textbf{Example:} Suppose we want to estimate the proportion of Nebraska high school students who are taking (or have taken) a dual credit course.
+\
+
+- 
+
+\
+
+**Example**: Suppose we want to estimate the proportion of Nebraska high school students who are taking (or have taken) a dual credit course.
+
+\
+\
+\
+\
+\
 
 \newpage
 
-Both of these are examples of \textbf{cluster samples}. In cluster sampling, 
+Both of these are examples of **cluster samples**. In cluster sampling,
 
-\vspace{40mm}
+\
+\
+\
+\
+\
+\
 
++----------------------------------------+-----------------+---------------+
+| Population of Interest                 | Elements        | Cluster       |
+|                                        |                 |               |
+|                                        | secondary units | primary units |
++========================================+=================+===============+
+| Articles in social/behavioral journals |                 |               |
++----------------------------------------+-----------------+---------------+
+|                                        |                 |               |
++----------------------------------------+-----------------+---------------+
+| US residents                           |                 |               |
++----------------------------------------+-----------------+---------------+
+|                                        |                 |               |
++----------------------------------------+-----------------+---------------+
+| Lincoln households                     |                 |               |
++----------------------------------------+-----------------+---------------+
+|                                        |                 |               |
++----------------------------------------+-----------------+---------------+
+| UNL staff members                      |                 |               |
++----------------------------------------+-----------------+---------------+
+|                                        |                 |               |
++----------------------------------------+-----------------+---------------+
+| Maple trees in Vermont                 |                 |               |
++----------------------------------------+-----------------+---------------+
+|                                        |                 |               |
++----------------------------------------+-----------------+---------------+
 
-\begin{center}
-	\begin{tabular}[h]{ccc}
-		Population & Elements & Cluster \\
-		of Interest & secondary units & primary units \\ \hline
-		Articles in social &    \hspace{30mm} & \hspace{30mm} \\
-		\& behavior journals &    &   \\ \hline
-		US residents &     &        \\
-		  &   &   \\ \hline
-		  Lincoln households &    &    \\
-		   &   & \\ \hline 
-		   UNL staff members &   &   \\
-		   &  &  \\ \hline
-		   Maple trees  &   &  \\
-		   in Vermont &   & \\
-		   \end{tabular}
-		  		 \end{center}
+So, a **cluster sample** is a probability sample in which a sampling unit is a cluster. Sometimes the cluster is determined by the availability of a sampling frame.
 
-So, a \textbf{cluster sample} is a probability sample in which a sampling unit is a cluster. Sometimes the cluster is determined by the availability of a sampling frame
-
-\begin{center}
-	\begin{tabular}[h]{ccc}
-		Frame & Sampling Unit & Element (Observation Unit) \\ \hline
-		\hspace{30mm} & \hspace{30mm} & \hspace{30mm} \\
-		&  & \\
-		&  & \\
-		&  & \\
-		&  & \\	
-		&  & 
-		\end{tabular}
-\end{center}
++----------------+----------------+----------------------------+
+| Frame          | Sampling Unit  | Element (Observation Unit) |
++================+================+============================+
+|                |                |                            |
++----------------+----------------+----------------------------+
+|                |                |                            |
++----------------+----------------+----------------------------+
+|                |                |                            |
++----------------+----------------+----------------------------+
+|                |                |                            |
++----------------+----------------+----------------------------+
+|                |                |                            |
++----------------+----------------+----------------------------+
+|                |                |                            |
++----------------+----------------+----------------------------+
 
 This might at first blush look like stratification. Both clustering and stratification group population members. But, selection is totally different. Additionally,
 
+\
+\
+\
+\
+\
+\
+
 \newpage
 
-\textbf{Example:} High school dual credit
+**Example**: High school dual credit
 
-\vspace{30mm}
+\
+\
+\
+\
+\
+\
 
-We're going to start with \textbf{One-Stage Cluster Sampling}. One-stage means
+## One-Stage Cluster Sampling
 
-\vspace{20mm}
+We're going to start with **one-stage cluster sampling**. One-stage means
+
+\
+\
+\
+\
 
 Here's the set-up:
-\begin{itemize}
-	\item Divide the population into $N$ clusters, also known as \textbf{primary sampling units} (PSUs).
-	\item Cluster $i$ has size $M_i$, so $M_i$ is the number of \textbf{secondary sampling units} (SSUs).
-	
-	\vspace{20mm}
-	
-	\item Clusters can be selected using any sampling design. We'll assume an SRS.
-	\item On each SSU in a selected PSU, the characteristic of interest is observed. We are back to 2 subscripts:
-	
-	\vspace{20mm}
-	
-\end{itemize}
 
-We've got lots of new notation, which we'll break up  by sampling level in addition to population/sample. 
+- Divide the population into $N$ clusters, also known as \textbf{primary sampling units} (PSUs).
+- Cluster $i$ has size $M_i$, so $M_i$ is the number of \textbf{secondary sampling units} (SSUs).
 
-\textbf{Population Quantities: PSU level}
-\vspace{5mm}
+\
+\
+
+- Clusters can be selected using any sampling design. We'll assume an SRS.
+- On each SSU in a selected PSU, the characteristic of interest is observed. We are back to 2 subscripts:
+
+\
+\
+
+We've got lots of new notation, which we'll break up by sampling level in addition to population/sample.
+
+**Population Quantities: PSU level**
+
 $$
 \begin{array}{ll}
 N \hbox{\hspace{70mm}} & t_i \hbox{\hspace{70mm}} \\
  & \\
+ & \\
  M_i & t \\
+ & \\
  & \\
  M_0 & \sigma^2_t
 \end{array}
@@ -102,472 +143,672 @@ $$
 
 \newpage
 
-\textbf{Population Quantities: SSU level}
-\vspace{5mm}
+**Population Quantities: SSU level**
+
 $$
 \begin{array}{ll}
-	\wb y_{\mathcal{U}} \hbox{\hspace{70mm}} &  \hbox{\hspace{70mm}} \\
-	& \\
-	\wb y_{i\mathcal{U}} &  \\
-	& \\
-	\sigma^2 &  \\
-	& \\
-	\sigma^2_i &
+    \bar y_{\mathcal{U}} = \frac{1}{M_0} \sum_{i=1}^N \sum_{j=1}^{M_i} y_{ij} & \hbox{\hspace{100mm}} \\
+    & \\
+    \bar y_{i\mathcal{U}} = \frac{1}{M_i}\sum_{j=1}^{M_i} y_{ij} = \frac{t_i}{M_i} &  \\
+    & \\
+    \sigma^2 = \frac{1}{M_0-1} \sum_{i=1}^N \sum_{j=1}^{M_i} (y_{ij} -\bar y_{\mathcal{U}})^2  &  \\
+    & \\
+    \sigma^2_i = \frac{1}{M_i-1} \sum_{j=1}^{M_i} (y_{ij} - \bar y_{i\mathcal{U}})^2  & \\
+    & \\
 \end{array}
 $$
 
-\textbf{Sample Quantities}
-\vspace{5mm}
+**Sample Quantities**
+
 $$
 \begin{array}{ll}
-	\mathcal{S} \hbox{\hspace{70mm}} &  \hbox{\hspace{70mm}} \\
-	& \\
-	\mathcal{S}_i & \\
-	& \\
-	n & \\ 
-	& \\
-	m_i & \\
-	& \\
-	\wb y_{i} &  \\
-	& \\
-	\wh t_i &  \\
-	& \\
-	s^2_t & \\
-	& \\
-	s^2_i & \\
-	& \\
-	w_{ij} & 
+    \mathcal{S} = \hbox{sample of PSUs from the whole population} &  \hbox{\hspace{80mm}} \\
+    & \\
+    \mathcal{S}_i = \hbox{sample of SSUs selected from PSU } i & \\
+    & \\
+    n = \hbox{number of PSUs in the sample} & \\ 
+    & \\
+    m_i = \hbox{number of SSUs from PSU } i \hbox{ in the sample} & \\
+    & \\
+    \bar y_{i} = \frac{1}{m_i} \sum_{j \in \mathcal{S}_i} y_{ij} &  \\
+    & \\
+    \hat t_i = \frac{M_i}{m_i} \sum_{j \in \mathcal{S}_i} y_{ij} &  \\
+    & \\
+    s^2_t = \frac{1}{n-1} \sum_{i \in \mathcal{S}} \left ( \hat t_i - \frac{\sum_{i \in \mathcal{S}} \hat t_i}{n} \right )^2 & \\
+    & \\
+    s^2_i = \frac{1}{m_i-1}\sum_{j \in \mathcal{S}_i} (y_{ij} - \bar y_i )^2 & \\
+    & \\
+    w_{ij} = \hbox{sampling weight for SSU } j \hbox{ in PSU } i & \\
 \end{array}
 $$
-
 
 What does cluster sampling look like?
+
+\
 
 \newpage
 
 Now, because we are considering 1-stage cluster sampling
 
-\vspace{30mm}
+\
+\
+\
+
+### Equal size clusters
 
 We're going to start with the simplest case: clusters of equal size. This means
 
-\vspace{30mm}
+\
 
-If clusters are equal size, estimating population means and totals is easy--we treat the PSU mean/total as the observation and ignore the individual elements. 
+If clusters are equal size, estimating population means and totals is easy--we treat the PSU mean/total as the observation and ignore the individual elements.
 
-\vspace{30mm}
+\
+\
+\
+\
+\
+\
+\
 
 The clusters are a SRS of the population, so we can use the variances from the SRS
 
-\vspace{30mm}
+\
+\
+\
+\
 
 Dealing with means is also straightforward
 
+\
+\
+\
+\
+\
+\
+\
+\
+\
+
 \newpage
 
-\textbf{Example:} Inspecting cases of canned goods for damaged cans. We have a truckload of 100 cases, each with 12 cans. We select a SRS of 4 cases. Here's the data
-\begin{center}
-	\begin{tabular}[h]{ccccc}
-		Can \# & Case 1 & Case 2 & Case 3 & Case 4 \\ \hline
-		1 & 0 & 0 & 0 & 0 \\
-		2 & 0 & 0 & 0 & 0 \\
-		3 & 1 & 0 & 0 & 0 \\
-		4 & 0 & 0 & 1 & 0 \\
-		5 & 0 & 0 & 0 & 0 \\
-		6 & 1 & 1 & 0 & 0 \\
-		7 & 0 & 0 & 0 & 1 \\
-		8 & 0 & 0 & 0 & 0 \\
-		9 & 0 & 0 & 1 & 0 \\
-		10 & 0 & 0 & 0 & 0 \\
-		11 & 0 & 1 & 0 & 0 \\
-		12 & 0 & 0 & 0 & 0 \\ \hline
-		$t_i$ &   &   &   &
-	\end{tabular}
-\end{center}
+**Example**: Inspecting cases of canned goods for damaged cans. We have a truckload of 100 cases, each with 12 cans. We select a SRS of 4 cases. Here's the data.
+
+| Can \# | Case 1 | Case 2 | Case 3 | Case 4 |
+|--------|--------|--------|--------|--------|
+| 1      | 0      | 0      | 0      | 0      |
+| 2      | 0      | 0      | 0      | 0      |
+| 3      | 1      | 0      | 0      | 0      |
+| 4      | 0      | 0      | 1      | 0      |
+| 5      | 0      | 0      | 0      | 0      |
+| 6      | 1      | 1      | 0      | 0      |
+| 7      | 0      | 0      | 0      | 1      |
+| 8      | 0      | 0      | 0      | 0      |
+| 9      | 0      | 0      | 1      | 0      |
+| 10     | 0      | 0      | 0      | 0      |
+| 11     | 0      | 1      | 0      | 0      |
+| 12     | 0      | 0      | 0      | 0      |
+| $t_i$  |        |        |        |        |
+
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
 
 \newpage
 
 Suppose while checking the cans for damage the cans were also weighed, to make sure they are labeled correctly. The cans are labeled 8 oz.
-\begin{center}
-	\begin{tabular}[h]{ccccc}
-Can \# &   Case1 & Case2 & Case3 & Case4 \\ \hline
-1 &  8.15 &   8.03 &  7.65 &  7.99 \\
-2 &   7.70 &  8.16 &  7.90 &  7.79 \\
-3 &   7.76 &  7.73 &  7.84 &  7.96 \\
-4  &  7.59 &   7.67 &  8.14 &  8.20 \\
-5 &   7.71 &  7.92 &  8.07 &  7.92 \\
-6 &   7.55 &  7.94 &  7.83 &  7.98 \\ 
-7 &   8.30 &  7.93 &    8.07 &  7.67 \\
-8 &   8.26 &  7.77 &  7.96 &  7.99 \\
-9  &  8.01 &  7.93 &  7.96 &  7.85 \\
-10  & 8.06 &  8.01 &  7.91 &  8.13 \\
-11 &  7.69 &  7.88 &  7.95 &  7.56 \\
-12 &   8.08 &  7.58 &  7.79 &  7.94 \\ \hline
-$t_i$ &     &       &       &
-\end{tabular}
-\end{center}
+
+| Can \# | Case 1 | Case 2 | Case 3 | Case 4 |
+|--------|--------|--------|--------|--------|
+| 1      | 8.15   | 8.03   | 7.65   | 7.99   |
+| 2      | 7.70   | 8.16   | 7.90   | 7.79   |
+| 3      | 7.76   | 7.73   | 7.84   | 7.96   |
+| 4      | 7.59   | 7.67   | 8.14   | 8.20   |
+| 5      | 7.71   | 7.92   | 8.07   | 7.92   |
+| 6      | 7.55   | 7.94   | 7.83   | 7.98   |
+| 7      | 8.30   | 7.93   | 8.07   | 7.67   |
+| 8      | 8.26   | 7.77   | 7.96   | 7.99   |
+| 9      | 8.01   | 7.93   | 7.96   | 7.85   |
+| 10     | 8.06   | 8.01   | 7.91   | 8.13   |
+| 11     | 7.69   | 7.88   | 7.95   | 7.56   |
+| 12     | 8.08   | 7.58   | 7.79   | 7.94   |
+| $t_i$  |        |        |        |        |
+
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
 
 \newpage
 
-Like with previous designs, each unit has a \textbf{sampling weight}. Sampling weights are associated with SSUs. 
+Like with previous designs, each unit has a **sampling weight**. Sampling weights are associated with SSUs.
 
 Let $w_{ij}$ be the weight for observation unit (SSU) $j$ in PSU $i$.
 
-\vspace{40mm}
+\
+\
+\
+
+$$
+\sum_{i \in \mathcal{S}} \sum_{j=1}^M w_{ij} = \sum_i \sum_j \frac{N}{n} = \sum_i \frac{N}{n}\sum_j 1 = \sum_i \frac{N}{n}(M) = \frac{NM}{n} \sum_{i \in \mathcal{S}} 1 = \frac{NM}{n}(n) = NM
+$$\
 
 Sample weights can be used just like they are in the SRS to calculate estimators:
 
-\vspace{30mm}
+$$
+\hat t = \sum_i \sum_j w_{ij}y_{ij} \hbox{ and } \hat{\bar y} = \frac{\sum_i \sum_j w_{ij} y_{ij}}{\sum_i \sum_j w_{ij}}
+$$
 
 Survey packages use these weights to get the estimates, just as with other designs.
 
-In R, the main thing that will change is in the \texttt{svydesign} statement. The \texttt{id} option identifies clusters, so now we will use that. With previous designs, our R code looked like:
+In R, the main thing that will change is in the `svydesign` statement. The `id` option identifies clusters, so now we will use that. With previous designs, our R code looked like:
 
-\begin{verbatim}
-	design<-svydesign(id=~1,weights=~sampwt,fpc=rep(N,n),data=dataset)
-\end{verbatim}
-with potentially a \texttt{strata=} option included. Now, our generic syntax will be
-\begin{verbatim}
-	design<-svydesign(id=~cluster,weights=~sampwt,fpc=~fpc,data=dataset)
-\end{verbatim}
-where \texttt{cluster} is the column identifying the PSU in the data set.
+```         
+design<-svydesign(id=~1,weights=~sampwt,fpc=rep(N,n),data=dataset)
+```
 
-\textbf{Example:} For the cans data set, I used the code
-\begin{verbatim}
-	N<-100
-	n<-4
-	cans$sampwt<-N/n
-	cans
-	
-	library(survey)
-	candesign<-svydesign(id=~case,weights=~sampwt,fpc=~rep(100,48),data=cans)
-	candesign
-	wtmean<-svymean(~weight,candesign)
-	wtmean
-\end{verbatim}
+with potentially a `strata=` option included. Now, our generic syntax will be
 
-Usually clusters are not the same size (for example, household sizes) so more frequently we need to account for the cluster size. Recall that
+```         
+design<-svydesign(id=~cluster,weights=~sampwt,fpc=~fpc,data=dataset)
+```
 
-\vspace{10mm}
+where `cluster` is the column identifying the PSU in the data set.
 
-We could use the same (unbiased) estimators we did when cluster sizes are all equal
+**Example**: For the cans data set, I used the code
 
-\vspace{60mm}
+```{r}
+#| warning: false
+cans<-read.csv("cans.csv",header=TRUE)
+    
+N<-100
+n<-4
+cans$sampwt<-N/n
+head(cans)
+    
+library(survey)
+candesign<-svydesign(id=~case,weights=~sampwt,fpc=~rep(100,48),data=cans)
+candesign
+wtmean<-svymean(~weight,candesign)
+wtmean
+```
+
+### Unequal size clusters
+
+Often clusters are not the same size (for example, household sizes) so frequently we need to account for the cluster size. Recall that
+
+\
+
+We could use the same (unbiased) estimators we did when cluster sizes are all equal:
+
+$$
+\hat t_{unb} = \frac{N}{n}\sum_{i \in \mathcal{S}} t_i \hbox{ with } \hbox{SE}(\hat t_{unb}) = N \sqrt{\left (1 - \frac{n}{N}\right ) \frac{s_t^2}{n}}
+$$ and
+
+$$
+\hat{\bar y} = \frac{\hat t_{unb}}{M_0} \hbox{ with } \hbox{SE}(\hat{\bar y}) = \frac{N}{M_0}\sqrt{\left (1 - \frac{n}{N}\right ) \frac{s_t^2}{n}}
+$$
+
+\newpage
 
 These aren't usually the estimators we use, though. Why not? Why is it important to account for cluster sizes? Typically, cluster total $t_i$ is correlated with cluster size $M_i$
 
-\vspace{40mm}
+\
+\
+\
 
 We know how to deal with this situation!
 
 So now, $M_i$ serves as our auxiliary variable and our response is $t_i$. We can then use our ratio estimate for population mean, and its corresponding variance estimate
 
+$$
+\hat{\bar y_r} = \frac{\sum_{i=1}^n t_i}{\sum_{i=1}^n M_i}
+$$
+
+with
+
+\begin{eqnarray*}
+\widehat{\hbox{Var}(\hat{\bar y_r})} &=& \left (1 - \frac{n}{N} \right )\frac{1}{n\bar M_{\mathcal{U}}^2} \frac{\sum_{i=1}^n (t_i - \hat{\bar y_r} M_i)^2}{n-1} \\
+&=& \left (1 - \frac{n}{N} \right )\frac{1}{n\bar M_{\mathcal{U}}^2} \frac{\sum_{i=1}^n M_i^2 (\bar y_i - \hat{\bar y_r})^2}{n-1}
+\end{eqnarray*}
+
+**Example**: Can weights, revisited.
+
+| Can \#   | Case 1   | Case 2   | Case 3   | Case 4   |
+|----------|----------|----------|----------|----------|
+| 1        | 8.15     | 8.03     | 7.65     | 7.99     |
+| $\vdots$ | $\vdots$ | $\vdots$ | $\vdots$ | $\vdots$ |
+| 12       | 8.08     | 7.58     | 7.79     | 7.94     |
+| $t_i$    | 94.86    | 94.55    | 95.07    | 94.98    |
+
+\
+\
+\
+\
+
 \newpage
-
-\textbf{Example:} Can weights, revisited.
-\begin{center}
-	\begin{tabular}[h]{ccccc}
-		Can \# &   Case1 & Case2 & Case3 & Case4 \\ \hline
-		1 &  8.15 &   8.03 &  7.65 &  7.99 \\
-	\vdots & \vdots & \vdots & \vdots & \vdots \\
-		12 &   8.08 &  7.58 &  7.79 &  7.94 \\ \hline
-		$t_i$ &     &       &       &
-	\end{tabular}
-\end{center}
-
-\vspace{70mm}
-
 
 We can then easily get an estimate for the population total as well as an estimate of variance.
 
-\vspace{30mm}
+\
+\
+\
 
-\textbf{Example:}
+**Example**:
 
+\
+\
+\
+\
 
+**Example**: (adapted from Example 5.6 in the book) A school district in a large city has $N=187$ algebra classes. A researcher takes an SRS of $n=4$ classes and each student is given a quiz. In our sample, class sizes range from 17 to 34.
+
++----------+----------+------------+----------+--------------------------------------+
+| Class    | $M_i$    | $\bar y_i$ | $t_i$    | $M_i^2(\bar y_i - \hat{\bar y_r})^2$ |
++==========+==========+============+==========+======================================+
+| 1        | 34       | 58         |          |                                      |
++----------+----------+------------+----------+--------------------------------------+
+|          |          |            |          |                                      |
++----------+----------+------------+----------+--------------------------------------+
+|          |          |            |          |                                      |
++----------+----------+------------+----------+--------------------------------------+
+| 2        | 28       | 64.9       | 1816     | 899.28                               |
++----------+----------+------------+----------+--------------------------------------+
+| 3        | 32       | 72.1       | 2308     | 70051.268                            |
++----------+----------+------------+----------+--------------------------------------+
+| 4        | 17       | 58.2       | 989      | 9157.150                             |
++----------+----------+------------+----------+--------------------------------------+
+|          | 111      |            | 7085     | 119385.389                           |
++----------+----------+------------+----------+--------------------------------------+
+
+\
+\
+\
+\
+\
+\
+\
+\
+\
 
 \newpage
 
-\textbf{Example:} (adapted from Example 5.6 in the book) A school district in a large city has $N=187$ algebra classes. A researcher takes an SRS of $n=4$ classes and each student is given a quiz. In our sample, class sizes range from 17 to 34.
-\begin{center}
-	\begin{tabular}[h]{ccccc}
-		Class & $M_i$ & $\wb y_i$ & $t_i$ & $M_i^2 (\wb y_i - \wh{\wb y}_r)^2$ \\ \hline
-		1 & 34 & 58 & \hspace{20mm} & \hspace{50mm} \\
-		2 & 28 & 64.9 & & \\
-		3 & 32 & 72.1 & & \\
-		4 & 17 & 58.2 & & \\ \hline
-		 & 111 &   
-	\end{tabular}
-\end{center}
-
-\vspace{50mm}
-
 We can extend the idea of sample weights to different cluster sizes. We're still in 1-stage clustering, so all SSUs are observed for a selected PSU. This means
 
-\vspace{20mm}
+$$
+w_{ij} = \frac{1}{\hbox{P(SSU } j \hbox{ in PSU } i \hbox{ is in the sample})} = \frac{1}{n/N} = \frac{N}{n}
+$$
 
 When all clusters are the same size
 
-\vspace{20mm}
+$$
+\sum_{i \in \mathcal{S}} \sum_{j \in \mathcal{S}_i} w_{ij} = NM = M_0
+$$
 
-But when the PSUs have different sizes
+But when the PSUs have different sizes, $\sum_i \sum_j w_{ij}$ estimates population size:
 
-\vspace{30mm}
+$$
+\sum_{i \in \mathcal{S}} \sum_{j \in \mathcal{S}_i} w_{ij} = \sum_i \sum_j \frac{N}{n} = \sum_{i \in \mathcal{S}} \frac{N}{n} \sum_{j \in \mathcal{S}_i} 1 = \sum_{i \in \mathcal{S}} \frac{N}{n} M_i = \frac{N}{n} \sum_{i \in \mathcal{S}}M_i = \hat M_0
+$$
 
 The weights can be used to get estimators in exactly the same way, and this is what survey packages do.
 
-\vspace{30mm}
+## Two-Stage Cluster Sampling
 
-In \textbf{two-stage cluster sampling}, not all of the SSUs are observed for a selected PSU. Instead, 
-\begin{itemize}
-	\item 
-	\item
-\end{itemize}
+In **two-stage cluster sampling**, not all of the SSUs are observed for a selected PSU. Instead,
+
+- Stage 1: Select clusters (PSUs)
+
+- Stage 2: Select elements within each selected cluster (SSUs)
+
 and we only collect data on the SSUs that were sampled from the cluster. Here's what two-stage cluster sampling looks like
 
-\vspace{90mm}
+\
+\
+\
+\
+\
+\
+
+\newpage
 
 Now, because there are two stages of sampling, there are two sets of sampling units.
-\begin{itemize}
-	\item \textbf{Stage 1:}
-	\item \textbf{Stage 2:}
-\end{itemize}
+
+- Stage 1: Select SRS of $n$ PSU from the population of $N$ PSUs
+
+- Stage 2: Select SRS of $m_i$ SSUs from the $M_i$ elements of PSU $i$
 
 What are the implications?
 
 With one-stage cluster sampling, we had data on every single element in the selected clusters
 
-\vspace{15mm}
+$$
+\Rightarrow \hbox{Cluster population values are known. We directly observe } \bar y_i, t_i
+$$
 
 But with two-stage cluster sampling, we only observe data on a sample of the elements in a selected cluster.
 
-\newpage
+$$
+\Rightarrow \hbox{We have to calculate estimates of } \bar y_i, t_i
+$$
 
 So why use two-stage cluster sampling?
-\begin{itemize}
-	\item 
-	\item
-\end{itemize}
 
-\vspace{30mm}
+- Maybe we only have access to a frame that lists clusters
+
+- Elements in a PSU are so similar that it's a waste of resources to sample all of them. Extra effort does not provide much additional information.
 
 As you can maybe guess, the variance estimates in two-stage cluster sampling are a LOT messier because we have to account for variance among the PSU (like before) but also the variance among the SSUs within the PSUs.
 
 Let's consider the unbiased estimator of the population total
 
-\vspace{20mm}
+$$
+\hat t_{unb} = \frac{N}{n} \sum_{i \in \mathcal{S}} t_i
+$$
 
 We now no longer know $t_i$, and we have to estimate it. We've observed data on $m_i$ elements in cluster $i$, so
 
-\vspace{30mm}
+$$
+\hat t_i = M_i \bar y_i = \sum_{j=1}^{m_i} \frac{M_i}{m_i} y_{ij}
+$$
 
 Basically, we're using the same estimator we did with one-stage clustering, but plugging in estimated cluster totals rather than known cluster totals.
 
-\vspace{60mm}
+- One-stage: $\hat t_{unb} = \frac{N}{n} \sum_i \underbrace{t_i}_{\text{known}} = \frac{N}{n} \sum_i M_i \underbrace{\bar y_{i\mathcal{U}}}_{\text{known}}$
+
+- Two-stage: $\hat t_{unb} = \frac{N}{n} \sum_i \underbrace{\hat t_i}_{\text{est}} = \frac{N}{n} \sum_i M_i \underbrace{\bar y_i}_{\text{est from } m_i \text{ elements}}$
 
 \newpage
 
-The variance of $\wh t_{unb}$ has two components, associated with the 2 sampling stages: variation among PSUs and variation among SSUs within PSUs:
+The variance of $\hat t_{unb}$ has two components, associated with the 2 sampling stages: variation among PSUs and variation among SSUs within PSUs:
 
-\vspace{100mm}
+- One-stage: only variation among PSUs
 
-\textbf{Example:} Let's go back to the can example, and suppose we weighed only 3 cans in each case.
-\begin{center}
-	\begin{tabular}[h]{ccccc}
-		Can \# &   Case1 & Case2 & Case3 & Case4 \\ \hline
-		1 &  8.15 &   8.03 &  7.65 &  7.99 \\
-		2 &   7.70 &  8.16 &  7.90 &  7.79 \\
-		3 &   8.08 &  7.58 &  7.79 &  7.94 \\ \hline
-		 &     &       &       &
-	\end{tabular}
-\end{center}
+$$
+\widehat{\hbox{Var}(\hat t)} = N^2 \left (1 - \frac{n}{N} \right ) \frac{s_t^2}{n}, \hbox{\hspace{5mm}} s^2_t=\frac{1}{n-1}\sum_i \left (\underbrace{t_i}_{\text{known}} - \frac{\hat t}{N} \right )^2
+$$ - Two-stage: we now have to estimate $t_i$ with $hat t_i$
 
-\begin{itemize}
-	\item Stage 1:
-	\begin{itemize}
-		\item Cluster
-		\item $N$=
-		\item $n$ = 
-	\end{itemize}
-	   \item Stage 2:
-	   \begin{itemize}
-	   	\item Element 
-	   	\item $M_i$ = 
-	   	\item $m_i$ = 
-	   \end{itemize}
-\end{itemize}
+$$
+\widehat{\hbox{Var}(\hat t_{unb})} = \underbrace{N^2 \left ( 1- \frac{n}{N} \right ) \frac{s^2_t}{n}}_{\text{among PSUs}} + \underbrace{\frac{N}{n}\sum_{i \in \mathcal{S}} \left ( 1-\frac{m_i}{M_i} \right ) M_i^2 \frac{s_i^2}{m_i}}_{\text{within PSUs}}
+$$
 
-\newpage
+where $s_t^2 = \frac{1}{n-1}\sum_{i \in \mathcal{S}} \left ( \hat t_i - \frac{\hat t_{unb}}{N} \right)^2$ and $s_i^2 = \frac{1}{m_i-1} \sum_{j \in \mathcal{S_i}} (y_{ij} - \bar y_i)^2$.
 
-\begin{center}
-	\begin{tabular}[h]{rcccc}
-		\multicolumn{1}{c}{Can \#} &   Case1 & Case2 & Case3 & Case4 \\ \hline
-		1 &  8.15 &   8.03 &  7.65 &  7.99 \\
-		2 &   7.70 &  8.16 &  7.90 &  7.79 \\
-		3 &   8.08 &  7.58 &  7.79 &  7.94 \\ \hline
-		$\wb y_i$ &   &   & & \\
-		          &    &   &  & \\	         
-		$\wh t_i = M_i \wb y_i$ &     &       &       & \\
-		 & & & & \\
-		 $s_i^2 = \frac{1}{m_i - 1} \sum_{j=1}^{m_i} (y_{ij} - \wb y_i)^2$ & & & & \\
-	\end{tabular}
-\end{center}
+**Example**: Let's go back to the can example, and suppose we weighed only 3 cans in each case.
+
+| Can \# | Case 1 | Case 2 | Case 3 | Case 4 |
+|--------|--------|--------|--------|--------|
+| 1      | 8.15   | 8.03   | 7.65   | 7.99   |
+| 2      | 7.70   | 8.16   | 7.90   | 7.79   |
+| 3      | 8.08   | 7.58   | 7.79   | 7.94   |
+|        | 23.93  | 23.77  | 23.34  | 23.72  |
+
+- Stage 1:
+  - Cluster = Case
+  - $N=100$
+  - $n = 4$
+- Stage 2:
+  - Element = Can
+  - $M_i = 12$
+  - $m_i = 3$
 
 \newpage
 
-We can use this estimator for the total (and its estimated variance) to get an estimator for the population mean $\wb y_{\mathcal{U}}$.
++---------------------------------------------------------------+--------+--------+--------+---------+
+| Can \#                                                        | Case 1 | Case 2 | Case 3 | Case 4  |
++:=============================================================:+========+========+========+=========+
+| 1                                                             | 8.15   | 8.03   | 7.65   | 7.99    |
++---------------------------------------------------------------+--------+--------+--------+---------+
+| 2                                                             | 7.70   | 8.16   | 7.90   | 7.79    |
++---------------------------------------------------------------+--------+--------+--------+---------+
+| 3                                                             | 8.08   | 7.58   | 7.79   | 7.94    |
++---------------------------------------------------------------+--------+--------+--------+---------+
+| $\bar y_i$                                                    | 7.977  | 7.923  | 7.78   | 7.917   |
++---------------------------------------------------------------+--------+--------+--------+---------+
+| $\hat t_i = M_i \bar y_i$                                     | 95.724 | 95.076 | 93.36  | 95.004  |
++---------------------------------------------------------------+--------+--------+--------+---------+
+| $s_i^2=\frac{1}{m_i -1} \sum_{j=1}^{m_i} (y_{ij}-\bar y_i)^2$ | 0.0586 | 0.0926 | 0.0157 | 0.01099 |
++---------------------------------------------------------------+--------+--------+--------+---------+
 
-\vspace{50mm}
+So, 
+$$
+\hat t_{unb} = \frac{N}{n} \sum_{i=1}^n \hat t_i = \frac{100}{4} [95.724 + \cdots + 95.004] = 9479.85
+$$ 
+and
 
-\textbf{Example:}
+$$
+s_t^2 = \frac{1}{n-1}\sum_{i \in \mathcal{S}} \left ( \hat t_i - \frac{\hat t_{unb}}{N} \right)^2 = \frac{1}{3}\left [ \left ( 95.724 - \frac{9479.85}{100} \right)^2 + \cdots + \left ( 95.004 - \frac{9479.85}{100} \right)^2\right ] = 1.015
+$$
 
-\vspace{50mm}
-
-
-We can also use ratio estimation like we did with one-stage cluster sampling. The ratio estimate for the population mean $\wb y_{\mathcal{U}}$ is
+So,
+\begin{eqnarray*}
+\widehat{\hbox{Var}(\hat t_{unb})} &=& \underbrace{N^2 \left ( 1- \frac{n}{N} \right ) \frac{s^2_t}{n}}_{\text{among PSUs}} + \underbrace{\frac{N}{n}\sum_{i \in \mathcal{S}} \left ( 1-\frac{m_i}{M_i} \right ) M_i^2 \frac{s_i^2}{m_i}}_{\text{within PSUs}} \\
+&=& (100)^2\left (1 -\frac{4}{100}\right)\frac{1.015}{4} + \frac{100}{4}\left [ \left ( 1-\frac{3}{12}\right)(12)^2\frac{0.0586}{3} + \cdots + \left ( 1-\frac{3}{12}\right)(12)^2\frac{0.01099}{3} \right ] \\
+&=& 2436.055 + 480.303 = 2916.358 \Rightarrow \hbox{SE} = 54.0033
+\end{eqnarray*}
 
 \newpage
 
-\textbf{Example:}
-\begin{center}
-	\begin{tabular}[h]{rcccc}
-		\multicolumn{1}{c}{Can \#} &   Case1 & Case2 & Case3 & Case4 \\ \hline
-		1 &  8.15 &   8.03 &  7.65 &  7.99 \\
-		2 &   7.70 &  8.16 &  7.90 &  7.79 \\
-		3 &   8.08 &  7.58 &  7.79 &  7.94 \\ \hline
-		$\wb y_i$ & 7.977  & 7.923  &  7.78 & 7.917 \\
-		&    &   &  & \\	         
-		$\wh t_i = M_i \wb y_i$ &  95.724   & 95.076      & 93.36      & 95.004 \\
-		& & & & \\
-		$s_i^2 = \frac{1}{m_i - 1} \sum_{j=1}^{m_i} (y_{ij} - \wb y_i)^2$ & 0.0586 & 0.0926 &  0.0157 & 0.01099 \\
-	\end{tabular}
-\end{center}
+We can use this estimator for the total (and its estimated variance) to get an estimator for the population mean $\bar y_{\mathcal{U}}$.
 
-\vspace{100mm}
+$$
+\hat{\bar y_{unb}} = \frac{\hat t_{unb}}{M_0}
+$$
+
+$$
+\widehat{\hbox{Var}(\hat{\bar y_{unb})}} = \frac{1}{M_0^2}\widehat{\hbox{Var}(\hat t_{unb})}
+$$
+
+
+**Example**: For the can data,
+
+$$
+\hat{\bar y_{unb}} = \frac{\hat t_{unb}}{M_0} = \frac{9479.85}{1200} = 7.8999
+$$
+and
+$$
+\widehat{\hbox{Var}(\hat{\bar y_{unb})}} = \frac{1}{M_0^2}\widehat{\hbox{Var}(\hat t_{unb})} = \frac{1}{1200^2} 2596.156 = 0.0018
+$$
+
+We can also use ratio estimation like we did with one-stage cluster sampling. The ratio estimate for the population mean $\bar y_{\mathcal{U}}$ is
+
+$$
+\hat{\bar y_r} = \frac{\sum_{i=1}^n \hat t_i}{\sum_{i=1}^n M_i} = \frac{\sum_i M_i \bar y_i}{\sum_i M_i}
+$$
+
+with estimated variance
+$$
+\widehat{\hbox{Var}(\hat{\bar y_r})} = \frac{1}{\bar M_{\mathcal{U}}^2} \left [ \left (1-\frac{n}{N} \right ) \frac{s_r^2}{n} + \frac{1}{nN}\sum_{i=1}^n M_i^2 \left (1-\frac{m_i}{M_i} \right ) \frac{s_i^2}{m_i} \right]
+$$
+where
+$$
+s_r^2 = \frac{1}{n-1}\sum_{i=1}^n (M_i \bar y_i - M_i \hat{\bar y_r})^2 = \frac{1}{n-1}\sum_{i=1}^n M_i^2 (\bar y_i - \hat{\bar y_r})^2.
+$$
+
+**Example**:
+
+
++---------------------------------------------------------------+--------+--------+--------+---------+
+| Can \#                                                        | Case 1 | Case 2 | Case 3 | Case 4  |
++:=============================================================:+========+========+========+=========+
+| 1                                                             | 8.15   | 8.03   | 7.65   | 7.99    |
++---------------------------------------------------------------+--------+--------+--------+---------+
+| 2                                                             | 7.70   | 8.16   | 7.90   | 7.79    |
++---------------------------------------------------------------+--------+--------+--------+---------+
+| 3                                                             | 8.08   | 7.58   | 7.79   | 7.94    |
++---------------------------------------------------------------+--------+--------+--------+---------+
+| $\bar y_i$                                                    | 7.977  | 7.923  | 7.78   | 7.917   |
++---------------------------------------------------------------+--------+--------+--------+---------+
+| $\hat t_i = M_i \bar y_i$                                     | 95.724 | 95.076 | 93.36  | 95.004  |
++---------------------------------------------------------------+--------+--------+--------+---------+
+| $s_i^2=\frac{1}{m_i -1} \sum_{j=1}^{m_i} (y_{ij}-\bar y_i)^2$ | 0.0586 | 0.0926 | 0.0157 | 0.01099 |
++---------------------------------------------------------------+--------+--------+--------+---------+
+
+
+So,
+
+$$
+\hat{\bar y_r} = \frac{\sum_{i=1}^n \hat t_i}{\sum_{i=1}^n M_i} = \frac{95.724 + \cdots + 95.004}{12 + \cdots + 12} = 7.899
+$$
+and
+$$
+s_r^2 = \frac{1}{n-1}\sum_{i=1}^n M_i^2 (\bar y_i - \hat{\bar y_r})^2 = \frac{1}{3}\left [ 12^2(7.977-7.899)^2 + \cdots + 12^2(7.917-7.899)^2\right ] = 1.01496
+$$
+and therefore
+\begin{eqnarray*}
+\widehat{\hbox{Var}(\hat{\bar y_r})} &=& \frac{1}{\bar M_{\mathcal{U}}^2} \left [ \left (1-\frac{n}{N} \right ) \frac{s_r^2}{n} + \frac{1}{nN}\sum_{i=1}^n M_i^2 \left (1-\frac{m_i}{M_i} \right ) \frac{s_i^2}{m_i} \right] \\
+&=& \frac{1}{12^2}\left [ \left ( 1-\frac{4}{100}\right ) \frac{1.01496}{4} + \frac{1}{(4)(100)} (19.2121)\right ] = 0.00205
+\end{eqnarray*}
+
+so the SE is 0.045.
 
 We can use the ratio estimate of the population mean to get the ratio estimate for the population total
+
+$$
+\hat t_r = M_0 \hat{\bar y_r} \hbox{ with } \widehat{\hbox{Var}(\hat t_r)} = M_0^2 \widehat{\hbox{Var}(\hat {\bar y_r)}}
+$$
+In the can example,
+
+$$
+\hat t_r = M_0 \hat{\bar y_r} = (1200)(7.899) = 9478.8
+$$
+
+and
+
+$$
+\widehat{\hbox{Var}(\hat t_r)} = M_0^2 \widehat{\hbox{Var}(\hat {\bar y_r)}}=(1200^2)(0.002025)=2916.207
+$$
+
+Why do the unbiased estimators and their variances match so closely with the (biased) ratio estimators? There is little variance among cases and cans and the clusters are all the same sizes.
 
 \newpage
 
 When should we use the unbiased estimators versus the (biased) ratio estimators? Some things to keep in mind:
-\begin{itemize}
-	\item Unbiased estimation requires that we know $N$ and $M_0$.
-	\item Ratio estimation only requires knowledge of $M_i$
-	\item Unbiased estimation can have poor precision (big variance) if
-	\begin{itemize}
-		\item Cluster sizes ($M_i$) are unequal
-		\item Cluster totals ($t_i$) are roughly proportional to cluster size  
-	\end{itemize}
-	\item Ratio (biased) estimation can be precise if
-	\begin{itemize}
-		\item $t_i$ is roughly proportional to $M_i$
-	\end{itemize}
-\end{itemize}
 
-\textbf{Example:} (Example 5.9 in book) We want to estimate the average number of legs on healthy puppies in animal shelters. There are two animal shelters in the town. Shelter A has 30 puppies and Shelter B has 10 puppies. We select one shelter at random. After selecting the shelter, we'll select 2 puppies at random.
+- Unbiased estimation requires that we know $N$ and $M_0$.
+- Ratio estimation only requires knowledge of $M_i$
+- Unbiased estimation can have poor precision (big variance) if
+  - Cluster sizes ($M_i$) are unequal
+  - Cluster totals ($t_i$) are roughly proportional to cluster size  
+- Ratio (biased) estimation can be precise if
+  - $t_i$ is roughly proportional to $M_i$
 
-\newpage
+
+**Example**: (Example 5.9 in book) We want to estimate the average number of legs on healthy puppies in animal shelters. There are two animal shelters in the town. Shelter A has 30 puppies and Shelter B has 10 puppies. We select one shelter at random. After selecting the shelter, we'll select 2 puppies at random.
+
+**Pick Shelter A**: $y_{A1}=4$, $y_{A2}=4$
+
+\begin{eqnarray*}
+\hat t_A &=& M_A \bar y_A = (30)(4) = 120 \\
+\hat t_{unb} &=& \frac{N}{n}\sum_i \hat t_i = \frac{2}{1}(120)=240 \\
+\Rightarrow \hat{\bar y_{unb}} &=& \frac{\hat t_{unb}}{M_0} = \frac{240}{40} = 6 \hbox{ puppy legs!}
+\end{eqnarray*}
+
+**Pick Shelter B**: $y_{B1}=4$, $y_{B2}=4$
+
+\begin{eqnarray*}
+\hat t_B &=& M_B \bar y_B = (10)(4) = 40 \\
+\hat t_{unb} &=& \frac{N}{n}\sum_i \hat t_i = \frac{2}{1}(40)=80 \\
+\Rightarrow \hat{\bar y_{unb}} &=& \frac{\hat t_{unb}}{M_0} = \frac{80}{40} = 2 \hbox{ puppy legs!}
+\end{eqnarray*}
+
+So the estimator is unbiased (6+2/2=4), but gives ridiculous estimates (not shown, but the variance of the unbiased mean here is 6400).
+
+The ratio estimator on the other hand,
+
+**Shelter A**: $\hat{\bar y_r}=\frac{\sum_i \hat t_i}{\sum_i M_i} = \frac{120}{30} = 4$
+
+**Shelter B**: $\hat{\bar y_r}=\frac{\sum_i \hat t_i}{\sum_i M_i} = \frac{40}{10} = 4$, and the variance is 0.
 
 Let's go back to the estimator for the population total
 
-\vspace{50mm}
+\begin{eqnarray*}
+\hat t_{unb} &=& \frac{N}{n} \sum_i \hat t_i = \frac{N}{n} \sum_i M_i \bar y_i = \frac{N}{n} \sum_i \frac{M_i}{m_i} \sum_{j=1}^{m_i} y_{ij} \\
+&=& \sum_i \sum_j \frac{N}{n}\frac{M_i}{m_i} y_{ij} = \sum_i\sum_j w_{ij}y_{ij} 
+\end{eqnarray*}
 
 So, the weight for element $j$ in cluster $i$ is
 
 $$
-w_{ij} = \hbox{\hspace{40mm}}
+w_{ij} = \frac{N}{n}\frac{M_i}{m_i}
 $$
 
 Is this still an equal probability sample? Let's look more closely as the inclusion probabilities
 
-\begin{itemize}
-	\item $\pi_j = $ 
-	
-	\vspace{20mm}
-	
-	\item $\pi_{j|i} = $ 
-	
-	\vspace{20mm}
-	
-	\item $\pi_{ij} = $ 
-	
-	\vspace{30mm}
-	
-	
-\end{itemize}
+- $\pi_i = \hbox{P(cluster } i \hbox{ is in the sample)} = \frac{n}{N}$ because clusters are selected in a SRS 
+    
+- $\pi_{j|i} = \hbox{P(element } j \hbox{ is selected GIVEN cluster } i \hbox{ is in the sample)} = \frac{m_i}{M_i} = \frac{\hbox{total selected}}{\hbox{total in cluster}}$ 
+    
+- $\pi_{ij} = \hbox{P(element } j \hbox{ and cluster } i \hbox{ is in the sample)} = \pi_i \pi_{j|i} = \left (\frac{n}{N} \right) \left (\frac{m_i}{M_i} \right ) = \frac{nm_i}{NM_i} \Rightarrow w_{ij} = \frac{NM_i}{nm_i}$
+
+This is only constant if $M_i/m_i$ is constant, $M_i/m_i=c$.
+
 
 So, if we want a self-weighting design with two-stage clustering
-\begin{itemize}
-	\item Stage 1: Select $n$ PSUs from $N$ population PSUs using SRS
-	\item Stage 2: Choose $m_i$ proportional to $M_i$ so that $m_i/M_i$ is constant. Select the $m_i$ SSUs using a SRS.
-	\item The sample weight for SSU $j$ in Cluster $i$ is then constant for all elements
-\end{itemize}
-	
-What are the implications of $m_i/M_i$ constant?	
-	
-	
+
+- Stage 1: Select $n$ PSUs from $N$ population PSUs using SRS
+- Stage 2: Choose $m_i$ proportional to $M_i$ so that $m_i/M_i$ is constant. Select the $m_i$ SSUs using a SRS.
+- The sample weight for SSU $j$ in Cluster $i$ is then constant for all elements
+
+
+What are the implications of $m_i/M_i$ constant? You have to subsample many more elements in big clusters than in small clusters.
+
 \newpage
 
-We can use R to get estimates from one-stage clustering with unequal cluster sizes, as well as two-stage clustering. The differences are going to come in the \texttt{svydesign} statement, and the inputs we pass to it.
+We can use `R` to get estimates from one-stage clustering with unequal cluster sizes, as well as two-stage clustering. The differences are going to come in the `svydesign` statement, and the inputs we pass to it.
 
 For one-stage clustering with unequal cluster sizes, nothing really changes from equal cluster sizes.
 
-\textbf{Example:} Algebra classes. Let's now use all $n=12$ classes that were randomly selected out of the $N=187$, rather than just 4.
-\begin{verbatim}
-	N<-187
-	n<-12
-	m<-299
-	algebra$sampwt<-N/n
-	algebra
-	
-	library(survey)
-	algdesign<-svydesign(id=~class,weights=~sampwt,fpc=~rep(N,m),data=algebra)
-	algdesign
-	scoremean<-svymean(~score,algdesign)
-	scoremean
-\end{verbatim}
+**Example**: Algebra classes. Let's now use all $n=12$ classes that were randomly selected out of the $N=187$, rather than just 4.
+
+```{r}
+algebra<-read.csv("algebra.csv",header=TRUE)
+head(algebra)
+N<-187
+n<-12
+m<-299
+algebra$sampwt<-N/n
+head(algebra)
+
+algdesign<-svydesign(id=~class,weights=~sampwt,fpc=~rep(N,m),data=algebra)
+algdesign
+scoremean<-svymean(~score,algdesign)
+scoremean
+```
 
 Note the fpc option uses $m=299$, since there were a total of 299 students in our sample of 12 classes. This gives the output
-\begin{verbatim}
-	> algdesign
-	1 - level Cluster Sampling design
-	With (12) clusters.
-	svydesign(id = ~class, weights = ~sampwt, fpc = ~rep(N, m), data = algebra)
-	> scoremean<-svymean(~score,algdesign)
-	> scoremean
-	mean     SE
-	score 62.569 1.4916
-\end{verbatim}
 
 For two-stage clustering we do need to adjust the code. We'll need to identify both the PSUs and the SSUs
 
-\textbf{Example:} (Book Problem \#8) A person with a large library needs to estimate the purchase cost and replace value of a book collection for their insurance. They have 44 shelves with books and randomly select 12 shelves. They then count the number of books $M_i$ on each of the selected shelves, and generate five random numbers between 1 and $M_i$ for each selected shelf to determine which books to examine. They select the specific books determined by the random numbers and look up the replacement value. The data are in `books.csv' on Canvas. We'll estimate total replacement cost for the library as well as average replacement cost per book.
-
-\newpage
+**Example**: (Book Problem #8) A person with a large library needs to estimate the purchase cost and replace value of a book collection for their insurance. They have 44 shelves with books and randomly select 12 shelves. They then count the number of books $M_i$ on each of the selected shelves, and generate five random numbers between 1 and $M_i$ for each selected shelf to determine which books to examine. They select the specific books determined by the random numbers and look up the replacement value. The data are in `books.csv` on Canvas. We'll estimate total replacement cost for the library as well as average replacement cost per book.
 
 In R, we'll use the code
 
-\begin{verbatim}
-	books<-read.csv('books.csv',header=TRUE)
-	head(books)
-	N<-44
-	n<-12
-	nbooks<-nrow(books)
-	
-	
-	booksdesign<-svydesign(id=~shelf+booknumber,fpc=~rep(N,nbooks)+Mi,nest=TRUE,data=books)
-	svytotal(~replace,booksdesign)
-	svymean(~replace,booksdesign)
-\end{verbatim}
+```{r}
+    books<-read.csv('books.csv',header=TRUE)
+    head(books)
+    N<-44
+    n<-12
+    nbooks<-nrow(books)
+    
+    booksdesign<-svydesign(id=~shelf+booknumber,fpc=~rep(N,nbooks)+Mi,nest=TRUE,data=books)
+    svytotal(~replace,booksdesign)
+    svymean(~replace,booksdesign)
+```
 
-which gives the output
 
-\begin{verbatim}
-	> booksdesign<-svydesign(id=~shelf+booknumber,fpc=~rep(N,nbooks)+Mi,nest=TRUE,data=books)
-	> svytotal(~replace,booksdesign)
-	total     SE
-	replace 32638 5733.5
-	> svymean(~replace,booksdesign)
-	mean     SE
-	replace 23.611 5.4759
-\end{verbatim}
