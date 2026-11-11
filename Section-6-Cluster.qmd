@@ -541,7 +541,7 @@ The variance of $\hat t_{unb}$ has two components, associated with the 2 samplin
 
 $$
 \widehat{\hbox{Var}(\hat t)} = N^2 \left (1 - \frac{n}{N} \right ) \frac{s_t^2}{n}, \hbox{\hspace{5mm}} s^2_t=\frac{1}{n-1}\sum_i \left (\underbrace{t_i}_{\text{known}} - \frac{\hat t}{N} \right )^2
-$$ 
+$$
 
 - Two-stage: we now have to estimate $t_i$ with $\hat t_i$
 
@@ -587,18 +587,15 @@ where $s_t^2 = \frac{1}{n-1}\sum_{i \in \mathcal{S}} \left ( \hat t_i - \frac{\h
 | $s_i^2=\frac{1}{m_i -1} \sum_{j=1}^{m_i} (y_{ij}-\bar y_i)^2$ | 0.0586 | 0.0926 | 0.0157 | 0.01099 |
 +---------------------------------------------------------------+--------+--------+--------+---------+
 
-So, 
-$$
+So, $$
 \hat t_{unb} = \frac{N}{n} \sum_{i=1}^n \hat t_i = \frac{100}{4} [95.724 + \cdots + 95.004] = 9479.85
-$$ 
-and
+$$ and
 
 $$
 s_t^2 = \frac{1}{n-1}\sum_{i \in \mathcal{S}} \left ( \hat t_i - \frac{\hat t_{unb}}{N} \right)^2 = \frac{1}{3}\left [ \left ( 95.724 - \frac{9479.85}{100} \right)^2 + \cdots + \left ( 95.004 - \frac{9479.85}{100} \right)^2\right ] = 1.015
 $$
 
-So,
-\begin{eqnarray*}
+So, \begin{eqnarray*}
 \widehat{\hbox{Var}(\hat t_{unb})} &=& \underbrace{N^2 \left ( 1- \frac{n}{N} \right ) \frac{s^2_t}{n}}_{\text{among PSUs}} + \underbrace{\frac{N}{n}\sum_{i \in \mathcal{S}} \left ( 1-\frac{m_i}{M_i} \right ) M_i^2 \frac{s_i^2}{m_i}}_{\text{within PSUs}} \\
 &=& (100)^2\left (1 -\frac{4}{100}\right)\frac{1.015}{4} + \frac{100}{4}\left [ \left ( 1-\frac{3}{12}\right)(12)^2\frac{0.0586}{3} + \cdots + \left ( 1-\frac{3}{12}\right)(12)^2\frac{0.01099}{3} \right ] \\
 &=& 2436.055 + 480.303 = 2916.358 \Rightarrow \hbox{SE} = 54.0033
@@ -616,14 +613,11 @@ $$
 \widehat{\hbox{Var}(\hat{\bar y_{unb})}} = \frac{1}{M_0^2}\widehat{\hbox{Var}(\hat t_{unb})}
 $$
 
-
 **Example**: For the can data,
 
 $$
 \hat{\bar y_{unb}} = \frac{\hat t_{unb}}{M_0} = \frac{9479.85}{1200} = 7.8999
-$$
-and
-$$
+$$ and $$
 \widehat{\hbox{Var}(\hat{\bar y_{unb})}} = \frac{1}{M_0^2}\widehat{\hbox{Var}(\hat t_{unb})} = \frac{1}{1200^2} 2596.156 = 0.0018
 $$
 
@@ -633,17 +627,13 @@ $$
 \hat{\bar y_r} = \frac{\sum_{i=1}^n \hat t_i}{\sum_{i=1}^n M_i} = \frac{\sum_i M_i \bar y_i}{\sum_i M_i}
 $$
 
-with estimated variance
-$$
+with estimated variance $$
 \widehat{\hbox{Var}(\hat{\bar y_r})} = \frac{1}{\bar M_{\mathcal{U}}^2} \left [ \left (1-\frac{n}{N} \right ) \frac{s_r^2}{n} + \frac{1}{nN}\sum_{i=1}^n M_i^2 \left (1-\frac{m_i}{M_i} \right ) \frac{s_i^2}{m_i} \right]
-$$
-where
-$$
+$$ where $$
 s_r^2 = \frac{1}{n-1}\sum_{i=1}^n (M_i \bar y_i - M_i \hat{\bar y_r})^2 = \frac{1}{n-1}\sum_{i=1}^n M_i^2 (\bar y_i - \hat{\bar y_r})^2.
 $$
 
 **Example**:
-
 
 +---------------------------------------------------------------+--------+--------+--------+---------+
 | Can \#                                                        | Case 1 | Case 2 | Case 3 | Case 4  |
@@ -661,18 +651,13 @@ $$
 | $s_i^2=\frac{1}{m_i -1} \sum_{j=1}^{m_i} (y_{ij}-\bar y_i)^2$ | 0.0586 | 0.0926 | 0.0157 | 0.01099 |
 +---------------------------------------------------------------+--------+--------+--------+---------+
 
-
 So,
 
 $$
 \hat{\bar y_r} = \frac{\sum_{i=1}^n \hat t_i}{\sum_{i=1}^n M_i} = \frac{95.724 + \cdots + 95.004}{12 + \cdots + 12} = 7.899
-$$
-and
-$$
+$$ and $$
 s_r^2 = \frac{1}{n-1}\sum_{i=1}^n M_i^2 (\bar y_i - \hat{\bar y_r})^2 = \frac{1}{3}\left [ 12^2(7.977-7.899)^2 + \cdots + 12^2(7.917-7.899)^2\right ] = 1.01496
-$$
-and therefore
-\begin{eqnarray*}
+$$ and therefore \begin{eqnarray*}
 \widehat{\hbox{Var}(\hat{\bar y_r})} &=& \frac{1}{\bar M_{\mathcal{U}}^2} \left [ \left (1-\frac{n}{N} \right ) \frac{s_r^2}{n} + \frac{1}{nN}\sum_{i=1}^n M_i^2 \left (1-\frac{m_i}{M_i} \right ) \frac{s_i^2}{m_i} \right] \\
 &=& \frac{1}{12^2}\left [ \left ( 1-\frac{4}{100}\right ) \frac{1.01496}{4} + \frac{1}{(4)(100)} (19.2121)\right ] = 0.00205
 \end{eqnarray*}
@@ -683,8 +668,7 @@ We can use the ratio estimate of the population mean to get the ratio estimate f
 
 $$
 \hat t_r = M_0 \hat{\bar y_r} \hbox{ with } \widehat{\hbox{Var}(\hat t_r)} = M_0^2 \widehat{\hbox{Var}(\hat {\bar y_r)}}
-$$
-In the can example,
+$$ In the can example,
 
 $$
 \hat t_r = M_0 \hat{\bar y_r} = (1200)(7.899) = 9478.8
@@ -706,10 +690,9 @@ When should we use the unbiased estimators versus the (biased) ratio estimators?
 - Ratio estimation only requires knowledge of $M_i$
 - Unbiased estimation can have poor precision (big variance) if
   - Cluster sizes ($M_i$) are unequal
-  - Cluster totals ($t_i$) are roughly proportional to cluster size  
+  - Cluster totals ($t_i$) are roughly proportional to cluster size\
 - Ratio (biased) estimation can be precise if
   - $t_i$ is roughly proportional to $M_i$
-
 
 **Example**: (Example 5.9 in book) We want to estimate the average number of legs on healthy puppies in animal shelters. There are two animal shelters in the town. Shelter A has 30 puppies and Shelter B has 10 puppies. We select one shelter at random. After selecting the shelter, we'll select 2 puppies at random.
 
@@ -752,21 +735,19 @@ $$
 
 Is this still an equal probability sample? Let's look more closely as the inclusion probabilities
 
-- $\pi_i = \hbox{P(cluster } i \hbox{ is in the sample)} = \frac{n}{N}$ because clusters are selected in a SRS 
-    
-- $\pi_{j|i} = \hbox{P(element } j \hbox{ is selected GIVEN cluster } i \hbox{ is in the sample)} = \frac{m_i}{M_i} = \frac{\hbox{total selected}}{\hbox{total in cluster}}$ 
-    
+- $\pi_i = \hbox{P(cluster } i \hbox{ is in the sample)} = \frac{n}{N}$ because clusters are selected in a SRS
+
+- $\pi_{j|i} = \hbox{P(element } j \hbox{ is selected GIVEN cluster } i \hbox{ is in the sample)} = \frac{m_i}{M_i} = \frac{\hbox{total selected}}{\hbox{total in cluster}}$
+
 - $\pi_{ij} = \hbox{P(element } j \hbox{ and cluster } i \hbox{ is in the sample)} = \pi_i \pi_{j|i} = \left (\frac{n}{N} \right) \left (\frac{m_i}{M_i} \right ) = \frac{nm_i}{NM_i} \Rightarrow w_{ij} = \frac{NM_i}{nm_i}$
 
 This is only constant if $M_i/m_i$ is constant, $M_i/m_i=c$.
-
 
 So, if we want a self-weighting design with two-stage clustering
 
 - Stage 1: Select $n$ PSUs from $N$ population PSUs using SRS
 - Stage 2: Choose $m_i$ proportional to $M_i$ so that $m_i/M_i$ is constant. Select the $m_i$ SSUs using a SRS.
 - The sample weight for SSU $j$ in Cluster $i$ is then constant for all elements
-
 
 What are the implications of $m_i/M_i$ constant? You have to subsample many more elements in big clusters than in small clusters.
 
@@ -793,7 +774,7 @@ scoremean<-svymean(~score,algdesign)
 scoremean
 ```
 
-Note the fpc option uses $m=299$, since there were a total of 299 students in our sample of 12 classes. This gives the output
+Note the fpc option uses $m=299$, since there were a total of 299 students in our sample of 12 classes. 
 
 For two-stage clustering we do need to adjust the code. We'll need to identify both the PSUs and the SSUs
 
@@ -812,5 +793,3 @@ In R, we'll use the code
     svytotal(~replace,booksdesign)
     svymean(~replace,booksdesign)
 ```
-
-

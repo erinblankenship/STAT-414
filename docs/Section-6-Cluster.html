@@ -1418,7 +1418,7 @@ svydesign(id = ~class, weights = ~sampwt, fpc = ~rep(N, m), data = algebra)</cod
 score 62.569 1.4916</code></pre>
 </div>
 </div>
-<p>Note the fpc option uses <span class="math inline">\(m=299\)</span>, since there were a total of 299 students in our sample of 12 classes. This gives the output</p>
+<p>Note the fpc option uses <span class="math inline">\(m=299\)</span>, since there were a total of 299 students in our sample of 12 classes.</p>
 <p>For two-stage clustering we do need to adjust the code. We’ll need to identify both the PSUs and the SSUs</p>
 <p><strong>Example</strong>: (Book Problem #8) A person with a large library needs to estimate the purchase cost and replace value of a book collection for their insurance. They have 44 shelves with books and randomly select 12 shelves. They then count the number of books <span class="math inline">\(M_i\)</span> on each of the selected shelves, and generate five random numbers between 1 and <span class="math inline">\(M_i\)</span> for each selected shelf to determine which books to examine. They select the specific books determined by the random numbers and look up the replacement value. The data are in <code>books.csv</code> on Canvas. We’ll estimate total replacement cost for the library as well as average replacement cost per book.</p>
 <p>In R, we’ll use the code</p>
