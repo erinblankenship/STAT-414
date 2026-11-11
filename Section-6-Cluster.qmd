@@ -541,7 +541,9 @@ The variance of $\hat t_{unb}$ has two components, associated with the 2 samplin
 
 $$
 \widehat{\hbox{Var}(\hat t)} = N^2 \left (1 - \frac{n}{N} \right ) \frac{s_t^2}{n}, \hbox{\hspace{5mm}} s^2_t=\frac{1}{n-1}\sum_i \left (\underbrace{t_i}_{\text{known}} - \frac{\hat t}{N} \right )^2
-$$ - Two-stage: we now have to estimate $t_i$ with $hat t_i$
+$$ 
+
+- Two-stage: we now have to estimate $t_i$ with $\hat t_i$
 
 $$
 \widehat{\hbox{Var}(\hat t_{unb})} = \underbrace{N^2 \left ( 1- \frac{n}{N} \right ) \frac{s^2_t}{n}}_{\text{among PSUs}} + \underbrace{\frac{N}{n}\sum_{i \in \mathcal{S}} \left ( 1-\frac{m_i}{M_i} \right ) M_i^2 \frac{s_i^2}{m_i}}_{\text{within PSUs}}
