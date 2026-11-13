@@ -1,0 +1,1043 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.10.18">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>pp2</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="PP2_files/libs/clipboard/clipboard.min.js"></script>
+<script src="PP2_files/libs/quarto-html/quarto.js" type="module"></script>
+<script src="PP2_files/libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="PP2_files/libs/quarto-html/popper.min.js"></script>
+<script src="PP2_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="PP2_files/libs/quarto-html/anchor.min.js"></script>
+<link href="PP2_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="PP2_files/libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="PP2_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="PP2_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="PP2_files/libs/bootstrap/bootstrap-215b371544c282197b31c8aa00ce3677.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body class="quarto-light">
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+<div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+<div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="PP2.pdf"><i class="bi bi-file-pdf"></i>PDF</a></li></ul></div></div>
+<main class="content" id="quarto-document-content">
+
+
+
+
+<section id="practice-problems-2" class="level1">
+<h1>Practice Problems 2</h1>
+<p>Not to turn in, but may be helpful before the exam</p>
+<ol type="1">
+<li><p>(Problem #5, Chapter 5) A language school owner takes a SRS of 10 out of the 72 Introductory Spanish classes offered by the school. Each student in each of the sampled classes is given a vocabulary test and is asked whether they are planning a trip to a Spanish-speaking country in the next year. The data are summarized below:</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Class</th>
+<th><span class="math inline">\(m_i\)</span></th>
+<th><span class="math inline">\(t_i\)</span> (score)</th>
+<th><span class="math inline">\(t_i\)</span> (trip)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>4</td>
+<td>20</td>
+<td>1486</td>
+<td>2</td>
+</tr>
+<tr class="even">
+<td>20</td>
+<td>21</td>
+<td>1406</td>
+<td>15</td>
+</tr>
+<tr class="odd">
+<td>23</td>
+<td>14</td>
+<td>944</td>
+<td>3</td>
+</tr>
+<tr class="even">
+<td>34</td>
+<td>22</td>
+<td>1267</td>
+<td>1</td>
+</tr>
+<tr class="odd">
+<td>39</td>
+<td>21</td>
+<td>1746</td>
+<td>13</td>
+</tr>
+<tr class="even">
+<td>47</td>
+<td>18</td>
+<td>948</td>
+<td>1</td>
+</tr>
+<tr class="odd">
+<td>60</td>
+<td>26</td>
+<td>1822</td>
+<td>8</td>
+</tr>
+<tr class="even">
+<td>65</td>
+<td>16</td>
+<td>931</td>
+<td>4</td>
+</tr>
+<tr class="odd">
+<td>68</td>
+<td>16</td>
+<td>1174</td>
+<td>4</td>
+</tr>
+<tr class="even">
+<td>69</td>
+<td>22</td>
+<td>1367</td>
+<td>12</td>
+</tr>
+</tbody>
+</table></li>
+</ol>
+<!-- -->
+<ol type="a">
+<li><p>Estimate the total number of students planning a trip to a Spanish-speaking country in the next year, and give a 95% confidence interval. Use the unbiased estimator.</p></li>
+<li><p>Estimate the mean vocabulary test score for the Introductory Spanish students in the language school, and give a 95% confidence interval. Use the ratio estimator.</p></li>
+</ol>
+<!-- -->
+<ol start="2" type="1">
+<li><p>(Problem #6, Chapter 5) An inspector samples cans from a truckload of canned creamed corn to estimate the total number of worm fragments in the truckload. The truck has 580 cases, each case contains 24 cans. The inspector samples 12 cases at random, and subsamples 3 cans randomly from each selected case. The following table gives number of worm fragments found in the sampled cans.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 8%">
+<col style="width: 7%">
+<col style="width: 7%">
+<col style="width: 7%">
+<col style="width: 7%">
+<col style="width: 7%">
+<col style="width: 8%">
+<col style="width: 7%">
+<col style="width: 7%">
+<col style="width: 7%">
+<col style="width: 7%">
+<col style="width: 7%">
+<col style="width: 7%">
+</colgroup>
+<thead>
+<tr class="header">
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+<th>Case</th>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td></td>
+<td>1</td>
+<td>2</td>
+<td>3</td>
+<td>4</td>
+<td>5</td>
+<td>6</td>
+<td>7</td>
+<td>8</td>
+<td>9</td>
+<td>10</td>
+<td>11</td>
+<td>12</td>
+</tr>
+<tr class="even">
+<td>Can1</td>
+<td>1</td>
+<td>4</td>
+<td>0</td>
+<td>3</td>
+<td>4</td>
+<td>0</td>
+<td>5</td>
+<td>3</td>
+<td>7</td>
+<td>3</td>
+<td>4</td>
+<td>0</td>
+</tr>
+<tr class="odd">
+<td>Can2</td>
+<td>5</td>
+<td>2</td>
+<td>1</td>
+<td>6</td>
+<td>9</td>
+<td>7</td>
+<td>5</td>
+<td>0</td>
+<td>3</td>
+<td>1</td>
+<td>7</td>
+<td>0</td>
+</tr>
+<tr class="even">
+<td>Can3</td>
+<td>7</td>
+<td>4</td>
+<td>2</td>
+<td>6</td>
+<td>8</td>
+<td>3</td>
+<td>1</td>
+<td>2</td>
+<td>5</td>
+<td>4</td>
+<td>9</td>
+<td>0</td>
+</tr>
+</tbody>
+</table></li>
+</ol>
+<!-- -->
+<ol type="a">
+<li>Estimate the mean number of worm fragments per can.</li>
+<li>In this case, the choice of unbiased estimator or ratio estimator shouldn’t make a big difference. Why?</li>
+</ol>
+<ol start="3" type="1">
+<li>(Problem #7, Chapter 5) A market research firm took a SRS of 6 cities from the 45 cities in a region and then took a SRS of <span class="math inline">\(m_i\)</span> supermarkets from the <span class="math inline">\(M_i\)</span> supermarkets in sampled city <span class="math inline">\(i\)</span>. The following table gives the number of the new candy Green Globules sold during March in each of the sampled supermarkets.</li>
+</ol>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 8%">
+<col style="width: 10%">
+<col style="width: 10%">
+<col style="width: 70%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>City</th>
+<th><span class="math inline">\(M_i\)</span></th>
+<th><span class="math inline">\(m_i\)</span></th>
+<th style="text-align: left;">Number of Cases Sold</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td>52</td>
+<td>10</td>
+<td style="text-align: left;">146, 180, 251, 152, 72, 181, 171, 361, 73, 186</td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td>19</td>
+<td>4</td>
+<td style="text-align: left;">99, 101, 52, 121</td>
+</tr>
+<tr class="odd">
+<td>3</td>
+<td>37</td>
+<td>7</td>
+<td style="text-align: left;">199, 179, 98, 63, 126, 87, 62</td>
+</tr>
+<tr class="even">
+<td>4</td>
+<td>39</td>
+<td>8</td>
+<td style="text-align: left;">226, 129, 57, 46, 86, 43, 85, 165</td>
+</tr>
+<tr class="odd">
+<td>5</td>
+<td>8</td>
+<td>2</td>
+<td style="text-align: left;">12, 23</td>
+</tr>
+<tr class="even">
+<td>6</td>
+<td>14</td>
+<td>3</td>
+<td style="text-align: left;">87, 43, 59</td>
+</tr>
+</tbody>
+</table>
+<p>Summary values are included below</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 11%">
+<col style="width: 11%">
+<col style="width: 11%">
+<col style="width: 11%">
+<col style="width: 11%">
+<col style="width: 11%">
+<col style="width: 11%">
+<col style="width: 11%">
+<col style="width: 11%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>City</th>
+<th><span class="math inline">\(M_i\)</span></th>
+<th><span class="math inline">\(m_i\)</span></th>
+<th style="text-align: right;"><span class="math inline">\(\bar y_i\)</span></th>
+<th style="text-align: right;"><span class="math inline">\(s_i\)</span></th>
+<th style="text-align: right;"><span class="math inline">\(\hat t_i\)</span></th>
+<th style="text-align: right;"><span class="math inline">\(\hat t_i - \frac{\hat t_{unb}}{N}\)</span></th>
+<th style="text-align: right;"><span class="math inline">\(M_i(\bar y_i - \hat{\bar y_r})\)</span></th>
+<th style="text-align: right;"><span class="math inline">\((1-\frac{m_i}{M_i})M_i^2\frac{s_i^2}{m_i}\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td>52</td>
+<td>10</td>
+<td style="text-align: right;">177.30</td>
+<td style="text-align: right;">83.60</td>
+<td style="text-align: right;">9219.6</td>
+<td style="text-align: right;">5820.2</td>
+<td style="text-align: right;">2943.8</td>
+<td style="text-align: right;">1526376</td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td>19</td>
+<td>4</td>
+<td style="text-align: right;">93.25</td>
+<td style="text-align: right;">29.24</td>
+<td style="text-align: right;">1771.8</td>
+<td style="text-align: right;">-1627.6</td>
+<td style="text-align: right;">-521.3</td>
+<td style="text-align: right;">60913</td>
+</tr>
+<tr class="odd">
+<td>3</td>
+<td>37</td>
+<td>7</td>
+<td style="text-align: right;">116.29</td>
+<td style="text-align: right;">54.54</td>
+<td style="text-align: right;">4302.6</td>
+<td style="text-align: right;">903.2</td>
+<td style="text-align: right;">-162.9</td>
+<td style="text-align: right;">471682</td>
+</tr>
+<tr class="even">
+<td>4</td>
+<td>39</td>
+<td>8</td>
+<td style="text-align: right;">104.63</td>
+<td style="text-align: right;">64.59</td>
+<td style="text-align: right;">4080.4</td>
+<td style="text-align: right;">681.0</td>
+<td style="text-align: right;">-626.5</td>
+<td style="text-align: right;">630534</td>
+</tr>
+<tr class="odd">
+<td>5</td>
+<td>8</td>
+<td>2</td>
+<td style="text-align: right;">17.50</td>
+<td style="text-align: right;">7.78</td>
+<td style="text-align: right;">140.0</td>
+<td style="text-align: right;">-3259.4</td>
+<td style="text-align: right;">-825.5</td>
+<td style="text-align: right;">1452</td>
+</tr>
+<tr class="even">
+<td>6</td>
+<td>14</td>
+<td>3</td>
+<td style="text-align: right;">63.00</td>
+<td style="text-align: right;">22.27</td>
+<td style="text-align: right;">882.0</td>
+<td style="text-align: right;">-2517.4</td>
+<td style="text-align: right;">-807.6</td>
+<td style="text-align: right;">25461</td>
+</tr>
+<tr class="odd">
+<td>Total</td>
+<td>169</td>
+<td>34</td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;">20396.6</td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;">2716418</td>
+</tr>
+</tbody>
+</table>
+<p>We are interested in estimating the total number of cases sold in the region, as well as the average number of cases sold per supermarket.</p>
+<ol type="a">
+<li>Explain what column 6 (<span class="math inline">\(\hat t_i\)</span>) represents and how it is calculated.</li>
+<li>Use column 6 to estimate the total number of cases sold in the region.</li>
+<li>Explain the role column 7 plays in estimating the variance of the total number of cases sold in the region.</li>
+<li>Use the information in the table to find the ratio estimator for the average number of cases sold per supermarket.</li>
+<li>Explain the role column 8 plays in estimating the variance of the average number of cases sold per supermarket.</li>
+<li>Explain the difference between column 7 and column 8, and why the column 8 values are smaller (in absolute value) than the column 7 values.</li>
+<li>What role does column 9 play? Does it matter whether we’re estimating total number of cases or average number of cases? Why or why not?</li>
+</ol>
+<ol start="4" type="1">
+<li><p>An experienced peach farmer makes a visual estimate of the weight of peaches on each tree in an orchard of <span class="math inline">\(N=200\)</span> trees. The farmer’s visual estimate of the total weight is 11800 pounds. A simple random sample of 10 trees is selected and the peaches are picked and weighed.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 28%">
+<col style="width: 7%">
+<col style="width: 7%">
+<col style="width: 7%">
+<col style="width: 7%">
+<col style="width: 7%">
+<col style="width: 7%">
+<col style="width: 7%">
+<col style="width: 7%">
+<col style="width: 7%">
+<col style="width: 7%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Sampled Trees</th>
+<th>1</th>
+<th>2</th>
+<th>3</th>
+<th>4</th>
+<th>5</th>
+<th>6</th>
+<th>7</th>
+<th>8</th>
+<th>9</th>
+<th>10</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><span class="math inline">\(y\)</span>, Actual Weight</td>
+<td>61</td>
+<td>42</td>
+<td>50</td>
+<td>58</td>
+<td>67</td>
+<td>45</td>
+<td>39</td>
+<td>59</td>
+<td>71</td>
+<td>53</td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(x\)</span>, Visual Weight</td>
+<td>59</td>
+<td>47</td>
+<td>52</td>
+<td>60</td>
+<td>67</td>
+<td>48</td>
+<td>44</td>
+<td>58</td>
+<td>76</td>
+<td>58</td>
+</tr>
+</tbody>
+</table></li>
+</ol>
+<p>Some summary statistics are provided; some are useful, others are not.</p>
+<p><span class="math display">\[
+\sum_{i \in \mathcal{S}} y_i = 545 \hbox{\hspace{5mm}} \bar y = 54.5 \hbox{\hspace{5mm}} s^2_y = 112.5 \hbox{\hspace{5mm}} \sum_{i \in \mathcal{S}} x_i = 569 \hbox{\hspace{5mm}} \bar x = 56.9 \hbox{\hspace{5mm}} s^2_x = 94.54 \hbox{\hspace{5mm}} r = 0.969 \hbox{\hspace{5mm}} s_e^2 = 7.779
+\]</span></p>
+<ol type="a">
+<li><p>Estimate the total actual weight of the peaches.</p></li>
+<li><p>Provide a standard error for the estimate you calculated in (a). Include the fpc.</p></li>
+<li><p><strong>Without doing any calculations,</strong></p>
+<ol type="i">
+<li><p>Do you think the estimate of the total actual weight calculated ignoring the auxiliary variable (i.e., estimated just using the typical SRS estimators) will the greater than, less than, or equal to your estimate in (a)? Explain your reasoning, citing relevant statistical facts.</p></li>
+<li><p>Do you think the standard error of the estimate of total actual weight calculated ignoring the auxiliary variable (i.e., estimated just using the typical SRS estimators) will the greater than, less than, or equal to your estimate in (b)? Explain your reasoning, citing relevant statistical evidence.</p></li>
+</ol></li>
+</ol>
+<!-- -->
+<ol start="5" type="1">
+<li><p>The owner of a gym wants to estimate the average amount of time the gym clients spend at the gym per visit during a 30 day period. The owner randomly selects 3 days out of the 30 using a SRS. On each of the three selected days, 5 visits were selected using a SRS. The owner recorded the amount of time the gym client spent at the facility during that visit. They also recorded the total number of client visits to the gym on each sample day. The data are:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 10%">
+<col style="width: 10%">
+<col style="width: 10%">
+<col style="width: 10%">
+<col style="width: 10%">
+<col style="width: 10%">
+<col style="width: 10%">
+<col style="width: 10%">
+<col style="width: 10%">
+<col style="width: 10%">
+</colgroup>
+<thead>
+<tr class="header">
+<th></th>
+<th></th>
+<th>Time</th>
+<th>Spent</th>
+<th>During</th>
+<th>Visit</th>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Day</td>
+<td>Total # of visits</td>
+<td>1</td>
+<td>2</td>
+<td>3</td>
+<td>4</td>
+<td>5</td>
+<td><span class="math inline">\(\sum_i y_i\)</span></td>
+<td><span class="math inline">\(\bar y_i\)</span></td>
+<td><span class="math inline">\(s_i^2\)</span></td>
+</tr>
+<tr class="even">
+<td>1</td>
+<td>100</td>
+<td>60</td>
+<td>40</td>
+<td>80</td>
+<td>80</td>
+<td>50</td>
+<td>310</td>
+<td>62</td>
+<td>320</td>
+</tr>
+<tr class="odd">
+<td>2</td>
+<td>150</td>
+<td>20</td>
+<td>10</td>
+<td>10</td>
+<td>40</td>
+<td>30</td>
+<td>110</td>
+<td>22</td>
+<td>170</td>
+</tr>
+<tr class="even">
+<td>3</td>
+<td>75</td>
+<td>30</td>
+<td>80</td>
+<td>30</td>
+<td>90</td>
+<td>100</td>
+<td>330</td>
+<td>66</td>
+<td>1130</td>
+</tr>
+<tr class="odd">
+<td>Total</td>
+<td>325</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td>750</td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table></li>
+</ol>
+<ol type="a">
+<li><p>Thoroughly explain why this is a two-stage cluster sample.</p></li>
+<li><p>Define or provide a value for each of the following:</p>
+<ol type="i">
+<li>Cluster =</li>
+<li>Element =</li>
+<li><span class="math inline">\(N\)</span> =</li>
+<li><span class="math inline">\(n\)</span> =</li>
+<li><span class="math inline">\(M_1\)</span> =</li>
+<li><span class="math inline">\(m_2\)</span> =</li>
+</ol></li>
+<li><p>Estimate the average amount of time spent per visit during the 30 day period using <strong>ratio estimation</strong>.</p></li>
+<li><p>It turns out the standard error for the estimate you found in (c) is 14.838. Find <strong>and interpret</strong> a 95% confidence interval for the mean visit time for gym clients. Note that <span class="math inline">\(t_{0.025, df=4} = 2.776\)</span>, <span class="math inline">\(t_{0.025, df=14} = 2.145\)</span>, <span class="math inline">\(t_{0.025, df=2} = 4.303\)</span>, and <span class="math inline">\(t_{0.025, df=29} = 2.045\)</span>.</p></li>
+<li><p>Suppose the owner had collected the data using a one-stage cluster sample.</p>
+<ol type="i">
+<li>What would change in the data collection process? Be specific, and it may be helpful to reference the three selected days.</li>
+<li>Assuming similar variability is seen in one-stage cluster data, would you expect a confidence interval based on the ratio estimator to be narrower, wider, or the same width as the one you found in (d)? Explain your reasoning.</li>
+</ol></li>
+</ol>
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

@@ -59,9 +59,14 @@ STAT 414 is an introduction to sampling. By the end of the course, you will:
   file.copy("hw5.html","docs/")
   file.copy("hw5.pdf","docs/")
   file.copy("hw5_files","docs/",recursive=TRUE)
-  
+
   quarto::quarto_render(input="hw6.qmd")
   file.copy("hw6.html","docs/")
   file.copy("hw6.pdf","docs/")
   file.copy("hw6_files","docs/",recursive=TRUE)
+  
+  quarto::quarto_render(input="PP2.qmd")
+  file.copy("PP2.html","docs/")
+  file.copy("PP2.pdf","docs/")
+  file.copy("PP2_files","docs/",recursive=TRUE)
   ```

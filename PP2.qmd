@@ -1,0 +1,147 @@
+---
+project:
+  output-dir: docs
+  
+format: 
+  html: default
+  pdf:   
+    header-includes:
+        - \usepackage{float}
+        - \floatplacement{table}{H}  
+    fontsize: 11pt
+    geometry: 
+      - top=20mm
+      - left=15mm
+      - right=10mm
+---
+
+# Practice Problems 2
+
+Not to turn in, but may be helpful before the exam
+
+1.  (Problem #5, Chapter 5) A language school owner takes a SRS of 10 out of the 72 Introductory Spanish classes offered by the school. Each student in each of the sampled classes is given a vocabulary test and is asked whether they are planning a trip to a Spanish-speaking country in the next year. The data are summarized below:
+
+    | Class | $m_i$ | $t_i$ (score) | $t_i$ (trip) |
+    |-------|-------|---------------|--------------|
+    | 4     | 20    | 1486          | 2            |
+    | 20    | 21    | 1406          | 15           |
+    | 23    | 14    | 944           | 3            |
+    | 34    | 22    | 1267          | 1            |
+    | 39    | 21    | 1746          | 13           |
+    | 47    | 18    | 948           | 1            |
+    | 60    | 26    | 1822          | 8            |
+    | 65    | 16    | 931           | 4            |
+    | 68    | 16    | 1174          | 4            |
+    | 69    | 22    | 1367          | 12           |
+
+<!-- -->
+
+a.  Estimate the total number of students planning a trip to a Spanish-speaking country in the next year, and give a 95% confidence interval. Use the unbiased estimator.
+
+b.  Estimate the mean vocabulary test score for the Introductory Spanish students in the language school, and give a 95% confidence interval. Use the ratio estimator.
+
+<!-- -->
+
+2.  (Problem #6, Chapter 5) An inspector samples cans from a truckload of canned creamed corn to estimate the total number of worm fragments in the truckload. The truck has 580 cases, each case contains 24 cans. The inspector samples 12 cases at random, and subsamples 3 cans randomly from each selected case. The following table gives number of worm fragments found in the sampled cans.
+
+    |      |     |     |     |     |     | Case |     |     |     |     |     |     |
+    |------|-----|-----|-----|-----|-----|------|-----|-----|-----|-----|-----|-----|
+    |      | 1   | 2   | 3   | 4   | 5   | 6    | 7   | 8   | 9   | 10  | 11  | 12  |
+    | Can1 | 1   | 4   | 0   | 3   | 4   | 0    | 5   | 3   | 7   | 3   | 4   | 0   |
+    | Can2 | 5   | 2   | 1   | 6   | 9   | 7    | 5   | 0   | 3   | 1   | 7   | 0   |
+    | Can3 | 7   | 4   | 2   | 6   | 8   | 3    | 1   | 2   | 5   | 4   | 9   | 0   |
+
+<!-- -->
+
+a.  Estimate the mean number of worm fragments per can.
+b.  In this case, the choice of unbiased estimator or ratio estimator shouldn't make a big difference. Why?
+
+\newpage
+
+3.  (Problem #7, Chapter 5) A market research firm took a SRS of 6 cities from the 45 cities in a region and then took a SRS of $m_i$ supermarkets from the $M_i$ supermarkets in sampled city $i$. The following table gives the number of the new candy Green Globules sold during March in each of the sampled supermarkets.
+
+| City | $M_i$ | $m_i$ | Number of Cases Sold                           |
+|------|-------|-------|:-----------------------------------------------|
+| 1    | 52    | 10    | 146, 180, 251, 152, 72, 181, 171, 361, 73, 186 |
+| 2    | 19    | 4     | 99, 101, 52, 121                               |
+| 3    | 37    | 7     | 199, 179, 98, 63, 126, 87, 62                  |
+| 4    | 39    | 8     | 226, 129, 57, 46, 86, 43, 85, 165              |
+| 5    | 8     | 2     | 12, 23                                         |
+| 6    | 14    | 3     | 87, 43, 59                                     |
+
+Summary values are included below
+
+| City | $M_i$ | $m_i$ | $\bar y_i$ | $s_i$ | $\hat t_i$ | $\hat t_i - \frac{\hat t_{unb}}{N}$ | $M_i(\bar y_i - \hat{\bar y_r})$ | $(1-\frac{m_i}{M_i})M_i^2\frac{s_i^2}{m_i}$ |
+|--------|--------|--------|-------:|-------:|-------:|-------:|-------:|-------:|
+| 1 | 52 | 10 | 177.30 | 83.60 | 9219.6 | 5820.2 | 2943.8 | 1526376 |
+| 2 | 19 | 4 | 93.25 | 29.24 | 1771.8 | -1627.6 | -521.3 | 60913 |
+| 3 | 37 | 7 | 116.29 | 54.54 | 4302.6 | 903.2 | -162.9 | 471682 |
+| 4 | 39 | 8 | 104.63 | 64.59 | 4080.4 | 681.0 | -626.5 | 630534 |
+| 5 | 8 | 2 | 17.50 | 7.78 | 140.0 | -3259.4 | -825.5 | 1452 |
+| 6 | 14 | 3 | 63.00 | 22.27 | 882.0 | -2517.4 | -807.6 | 25461 |
+| Total | 169 | 34 |  |  | 20396.6 |  |  | 2716418 |
+
+We are interested in estimating the total number of cases sold in the region, as well as the average number of cases sold per supermarket.
+
+a.  Explain what column 6 ($\hat t_i$) represents and how it is calculated.
+b.  Use column 6 to estimate the total number of cases sold in the region.
+c.  Explain the role column 7 plays in estimating the variance of the total number of cases sold in the region.
+d.  Use the information in the table to find the ratio estimator for the average number of cases sold per supermarket.
+e.  Explain the role column 8 plays in estimating the variance of the average number of cases sold per supermarket.
+f.  Explain the difference between column 7 and column 8, and why the column 8 values are smaller (in absolute value) than the column 7 values.
+g.  What role does column 9 play? Does it matter whether we're estimating total number of cases or average number of cases? Why or why not?
+
+\newpage
+
+4.  An experienced peach farmer makes a visual estimate of the weight of peaches on each tree in an orchard of $N=200$ trees. The farmer's visual estimate of the total weight is 11800 pounds. A simple random sample of 10 trees is selected and the peaches are picked and weighed.
+
+    | Sampled Trees      | 1   | 2   | 3   | 4   | 5   | 6   | 7   | 8   | 9   | 10  |
+    |--------------------|-----|-----|-----|-----|-----|-----|-----|-----|-----|-----|
+    | $y$, Actual Weight | 61  | 42  | 50  | 58  | 67  | 45  | 39  | 59  | 71  | 53  |
+    | $x$, Visual Weight | 59  | 47  | 52  | 60  | 67  | 48  | 44  | 58  | 76  | 58  |
+
+Some summary statistics are provided; some are useful, others are not.
+
+$$
+\sum_{i \in \mathcal{S}} y_i = 545 \hbox{\hspace{5mm}} \bar y = 54.5 \hbox{\hspace{5mm}} s^2_y = 112.5 \hbox{\hspace{5mm}} \sum_{i \in \mathcal{S}} x_i = 569 \hbox{\hspace{5mm}} \bar x = 56.9 \hbox{\hspace{5mm}} s^2_x = 94.54 \hbox{\hspace{5mm}} r = 0.969 \hbox{\hspace{5mm}} s_e^2 = 7.779
+$$
+
+a.  Estimate the total actual weight of the peaches.
+
+b.  Provide a standard error for the estimate you calculated in (a). Include the fpc.
+
+c.  **Without doing any calculations,**
+
+    i.  Do you think the estimate of the total actual weight calculated ignoring the auxiliary variable (i.e., estimated just using the typical SRS estimators) will the greater than, less than, or equal to your estimate in (a)? Explain your reasoning, citing relevant statistical facts.
+
+    ii. Do you think the standard error of the estimate of total actual weight calculated ignoring the auxiliary variable (i.e., estimated just using the typical SRS estimators) will the greater than, less than, or equal to your estimate in (b)? Explain your reasoning, citing relevant statistical evidence.
+
+<!-- -->
+
+\newpage
+
+5.  The owner of a gym wants to estimate the average amount of time the gym clients spend at the gym per visit during a 30 day period. The owner randomly selects 3 days out of the 30 using a SRS. On each of the three selected days, 5 visits were selected using a SRS. The owner recorded the amount of time the gym client spent at the facility during that visit. They also recorded the total number of client visits to the gym on each sample day. The data are:
+
+    |   |   | Time | Spent | During | Visit |   |   |   |   |
+    |----|----|----|----|----|----|----|----|----|----|
+    | Day | Total \# of visits | 1 | 2 | 3 | 4 | 5 | $\sum_i y_i$ | $\bar y_i$ | $s_i^2$ |
+    | 1 | 100 | 60 | 40 | 80 | 80 | 50 | 310 | 62 | 320 |
+    | 2 | 150 | 20 | 10 | 10 | 40 | 30 | 110 | 22 | 170 |
+    | 3 | 75 | 30 | 80 | 30 | 90 | 100 | 330 | 66 | 1130 |
+    | Total | 325 |  |  |  |  |  | 750 |  |  |
+
+  a. Thoroughly explain why this is a two-stage cluster sample.
+  b. Define or provide a value for each of the following:
+
+	   i. Cluster = 
+     ii. Element = 
+     iii. $N$ = 
+     iv. $n$ = 
+	   v. $M_1$ = 
+	   vi. $m_2$ =
+	   
+  c. Estimate the average amount of time spent per visit during the 30 day period using **ratio estimation**.
+  d. It turns out the standard error for the estimate you found in (c) is 14.838. Find **and interpret** a 95% confidence interval for the mean visit time for gym clients. Note that $t_{0.025, df=4} = 2.776$, $t_{0.025, df=14} = 2.145$, $t_{0.025, df=2} = 4.303$, and $t_{0.025, df=29} = 2.045$.
+  e. Suppose the owner had collected the data using a one-stage cluster sample.
+	   i. What would change in the data collection process? Be specific, and it may be helpful to reference the three selected days.
+	   ii. Assuming similar variability is seen in one-stage cluster data, would you expect a confidence interval based on the ratio estimator to be narrower, wider, or the same width as the one you found in (d)? Explain your reasoning.
